@@ -5,7 +5,6 @@ import {NavDropdown} from 'react-bootstrap'
 import * as Icon from 'react-icons/im'
 
 const DropDown = styled(NavDropdown)`
-color: #282c34;
 padding-left: 10px;
 a {
 color: #73879c !important;
