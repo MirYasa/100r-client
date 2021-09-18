@@ -3,7 +3,7 @@ import './App.css'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import {Col, Container, Row} from 'react-bootstrap'
 import Home from './layouts/Home'
-import SideBar from './componetns/SideBar'
+import SideBar from './componetns/SideBar/SideBar'
 import Forms from './layouts/Forms'
 
 function App() {
@@ -13,6 +13,7 @@ function App() {
        <Row>
          <SideBar/>
          <Col lg={10}>
+
            <Switch>
              <Route path={'/'} exact component={Home}/>
              <Route path={'/Forms'} exact component={Forms}/>
