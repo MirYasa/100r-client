@@ -1,17 +1,28 @@
 import React from 'react'
-import {Row, Col} from 'react-bootstrap'
-import './SideBar.scss'
-import SideBarUser from './SideBarUser/SideBarUser'
+import {Col} from 'react-bootstrap'
+import SideBarUser from './SideBarUser'
 import Photo from '../../Assets/userPhoto.jpg'
+import SideBarList from './SideBarList'
+import styled from 'styled-components'
 
+const SideBarCom = styled(Col)`
+  background-color: #2a3f54;
+  height: 100vh;
+  color: white;
+`
+const SideBarTitle = styled.h3`
+  text-align: center;
+  margin-top: 5%;
+`
 const SideBar = () => {
   return (
-    <Col lg={2} className={'SideBar'}>
-      <h3>Admin panel</h3>
+    <SideBarCom lg={2}>
+      <SideBarTitle>Admin panel</SideBarTitle>
       <SideBarUser
-      userName={'John Doe'}
-      userPhoto={Photo}/>
-    </Col>
+        userName={'John Doe'}
+        userPhoto={Photo}/>
+      <SideBarList/>
+    </SideBarCom>
   )
 }
 export default SideBar
