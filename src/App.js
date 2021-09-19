@@ -6,6 +6,7 @@ import Home from './layouts/Home'
 import SideBar from './componetns/SideBar/SideBar'
 import Forms from './layouts/Forms'
 import NavBar from './componetns/NavBar/Navbar'
+import Tables from './layouts/Tables'
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
             userName={'John Doe'}/>
             <Switch>
               <Route path={'/'} exact component={Home}/>
-              <Route path={'/Forms'} exact component={Forms}/>
+              <Route path={'/forms'} exact component={Forms}/>
+              <Route path={'/tables'} exact component={Tables}/>
             </Switch>
           </Col>
         </Row>
