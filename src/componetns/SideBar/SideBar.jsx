@@ -9,6 +9,8 @@ const SideBarCom = styled(Col)`
   background-color: #2a3f54;
   height: 100vh;
   color: white;
+  position: sticky;
+  top: 0;
 `
 const SideBarTitle = styled.h3`
   text-align: center;

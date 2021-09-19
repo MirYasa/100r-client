@@ -13,7 +13,8 @@ align-items: center;
 const Forms = () => {
   return (
     <FormsLayout>
-      <BasicForm/>
+      <BasicForm
+      margin={'50px 0'}/>
     </FormsLayout>
   )
 }

@@ -8,12 +8,12 @@ const FormBack = styled.div`
 width: 95%;
 background-color: white;
 border: 1px solid #eceef0;
-margin: 50px 0;
+margin: ${props => props.margin};
 `
 
-const BasicForm = () => {
+const BasicForm = ({margin}) => {
   return (
-    <FormBack>
+    <FormBack margin={margin}>
       <FormTitle
         title={'Title Form'}
         subTitle={'Subtitle Form'}/>
