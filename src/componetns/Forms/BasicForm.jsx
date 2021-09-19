@@ -8,7 +8,7 @@ const FormBack = styled.div`
 width: 95%;
 background-color: white;
 border: 1px solid #eceef0;
-margin-top: 50px;
+margin: 50px 0;
 `
 
 const BasicForm = () => {
@@ -22,7 +22,22 @@ const BasicForm = () => {
         isRequired={true}/>
       <CustomInput
         inputName={'Second Name'}
+        isRequired={true}/>
+      <CustomInput
+        inputName={'Middle Name / Initial'}
         isRequired={false}/>
+      <CustomInput
+        inputName={'Gender'}
+        isRequired={false}
+        type={'radio'}
+        radio={{
+          name: 'Gender',
+          values: [{title: 'Male', value: 'male'}, {title: 'Female', value: 'female'}]
+        }}/>
+      <CustomInput
+        inputName={'Date Of Birth'}
+        isRequired={false}
+        type={'date'}/>
       <FormButtons
         buttons={[
           {title: 'Cancel', type: 'primary'},

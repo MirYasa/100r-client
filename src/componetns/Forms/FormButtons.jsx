@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import {Button} from 'react-bootstrap'
 
 const ButtonsContainer = styled.div`
-width: 95%;
+width: 90%;
 border-top: 1px solid #eceef0;
 margin:  30px auto 0;
 display: flex;
@@ -11,7 +11,7 @@ align-items: center;
 justify-content: center;
 `
 const CustomButton = styled(Button)`
-margin: 15px 10px;
+margin: 20px 10px;
 background-color: ${props => props.variant === 'success' ? '#26b99a' : null};
 border: ${props => props.variant === 'success' ? '#26b99a 1px solid' : null};
 
