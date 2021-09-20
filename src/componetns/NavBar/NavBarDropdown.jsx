@@ -38,7 +38,7 @@ const NavBarDropdown = ({userName}) => {
       <LinkContainer to={'/help'}>
         <DropDownItem>Помощь</DropDownItem>
       </LinkContainer>
-      <LinkContainer to={'/login'}>
+      <LinkContainer to={'/'}>
         <DropDownItem>Выход <ExitIcon/>
         </DropDownItem>
       </LinkContainer>
