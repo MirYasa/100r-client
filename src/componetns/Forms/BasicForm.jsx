@@ -3,13 +3,16 @@ import styled from 'styled-components'
 import CustomInput from '../UI/CustomInput'
 import FormTitle from './FormTitle'
 import FormButtons from './FormButtons'
+import {Form} from 'react-bootstrap'
+import TextArea from '../UI/TextArea'
 
-const FormBack = styled.div`
+const FormBack = styled(Form)`
 width: 95%;
 background-color: white;
 border: 1px solid #eceef0;
 margin: ${props => props.margin};
 `
+
 
 const BasicForm = ({margin}) => {
   return (
@@ -38,6 +41,11 @@ const BasicForm = ({margin}) => {
         inputName={'Date Of Birth'}
         isRequired={false}
         type={'date'}/>
+      <CustomInput
+        inputName={'Select Custom'}
+        isRequired={false}
+        type={'select'}/>
+        <TextArea/>
       <FormButtons
         buttons={[
           {title: 'Cancel', type: 'primary'},

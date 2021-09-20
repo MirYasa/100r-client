@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import {Col, Row, ToggleButton, ToggleButtonGroup} from 'react-bootstrap'
+import {Col, Form, Row, ToggleButton, ToggleButtonGroup} from 'react-bootstrap'
 
 const InputContainer = styled(Row)`
 height: 38px;
@@ -28,6 +28,9 @@ outline: none;
 background-color: #6c757d;
 border: #6c757d 1px solid;
 `
+const CustomSelect = styled(Form.Select)`
+
+`
 
 const CustomInput = ({inputName, isRequired, type, radio}) => {
   return (
@@ -44,7 +47,12 @@ const CustomInput = ({inputName, isRequired, type, radio}) => {
               </RadioButton>
             )
           })}
-        </RadioContainer> : <InputBody type={type}/>}
+        </RadioContainer> : type === 'select' ? <CustomSelect>
+          <option>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </CustomSelect> : <InputBody type={type}/>}
       </Col>
     </InputContainer>
   )

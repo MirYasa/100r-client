@@ -2,7 +2,7 @@ import React from 'react'
 import BasicForm from '../componetns/Forms/BasicForm'
 import styled from 'styled-components'
 
-const FormsLayout = styled.form`
+const FormsLayout = styled.div`
 width: 100%;
 background-color: #f7f7f7;
 display: flex;
