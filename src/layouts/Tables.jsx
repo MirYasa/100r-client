@@ -2,6 +2,7 @@ import React from 'react'
 import StrippedTable from '../componetns/Tables/StrippedTable'
 import styled from 'styled-components'
 import BasicTable from '../componetns/Tables/BasicTable'
+import PlusBasicTable from '../componetns/Tables/PlusBasicTable'
 
 const TablesContainer = styled.div`
 width: 95%;
@@ -67,6 +68,32 @@ const Tables = () => {
             amount: '$7.45'
           }
         ]}/>
+        <h3>Plus basic table</h3>
+      <PlusBasicTable
+      tableData={[{
+        name: 'Airi Satou',
+        position: ' Accountant',
+        office: 'Tokyo',
+        age: '33',
+        startDate: '2008/11/28',
+        salary: '$162,700'
+      },
+        {
+          name: 'Airi Satou',
+          position: ' Accountant',
+          office: 'Tokyo',
+          age: '33',
+          startDate: '2008/11/28',
+          salary: '$162,700'
+        },
+        {
+          name: 'Airi Satou',
+          position: ' Accountant',
+          office: 'Tokyo',
+          age: '33',
+          startDate: '2008/11/28',
+          salary: '$162,700'
+        }]}/>
     </TablesContainer>
   )
 }
