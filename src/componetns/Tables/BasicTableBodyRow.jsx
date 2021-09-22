@@ -19,9 +19,11 @@ padding: 0;
 const BasicTableBodyRow = ({isActive, rowData}) => {
   const [active, setActive] = useState(isActive)
   const [open, setOpen] = useState(false)
+
   useEffect(() => {
     setActive(isActive)
   }, [isActive])
+
   return (
     <React.Fragment>
       <BodyRow active={active}>
@@ -29,13 +31,13 @@ const BasicTableBodyRow = ({isActive, rowData}) => {
         }} onClick={() => {
           setActive(!active)
         }}/></td>
-        <td>{rowData.invoice}</td>
-        <td>{rowData.invoiceDate}</td>
-        <td>{rowData.order}</td>
-        <td>{rowData.billToName}</td>
-        <td>{rowData.status}</td>
-        <td>{rowData.amount}</td>
+        {Object.values(rowData).map((item, index) => {
+          return(
+            <td key={index}>{item}</td>
+          )
+        })}
         <td><ButtonTable variant={'link'} onClick={()=> {setOpen(true)}}>View</ButtonTable></td>
+        <td><ButtonTable variant={'danger'} onClick={()=> {setOpen(true)}}>Delete</ButtonTable></td>
       </BodyRow>
       <BasicTablePopup
         show={open}

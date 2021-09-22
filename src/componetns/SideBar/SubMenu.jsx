@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import {NavLink} from 'react-router-dom'
+import * as FaIcons from 'react-icons/fa'
+import {useSelector} from 'react-redux'
 
 
 const SideBarLink = styled(NavLink)`
@@ -43,8 +45,8 @@ const DropdownLink = styled(NavLink)`
 
 const SubMenu = ({item}) => {
   const [subnav, setSubnav] = useState(false)
-
   const showSubnav = () => setSubnav(!subnav)
+  const {tabs} = useSelector(state => state)
 
   return (
     <>
@@ -62,15 +64,18 @@ const SubMenu = ({item}) => {
         </div>
       </SideBarLink>
       {subnav &&
-      item.subNav.map((item, index) => {
-        return (
-          <DropdownLink to={item.path} key={index}>
-            {item.icon}
-            <SideBarLabel>{item.title}</SideBarLabel>
-          </DropdownLink>
-        )
-      })}
+      item.subNav && item.title === 'Таблицы' ?
+          tabs.tabs.map((item, index) => {
+            return (
+              <DropdownLink to={`/tables/${item}`} key={index}>
+                <FaIcons.FaTable/>
+                <SideBarLabel>{item}</SideBarLabel>
+              </DropdownLink>
+            )
+          }) : null}
     </>
   )
 }
+
+
 export default SubMenu

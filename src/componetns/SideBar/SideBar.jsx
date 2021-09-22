@@ -11,6 +11,11 @@ const SideBarCom = styled(Col)`
   color: white;
   position: sticky;
   top: 0;
+  overflow-y: scroll;
+  &::-webkit-scrollbar{
+  width: 0;
+  }
+  scrollbar-width: none;
 `
 const SideBarTitle = styled.h3`
   text-align: center;

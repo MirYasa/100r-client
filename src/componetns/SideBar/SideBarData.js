@@ -8,7 +8,6 @@ export const SidebarData = [
     title: 'Главная',
     path: '/home',
     icon: <AiIcons.AiFillHome/>
-
   },
   {
     title: 'Формы',
@@ -16,7 +15,6 @@ export const SidebarData = [
     icon: <AiIcons.AiOutlineForm/>,
     iconClosed: <RiIcons.RiArrowDownSFill/>,
     iconOpened: <RiIcons.RiArrowUpSFill/>,
-
     subNav: [
       {
         title: 'Form 1',
@@ -43,18 +41,6 @@ export const SidebarData = [
     icon: <FaIcons.FaTable/>,
     iconClosed: <RiIcons.RiArrowDownSFill/>,
     iconOpened: <RiIcons.RiArrowUpSFill/>,
-
-    subNav: [
-      {
-        title: 'Table 1',
-        path: '/tables/tables1',
-        icon: <FaIcons.FaTable/>
-      },
-      {
-        title: 'Table 2',
-        path: '/tables/tables2',
-        icon: <FaIcons.FaTable/>
-      }
-    ]
+    subNav: true
   },
 ]

@@ -17,6 +17,7 @@ height: 16px;
 `
 const BasicTable = ({tableData}) => {
   const [allActive, setAllActive] = useState(false)
+  // console.log(tableData)
   return (
     <CustomTable striped bordered hover size="lg">
       <thead>
@@ -24,12 +25,13 @@ const BasicTable = ({tableData}) => {
         <th><input type="checkbox" onClick={() => {
           setAllActive(!allActive)
         }}/></th>
-        <th>Invoice</th>
-        <th>Invoice Date</th>
-        <th>Order</th>
-        <th>Bill to Name</th>
-        <th>Status</th>
-        <th>Amount</th>
+        {tableData.length === 0 ? null :
+          Object.keys(tableData[0]).map((item, index) => {
+            return (
+              <th key={index}>{item}</th>
+            )
+          })}
+        <th>Action</th>
         <th>Action</th>
       </HeadRow>
       </thead>
