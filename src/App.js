@@ -17,7 +17,7 @@ function App() {
 
 
   useEffect(() => {
-    getTabs(dispatch, 'GET_TABS', 'tabs')
+    getTabs(dispatch, 'GET_TABS', '/tabs')
   }, [])
 
 

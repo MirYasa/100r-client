@@ -14,7 +14,8 @@ const Forms = () => {
   return (
     <FormsLayout>
       <BasicForm
-      margin={'50px 0'}/>
+      margin={'50px 0'}
+      formData={{}}/>
     </FormsLayout>
   )
 }

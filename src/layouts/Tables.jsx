@@ -67,7 +67,9 @@ const Tables = () => {
             status: 'Paid',
             amount: '$7.45'
           }
-        ]}/>
+        ]}
+        inputTypes={{}}
+      />
         <h3>Plus basic table</h3>
       <PlusBasicTable
       tableData={[{

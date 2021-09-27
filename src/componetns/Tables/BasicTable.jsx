@@ -15,9 +15,8 @@ width: 16px;
 height: 16px;
 }
 `
-const BasicTable = ({tableData}) => {
+const BasicTable = ({tableData, currentTable, dispatch, inputTypes, url}) => {
   const [allActive, setAllActive] = useState(false)
-  // console.log(tableData)
   return (
     <CustomTable striped bordered hover size="lg">
       <thead>
@@ -41,7 +40,11 @@ const BasicTable = ({tableData}) => {
           <BasicTableBodyRow
             key={index}
             isActive={allActive}
-            rowData={item}/>
+            rowData={item}
+            currentTable={currentTable}
+            dispatch={dispatch}
+            inputTypes={inputTypes}
+            url={url}/>
         )
       })}
       </tbody>
