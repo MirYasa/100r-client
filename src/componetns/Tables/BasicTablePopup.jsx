@@ -9,16 +9,17 @@ max-width: 1000px;
 }
 `
 
-const BasicTablePopup = ({show, handleClose, formData, isCreate, dispatch, url, formDataValue}) => {
+const BasicTablePopup = ({show, handleClose, formData, isCreate, dispatch, url, formDataValue, modalTitle, id}) => {
   return (
     <Popup show={show} onHide={() => {
       handleClose(false)
     }}>
       <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
+        <Modal.Title>{modalTitle}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <BasicForm formData={formData} isCreate={isCreate} dispatch={dispatch} url={url} formDataValue={formDataValue}/>
+        <BasicForm formData={formData} isCreate={isCreate} dispatch={dispatch} url={url} id={id}
+                   formDataValue={formDataValue} onClose={handleClose}/>
       </Modal.Body>
     </Popup>
   )

@@ -13,6 +13,7 @@ const CustomTable = styled(Table)`
 input {
 width: 16px;
 height: 16px;
+overflow-x: scroll;
 }
 `
 const BasicTable = ({tableData, currentTable, dispatch, inputTypes, url}) => {
@@ -30,8 +31,8 @@ const BasicTable = ({tableData, currentTable, dispatch, inputTypes, url}) => {
               <th key={index}>{item}</th>
             )
           })}
-        <th>Action</th>
-        <th>Action</th>
+        <th>Смотреть</th>
+        <th>Удалить</th>
       </HeadRow>
       </thead>
       <tbody>

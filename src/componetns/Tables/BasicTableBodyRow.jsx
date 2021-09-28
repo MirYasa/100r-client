@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {Button} from 'react-bootstrap'
 import BasicTablePopup from './BasicTablePopup'
-import {confirm} from '../../functions/confirm'
+import {APIRequest} from '../../functions/APIRequest'
 
 const BodyRow = styled.tr`
 background-color: ${props => props.active ? '#cff0e9' : ''};
@@ -49,17 +49,20 @@ const BasicTableBodyRow = ({isActive, rowData, currentTable, dispatch, inputType
         })}
         <td><ButtonTable variant={'link'} onClick={() => {
           setOpen(true)
-        }}>View</ButtonTable></td>
-        <td style={{width: '90px'}}><Button variant={'danger'} onClick={() => {
-          confirm(currentTable, 'Удалить запись?', dispatch, rowData.id, 'GET_CONTENT')
-        }}>Delete</Button></td>
+        }}>Смотреть</ButtonTable></td>
+        <td><Button style={{width: 90}} variant={'danger'} onClick={() => {
+          APIRequest(currentTable, 'Удалить запись?', dispatch, rowData.id, 'GET_CONTENT')
+        }}>Удалить</Button></td>
       </BodyRow>
       <BasicTablePopup
         show={open}
         handleClose={setOpen}
         formData={inputTypes}
         formDataValue={d}
-        url={`${url}/${rowData.id}`}
+        url={url}
+        id={rowData.id}
+        modalTitle={'Просмотр и изменение'}
+        dispatch={dispatch}
       />
     </React.Fragment>
 

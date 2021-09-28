@@ -12,10 +12,13 @@ import {getInputs} from '../store/actions/inputDataAction'
 const TableContainer = styled.div`
 width: 90%;
 margin: 50px auto 0;
+overflow-x: scroll;
 `
 const CreateButton = styled(Button)`
 margin-bottom: 20px;
 color: #3f5367;
+position: sticky;
+left: 0;
 &:hover{color: #3f5367}
 `
 const Table = () => {
@@ -48,7 +51,8 @@ const Table = () => {
         formData={rowsData}
         isCreate={true}
         dispatch={dispatch}
-        url={table}/>
+        url={table}
+        modalTitle={'Создание'}/>
     </TableContainer>
   )
 }

@@ -1,6 +1,6 @@
 import {addContent, deleteContent, getContent, updateContent} from '../store/actions/contentAction'
 
-export const confirm = (url, message, dispatch, id, type) => {
+export const APIRequest = (url, message, dispatch, id, type) => {
 
   if (window.confirm(message))
 
@@ -23,9 +23,9 @@ export const createContent = (e ,url, data, dispatch, type) => {
       console.log(e)
     })
 }
-export const update = (e, url, data, dispatch, type) => {
+export const update = (e, url, data, dispatch, type, id) => {
   e.preventDefault()
-  updateContent(url, data)
+  updateContent(`${url}/${id}`, data)
     .then(() => {
       getContent(dispatch, type, url)
     })

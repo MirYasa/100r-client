@@ -20,20 +20,13 @@ background-color: ${props => props.variant === 'success' ? '#22aa8f' : null};
 border: ${props => props.variant === 'success' ? '#22aa8f 1px solid' : null};
 };
 `
-const FormButtons = ({buttons, sendPost, sendUpdate, dataForPost, type, dispatch, url, isCreate, updateUrl}) => {
-  console.log(updateUrl)
+const FormButtons = ({buttons}) => {
   return (
     <ButtonsContainer>
       {buttons.map((item, index) => {
         return (
           <CustomButton key={index} variant={item.type} onClick={(e) => {
-            if (item.title === 'Submit') {
-              if (isCreate) {
-                sendPost(e, url, dataForPost, dispatch, type)
-              } else {
-                sendUpdate(e, updateUrl, dataForPost, dispatch, type)
-              }
-            }
+            item.action(e)
           }}>{item.title}</CustomButton>
         )
       })}
