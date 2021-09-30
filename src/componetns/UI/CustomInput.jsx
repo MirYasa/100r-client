@@ -33,8 +33,7 @@ border: #6c757d 1px solid;
 const CustomSelect = styled(Form.Select)`
 
 `
-const CustomInput = ({inputName, isRequired, type, radio, val = '', setData, isClear}) => {
-  const [inputVal, setInputVal] = useState(val)
+const CustomInput = ({inputName, isRequired, type, radio, val = '', setData, refs}) => {
   let Type = ''
 
   useEffect(() => {
@@ -58,6 +57,7 @@ const CustomInput = ({inputName, isRequired, type, radio, val = '', setData, isC
       Type = 'number'
       break
   }
+
   return (
     <InputContainer>
       <Col lg={2}>
@@ -83,16 +83,21 @@ const CustomInput = ({inputName, isRequired, type, radio, val = '', setData, isC
                 <option value="3">Three</option>
               </CustomSelect> :
               Type === 'textarea' ?
-                <TextArea val={val} setData={setData} inputName={inputName}/> :
-                <InputBody type={Type}
-                           defaultChecked={inputVal}
-                           step={Type === 'float' ? '0.01' : null}
-                           required={isRequired}
-                           value={inputVal === null ? undefined : inputVal}
-                           onChange={(e) => {
-                             setInputVal(Type === 'checkbox' ? !e.target.defaultChecked : Type === 'number' ? parseInt(e.target.value) : e.target.value)
-                             setData(inputName, Type === 'checkbox' ? !e.target.defaultChecked : Type === 'number' ? parseInt(e.target.value) : e.target.value)
-                           }}/>}
+                <TextArea
+                  val={val}
+                  setData={setData} i
+                  nputName={inputName}
+                  ref={refs}/> :
+                <InputBody
+                  type={Type}
+                  ref={refs}
+                  defaultChecked={val}
+                  step={Type === 'float' ? '0.01' : null}
+                  required={isRequired}
+                  value={val === null ? undefined : val}
+                  onChange={(e) => {
+                    setData(inputName, Type === 'checkbox' ? !e.target.defaultChecked : Type === 'number' ? parseInt(e.target.value) : e.target.value)
+                  }}/>}
       </Col>
     </InputContainer>
   )

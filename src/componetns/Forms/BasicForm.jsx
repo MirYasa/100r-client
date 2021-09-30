@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useRef, useState} from 'react'
 import styled from 'styled-components'
 import CustomInput from '../UI/CustomInput'
 import FormButtons from './FormButtons'
@@ -13,6 +13,9 @@ margin: ${props => props.margin};
 `
 const BasicForm = ({margin, formData, isCreate, dispatch, url, formDataValue, id, onClose}) => {
   const [allData, setAllData] = useState(formDataValue)
+  const input = useRef(null)
+  let mut = {}
+
   const uploadData = (name, val) => {
     setAllData({
       ...allData,
@@ -32,7 +35,14 @@ const BasicForm = ({margin, formData, isCreate, dispatch, url, formDataValue, id
   }
 
   const clear = () => {
+    console.log(input.current.value)
+    // Object.keys(formData).map(key => {
+    //   mut = {...mut, [key]: null}
+    // })
+    // setAllData(mut)
   }
+
+  console.log(allData)
 
   return (
     <FormBack margin={margin}>
@@ -43,9 +53,10 @@ const BasicForm = ({margin, formData, isCreate, dispatch, url, formDataValue, id
               key={key}
               inputName={key}
               isRequired={false}
-              val={isCreate ? undefined : formDataValue[key]}
+              val={isCreate ? undefined : allData[key]}
               type={val}
-              setData={uploadData}/>
+              setData={uploadData}
+              refs={input}/>
           )
         })
       }
