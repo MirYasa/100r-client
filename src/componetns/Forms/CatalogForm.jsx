@@ -125,7 +125,9 @@ const CatalogForm = ({isCreate, onClose, id, data}) => {
     delete allData.manufacturer
     console.log(allData)
     close()
-    updateCat(e, url, allData, id, dispatch, () => {history.go(0)})
+    updateCat(e, url, allData, id, dispatch, () => {
+      history.go(0)
+    })
   }
 
   return (
@@ -159,12 +161,12 @@ const CatalogForm = ({isCreate, onClose, id, data}) => {
         })}
       </Block>
       {Object.entries(names).map(([key, val]) => {
-        // console.log(allData[key])
+        // console.log(allData[key], key)
         return (
           <CatalogInput
             key={key}
             inputName={key}
-            val={isCreate ? undefined : allData[key]}
+            val={isCreate ? val === 'select' ? allData[key] : undefined : allData[key]}
             type={val}
             inputTitle={titlesMap.get(key)}
             setData={uploadData}/>
