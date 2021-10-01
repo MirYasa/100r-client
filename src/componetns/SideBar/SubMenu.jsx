@@ -72,7 +72,14 @@ const SubMenu = ({item}) => {
                 <SideBarLabel>{item}</SideBarLabel>
               </DropdownLink>
             )
-          }) : null}
+          }) : subnav && item.subNav && item.title === 'Каталог' ? item.subArr.map((item, index) => {
+          return (
+            <DropdownLink to={`/admin_catalog${item.path}`} key={index}>
+              {item.icon}
+              <SideBarLabel>{item.title}</SideBarLabel>
+            </DropdownLink>
+          )
+        }): null}
     </>
   )
 }

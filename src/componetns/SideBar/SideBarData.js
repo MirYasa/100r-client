@@ -2,6 +2,7 @@ import React from 'react'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import * as RiIcons from 'react-icons/ri'
+import * as GrIcons from 'react-icons/gr'
 
 export const SidebarData = [
   {
@@ -42,5 +43,35 @@ export const SidebarData = [
     iconClosed: <RiIcons.RiArrowDownSFill/>,
     iconOpened: <RiIcons.RiArrowUpSFill/>,
     subNav: true
+  },
+  {
+    title: 'Каталог',
+    path: '/admin_catalog',
+    icon: <FaIcons.FaBook/>,
+    iconClosed: <RiIcons.RiArrowDownSFill/>,
+    iconOpened: <RiIcons.RiArrowUpSFill/>,
+    subNav: true,
+    subArr: [
+      {
+        title: 'Продукты',
+        path: '/products',
+        icon: <FaIcons.FaBookOpen/>
+      },
+      {
+        title: 'Типы цен',
+        path: '/price_type',
+        icon: <FaIcons.FaBookOpen/>
+      },
+      {
+        title: 'Параметры',
+        path: '/property',
+        icon: <FaIcons.FaBookOpen/>
+      },
+      {
+        title: 'Производители',
+        path: '/manufacturer',
+        icon: <FaIcons.FaBookOpen/>
+      }
+    ]
   },
 ]

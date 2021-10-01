@@ -56,6 +56,7 @@ const BasicForm = ({margin, formData, isCreate, dispatch, url, formDataValue, id
               val={isCreate ? undefined : allData[key]}
               type={val}
               setData={uploadData}
+              inputTitle={key}
               refs={input}/>
           )
         })

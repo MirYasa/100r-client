@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import styled from 'styled-components'
@@ -10,6 +10,9 @@ margin: 5px auto;
 
 const TextArea = ({val, setData, inputName}) => {
   const [value, setValue] = useState(val)
+  useEffect(() => {
+    setValue(val)
+  }, [val])
   return (
     <TextAreaContainer>
       <ReactQuill

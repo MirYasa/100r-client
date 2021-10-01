@@ -1,24 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import styled from 'styled-components'
 import {Button} from 'react-bootstrap'
 import BasicTablePopup from './BasicTablePopup'
 import {APIRequest} from '../../functions/APIRequest'
+import {BodyRow, ButtonTable} from './StyledComponentsTable'
 
-const BodyRow = styled.tr`
-background-color: ${props => props.active ? '#cff0e9' : ''};
-color: #212529;
-td {
-border: none;
-word-wrap: anywhere;
-}`
-const ButtonTable = styled(Button)`
-text-decoration: none;
-color: #6e889d;
-padding: 0;
-&:hover{color: rgba(40,44,52,0.8)};
-`
-
-const BasicTableBodyRow = ({isActive, rowData, currentTable, dispatch, inputTypes, url}) => {
+const BasicTableBodyRow = ({isActive, rowData, currentTable, dispatch, inputTypes, url, isPretty}) => {
   const [active, setActive] = useState(isActive)
   const [open, setOpen] = useState(false)
   const filted = Object.keys(rowData).filter(x => Object.keys(inputTypes).includes(x))
@@ -43,6 +29,11 @@ const BasicTableBodyRow = ({isActive, rowData, currentTable, dispatch, inputType
           setActive(!active)
         }}/></td>
         {Object.values(rowData).map((item, index) => {
+          if (isPretty) {
+            if (index > 1) {
+              return null
+            }
+          }
           return (
             <td key={index}>{item}</td>
           )

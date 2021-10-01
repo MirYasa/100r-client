@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import BasicTable from '../componetns/Tables/BasicTable'
-import {useParams} from 'react-router'
+import {useLocation, useParams} from 'react-router'
 import styled from 'styled-components'
 import {addContent, getContent} from '../store/actions/contentAction'
 import {useDispatch, useSelector} from 'react-redux'
@@ -24,8 +24,9 @@ left: 0;
 const Table = () => {
   const dispatch = useDispatch()
   const {table} = useParams()
-  const content = useSelector(state => state.content.content)
-  const rowsData = useSelector(state => state.inputData.inputData)
+  const local = useLocation()
+  const {content} = useSelector(state => state.content)
+  const {inputData} = useSelector(state => state.inputData)
   const [open, setOpen] = useState(false)
 
 
@@ -33,6 +34,7 @@ const Table = () => {
     getContent(dispatch, 'GET_CONTENT', table)
     getInputs(dispatch, 'GET_INPUT_DATA', `${table}/create`)
   }, [table])
+
 
   return (
     <TableContainer>
@@ -43,12 +45,13 @@ const Table = () => {
         tableData={content}
         currentTable={table}
         dispatch={dispatch}
-        inputTypes={rowsData}
-        url={table}/>
+        inputTypes={inputData}
+        url={table}
+        isPretty={local.pathname.includes('catalog')}/>
       <BasicTablePopup
         show={open}
         handleClose={setOpen}
-        formData={rowsData}
+        formData={inputData}
         isCreate={true}
         dispatch={dispatch}
         url={table}

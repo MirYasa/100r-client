@@ -10,6 +10,8 @@ import LoginPage from './layouts/LoginPage'
 import {useDispatch, useSelector} from 'react-redux'
 import {getTabs} from './store/actions/tabsAction'
 import Table from './layouts/Table'
+import {getCatalog, getProduct} from './store/actions/catalogAction'
+import Catalog from './layouts/Catalog'
 
 function App() {
   const location = useLocation()
@@ -18,6 +20,7 @@ function App() {
 
   useEffect(() => {
     getTabs(dispatch, 'GET_TABS', '/tabs')
+    getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
   }, [])
 
 
@@ -36,6 +39,8 @@ function App() {
             <Route path={'/forms'} exact component={Forms}/>
             <Route path={'/tables'} exact component={Tables}/>
             <Route path={'/tables/:table'} component={Table}/>
+            <Route path={'/admin_catalog'} exact component={Catalog}/>
+            <Route path={'/admin_catalog/:table'} exact component={Table}/>
           </Switch>
         </Col>
       </Row>

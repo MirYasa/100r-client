@@ -1,23 +1,17 @@
 import React, {useState} from 'react'
-import {Table} from 'react-bootstrap'
-import styled from 'styled-components'
 import BasicTableBodyRow from './BasicTableBodyRow'
+import {CustomTable, HeadRow} from './StyledComponentsTable'
 
-const HeadRow = styled.tr`
-background-color: #3f5367;
-color: white;
-th {
-border: none;
-}`
-const CustomTable = styled(Table)`
-input {
-width: 16px;
-height: 16px;
-overflow-x: scroll;
+const thNames = {
+  id: 'ID',
+  name: 'Название',
+  value: 'Значение'
 }
-`
-const BasicTable = ({tableData, currentTable, dispatch, inputTypes, url}) => {
+
+const BasicTable = ({tableData, currentTable, dispatch, inputTypes, url, isPretty}) => {
   const [allActive, setAllActive] = useState(false)
+  const namesMap = new Map(Object.entries(thNames))
+
   return (
     <CustomTable striped bordered hover size="lg">
       <thead>
@@ -27,6 +21,12 @@ const BasicTable = ({tableData, currentTable, dispatch, inputTypes, url}) => {
         }}/></th>
         {tableData.length === 0 ? null :
           Object.keys(tableData[0]).map((item, index) => {
+            if (isPretty) {
+              if (index > 1) {
+                return null
+              }
+              return <th key={index}>{namesMap.get(item)}</th>
+            }
             return (
               <th key={index}>{item}</th>
             )
@@ -45,7 +45,8 @@ const BasicTable = ({tableData, currentTable, dispatch, inputTypes, url}) => {
             currentTable={currentTable}
             dispatch={dispatch}
             inputTypes={inputTypes}
-            url={url}/>
+            url={url}
+            isPretty={isPretty}/>
         )
       })}
       </tbody>
