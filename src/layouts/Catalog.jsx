@@ -7,13 +7,6 @@ import CatalogTablePopup from '../componetns/Tables/CatalogTablePopup'
 import {getContent} from '../store/actions/contentAction'
 import {useParams} from 'react-router'
 import {getInputs} from '../store/actions/inputDataAction'
-
-// доп вкладка каталог
-// -- Продукты
-// -- Типы цен только name
-// -- Параметры name, data_type
-// -- Производители name
-
 const CatalogContainer = styled.div`
 width: 95%;
 margin: 50px auto 0;
@@ -23,6 +16,7 @@ const Catalog = () => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const {catalog} = useSelector(state => state.catalog)
+  const {products} = useSelector(state => state.catalog)
 
   useEffect(() => {
     getContent(dispatch, 'GET_CATEGORY', '/category')
@@ -40,6 +34,7 @@ const Catalog = () => {
       id={1}
       modalTitle={'Создать'}
       isCreate={true}
+      data={products}
       />
     </CatalogContainer>
 

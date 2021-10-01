@@ -26,6 +26,7 @@ padding: 5px;
 border-bottom: 1px solid #eceef0;
 margin: 10px 5px;
 `
+
 const CatalogForm = ({isCreate, onClose, id, data}) => {
   const {inputData} = useSelector(state => state.inputData)
   const [allData, setAllData] = useState(isCreate ? inputData : data)
@@ -35,25 +36,30 @@ const CatalogForm = ({isCreate, onClose, id, data}) => {
   const dispatch = useDispatch()
   const url = useLocation().pathname
 
+
+  console.log(data)
   useEffect(() => {
     getInputs(dispatch, 'GET_INPUT_DATA', `/admin_catalog/create?category=${allData.category_id === undefined ? '' : allData.category_id}`)
-    getProduct(dispatch, 'GET_PRODUCTS', '/admin_catalog', id)
+    // getProduct(dispatch, 'GET_PRODUCTS', `/admin_catalog/${id}`)
+
+    // console.log(allData.category_id)
   }, [allData.category_id])
 
-
   useEffect(() => {
-    if (isCreate) {
-      setAllData(inputData)
-      setAllData({
-        ...allData,
-        ['external_id']: 0
-      })
-    }
+    setAllData({
+      ...allData,
+      ['external_id']: 0
+    })
     setPrices(inputData.prices)
     setParams(inputData.params)
-    setAllData(data)
 
-  }, [inputData, data])
+    // if (isCreate) {
+    //   setAllData(inputData)
+    // } else {
+    //   setAllData(data)
+    // }
+
+  }, [inputData])
 
   const uploadData = (name, val) => {
     setAllData({
@@ -103,6 +109,7 @@ const CatalogForm = ({isCreate, onClose, id, data}) => {
     } catch (e) {
       console.log(e)
     }
+    console.log(data, url)
   }
   const createAction = (e) => {
     e.preventDefault()
@@ -110,8 +117,13 @@ const CatalogForm = ({isCreate, onClose, id, data}) => {
     addCatalog(url, allData)
   }
   const updateAction = (e) => {
+    delete allData.category
+    delete allData.created_at
+    delete allData.updated_at
+    delete allData.manufacturer
+    console.log(allData)
     close()
-    updateCat(e, url, allData, id)
+    // updateCat(e, url, allData, id)
   }
 
   return (

@@ -39,8 +39,6 @@ const CatalogInput = ({inputName, isRequired, type, radio, val = '', setData, is
   const [selectVal, setSelectVal] = useState([])
   const {categories, manufacturers} = useSelector(state => state.content)
 
-  console.log(input, val, type)
-
   useEffect(() => {
     setInput(val)
   }, [val])

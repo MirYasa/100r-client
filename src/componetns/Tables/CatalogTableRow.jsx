@@ -17,7 +17,7 @@ const CatalogTableRow = ({rowData}) => {
   // console.log(products)
 
   useEffect(() => {
-    // getProduct(dispatch, 'GET_PRODUCTS', '/admin_catalog', rowData.product_id)
+    getProduct(dispatch, 'GET_PRODUCTS', '/admin_catalog', rowData.product_id)
   }, [])
   return (
     <React.Fragment>
