@@ -6,7 +6,7 @@ import {Form} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import CatalogInput from '../UI/CatalogInput'
 import {names, titles} from './CatalogFormInputsName'
-import {useLocation} from 'react-router'
+import {useHistory, useLocation} from 'react-router'
 import instance from '../../settings/defaultAxios'
 import {getInputs} from '../../store/actions/inputDataAction'
 import {getCatalog, getProduct} from '../../store/actions/catalogAction'
@@ -35,9 +35,10 @@ const CatalogForm = ({isCreate, onClose, id, data}) => {
   const [prices, setPrices] = useState(inputData.prices)
   const dispatch = useDispatch()
   const url = useLocation().pathname
+  const history = useHistory()
 
 
-  console.log(data)
+  // console.log(allData)
   useEffect(() => {
     getInputs(dispatch, 'GET_INPUT_DATA', `/admin_catalog/create?category=${allData.category_id === undefined ? '' : allData.category_id}`)
     // getProduct(dispatch, 'GET_PRODUCTS', `/admin_catalog/${id}`)
@@ -53,11 +54,9 @@ const CatalogForm = ({isCreate, onClose, id, data}) => {
     setPrices(inputData.prices)
     setParams(inputData.params)
 
-    // if (isCreate) {
-    //   setAllData(inputData)
-    // } else {
-    //   setAllData(data)
-    // }
+    if (!isCreate)
+      setAllData(data)
+
 
   }, [inputData])
 
@@ -105,7 +104,10 @@ const CatalogForm = ({isCreate, onClose, id, data}) => {
           'Content-Type': 'application/json',
         }
       })
-      getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
+        .then(() => {
+          getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
+          history.go(0)
+        })
     } catch (e) {
       console.log(e)
     }
@@ -123,7 +125,7 @@ const CatalogForm = ({isCreate, onClose, id, data}) => {
     delete allData.manufacturer
     console.log(allData)
     close()
-    // updateCat(e, url, allData, id)
+    updateCat(e, url, allData, id, dispatch, () => {history.go(0)})
   }
 
   return (

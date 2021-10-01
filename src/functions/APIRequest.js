@@ -8,6 +8,7 @@ export const APIRequest = (url, message, dispatch, id, type) => {
     deleteContent(`${url}/${id}`)
       .then(() => {
         getContent(dispatch, type, url)
+        getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
       })
       .catch(e => {
         console.log(e)
@@ -35,9 +36,13 @@ export const createCatalog = (e, url, data, dispatch, type) => {
 
 }
 
-export const updateCat = (e, url, data, id) => {
+export const updateCat = (e, url, data, id, dispatch, func) => {
   e.preventDefault()
   updateCatalog(`${url}/${id}`, data)
+    .then(() => {
+      getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
+      func()
+    })
 }
 export const update = (e, url, data, dispatch, type, id) => {
   e.preventDefault()
