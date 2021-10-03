@@ -4,7 +4,7 @@ import FormButtons from './FormButtons'
 import styled from 'styled-components'
 import {Form} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
-import CatalogInput from '../UI/CatalogInput'
+import CatalogInput from '../UI/Inputs/CatalogInput'
 import {names, titles} from './CatalogFormInputsName'
 import {useHistory, useLocation} from 'react-router'
 import instance from '../../settings/defaultAxios'
@@ -38,12 +38,8 @@ const CatalogForm = ({isCreate, onClose, id, data}) => {
   const history = useHistory()
 
 
-  // console.log(allData)
   useEffect(() => {
     getInputs(dispatch, 'GET_INPUT_DATA', `/admin_catalog/create?category=${allData.category_id === undefined ? '' : allData.category_id}`)
-    // getProduct(dispatch, 'GET_PRODUCTS', `/admin_catalog/${id}`)
-
-    // console.log(allData.category_id)
   }, [allData.category_id])
 
   useEffect(() => {

@@ -12,6 +12,7 @@ import {getTabs} from './store/actions/tabsAction'
 import Table from './layouts/Table'
 import {getCatalog, getProduct} from './store/actions/catalogAction'
 import Catalog from './layouts/Catalog'
+import CatalogView from './componetns/Catalog/CatalogView'
 
 function App() {
   const location = useLocation()
@@ -40,6 +41,7 @@ function App() {
             <Route path={'/tables'} exact component={Tables}/>
             <Route path={'/tables/:table'} component={Table}/>
             <Route path={'/admin_catalog'} exact component={Catalog}/>
+            <Route path={'/admin_catalog/:id'} exact component={CatalogView}/>
             <Route path={'/admin_catalog/:table'} exact component={Table}/>
           </Switch>
         </Col>

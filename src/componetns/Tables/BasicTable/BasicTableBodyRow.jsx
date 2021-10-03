@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import {Button} from 'react-bootstrap'
 import BasicTablePopup from './BasicTablePopup'
-import {APIRequest} from '../../functions/APIRequest'
-import {BodyRow, ButtonTable} from './StyledComponentsTable'
+import {APIRequest} from '../../../functions/APIRequest'
+import {BodyRow, ButtonTable} from '../StyledComponentsTable'
 
 const BasicTableBodyRow = ({isActive, rowData, currentTable, dispatch, inputTypes, url, isPretty}) => {
   const [active, setActive] = useState(isActive)

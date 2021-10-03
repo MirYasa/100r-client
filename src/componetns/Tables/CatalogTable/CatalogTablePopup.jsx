@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react'
 import {Modal} from 'react-bootstrap'
 import styled from 'styled-components'
-import CatalogForm from '../Forms/CatalogForm'
-import {getInputs} from '../../store/actions/inputDataAction'
+import CatalogForm from '../../Forms/CatalogForm'
+import {getInputs} from '../../../store/actions/inputDataAction'
 import {useDispatch} from 'react-redux'
 
 const Popup = styled(Modal)`

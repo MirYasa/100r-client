@@ -36,12 +36,10 @@ export const createCatalog = (e, url, data, dispatch, type) => {
 
 }
 
-export const updateCat = (e, url, data, id, dispatch, func) => {
-  e.preventDefault()
+export const updateCat = (e, url, data, id, dispatch) => {
   updateCatalog(`${url}/${id}`, data)
     .then(() => {
       getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
-      func()
     })
 }
 export const update = (e, url, data, dispatch, type, id) => {

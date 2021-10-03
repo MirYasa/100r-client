@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {Button} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 
 const ButtonsContainer = styled.div`
 width: 90%;
@@ -20,10 +21,17 @@ background-color: ${props => props.variant === 'success' ? '#22aa8f' : null};
 border: ${props => props.variant === 'success' ? '#22aa8f 1px solid' : null};
 };
 `
-const FormButtons = ({buttons}) => {
+const FormButtons = ({buttons, isUpdateCatalog}) => {
   return (
     <ButtonsContainer>
       {buttons.map((item, index) => {
+        if (isUpdateCatalog && item.title !== 'Сброс') {
+          return (<Link to={'/admin_catalog'}>
+            <CustomButton key={index} variant={item.type} onClick={(e) => {
+              item.action(e)
+            }}>{item.title}</CustomButton>
+          </Link>)
+        }
         return (
           <CustomButton key={index} variant={item.type} onClick={(e) => {
             item.action(e)

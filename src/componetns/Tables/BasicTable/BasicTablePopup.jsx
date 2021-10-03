@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import BasicForm from '../Forms/BasicForm'
+import BasicForm from '../../Forms/BasicForm'
 import {Modal} from 'react-bootstrap'
 
 const Popup = styled(Modal)`

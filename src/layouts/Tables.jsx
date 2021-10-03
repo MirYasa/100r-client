@@ -1,7 +1,7 @@
 import React from 'react'
 import StrippedTable from '../componetns/Tables/StrippedTable'
 import styled from 'styled-components'
-import BasicTable from '../componetns/Tables/BasicTable'
+import BasicTable from '../componetns/Tables/BasicTable/BasicTable'
 import PlusBasicTable from '../componetns/Tables/PlusBasicTable'
 
 const TablesContainer = styled.div`

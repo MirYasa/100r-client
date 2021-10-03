@@ -5,7 +5,7 @@ import * as FaIcons from 'react-icons/fa'
 import {useSelector} from 'react-redux'
 
 
-const SideBarLink = styled(NavLink)`
+const SideBarLink = styled.div`
   display: flex;
    color: #f5f5f5; 
   justify-content: space-between;
@@ -50,7 +50,7 @@ const SubMenu = ({item}) => {
 
   return (
     <>
-      <SideBarLink exact to={item.path} onClick={item.subNav && showSubnav}>
+      <SideBarLink onClick={item.subNav && showSubnav}>
         <div>
           {item.icon}
           <SideBarLabel>{item.title}</SideBarLabel>

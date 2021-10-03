@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import BasicTableBodyRow from './BasicTableBodyRow'
-import {CustomTable, HeadRow} from './StyledComponentsTable'
+import {CustomTable, HeadRow} from '../StyledComponentsTable'
 
 const thNames = {
   id: 'ID',

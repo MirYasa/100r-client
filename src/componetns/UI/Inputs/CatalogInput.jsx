@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {Col, Form, Row, ToggleButton, ToggleButtonGroup} from 'react-bootstrap'
-import TextArea from '../UI/TextArea'
+import TextArea from '../TextArea'
 import {useSelector} from 'react-redux'
 
 const InputContainer = styled(Row)`
@@ -38,8 +38,6 @@ const CatalogInput = ({inputName, isRequired, type, radio, val = '', setData, is
   const [input, setInput] = useState(val)
   const [selectVal, setSelectVal] = useState([])
   const {categories, manufacturers} = useSelector(state => state.content)
-
-  console.log(inputName, val)
 
   useEffect(() => {
     setInput(val)

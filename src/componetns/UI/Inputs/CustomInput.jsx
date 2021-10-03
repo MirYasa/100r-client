@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {Col, Form, Row, ToggleButton, ToggleButtonGroup} from 'react-bootstrap'
-import TextArea from '../UI/TextArea'
+import TextArea from '../TextArea'
 
 const InputContainer = styled(Row)`
 
@@ -33,6 +33,7 @@ border: #6c757d 1px solid;
 const CustomSelect = styled(Form.Select)`
 
 `
+
 const CustomInput = ({inputName, isRequired, type, radio, val = '', setData, refs, inputTitle}) => {
   const [input, setInput] = useState(val)
   let Type = ''

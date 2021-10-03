@@ -1,5 +1,5 @@
 import React from 'react'
-import {CustomTable, HeadRow} from './StyledComponentsTable'
+import {CustomTable, HeadRow} from '../StyledComponentsTable'
 import CatalogTableRow from './CatalogTableRow'
 
 const CatalogTable = ({tableData}) => {

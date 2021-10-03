@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react'
-import BasicTable from '../componetns/Tables/BasicTable'
+import BasicTable from '../componetns/Tables/BasicTable/BasicTable'
 import {useLocation, useParams} from 'react-router'
 import styled from 'styled-components'
 import {addContent, getContent} from '../store/actions/contentAction'
 import {useDispatch, useSelector} from 'react-redux'
 import {Button} from 'react-bootstrap'
-import BasicTablePopup from '../componetns/Tables/BasicTablePopup'
+import BasicTablePopup from '../componetns/Tables/BasicTable/BasicTablePopup'
 import {getRows} from '../functions/getRows'
 import {getInputs} from '../store/actions/inputDataAction'
 

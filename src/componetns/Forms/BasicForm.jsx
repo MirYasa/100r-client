@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react'
 import styled from 'styled-components'
-import CustomInput from '../UI/CustomInput'
+import CustomInput from '../UI/Inputs/CustomInput'
 import FormButtons from './FormButtons'
 import {Form} from 'react-bootstrap'
 import {createContent, update} from '../../functions/APIRequest'
