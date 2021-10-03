@@ -3,7 +3,7 @@ import * as IconFa from 'react-icons/fa'
 import {getCatalog} from '../../../store/actions/catalogAction'
 import {useDispatch} from 'react-redux'
 
-const Titles = ({item}) => {
+const Titles = ({item, currentPage}) => {
   const thNames = {
     product_id: 'ID',
     category: 'Категория',
@@ -17,7 +17,7 @@ const Titles = ({item}) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    getCatalog(dispatch, 'GET_CATALOG', `/admin_catalog?order=${field}&direction=${asc ? 'asc' : 'desc'}`)
+    getCatalog(dispatch, 'GET_CATALOG', `/admin_catalog?page=${currentPage}&order=${field}&direction=${asc ? 'asc' : 'desc'}`)
   }, [field, asc])
 
   return (

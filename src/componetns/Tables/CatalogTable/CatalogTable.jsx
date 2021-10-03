@@ -3,7 +3,7 @@ import {CustomTable, HeadRow} from '../StyledComponentsTable'
 import CatalogTableRow from './CatalogTableRow'
 import Titles from './Titles'
 
-const CatalogTable = ({tableData}) => {
+const CatalogTable = ({tableData, currentPage}) => {
   return (
     <CustomTable striped bordered hover size="lg">
       <thead>
@@ -13,7 +13,7 @@ const CatalogTable = ({tableData}) => {
         {tableData.length === 0 ? null :
           Object.keys(tableData[0]).map((item, index) => {
             return (
-              <Titles key={index} item={item}/>
+              <Titles key={index} item={item} currentPage={currentPage}/>
             )
           })}
         <th>Смотреть</th>

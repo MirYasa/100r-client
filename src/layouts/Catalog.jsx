@@ -40,7 +40,8 @@ const Catalog = () => {
     <CatalogContainer>
       <Button style={{margin: '10px 0'}} variant={'warning'} onClick={()=>{setOpen(true)}}>Создать</Button>
       <CatalogTable
-        tableData={catalog}/>
+        tableData={catalog}
+        currentPage={page}/>
         <PaginationList
         count={count}
         updatePage={setPage}/>
