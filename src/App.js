@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Route, Switch, useLocation} from 'react-router-dom'
 import {Col, Container, Row} from 'react-bootstrap'
 import Home from './layouts/Home'
@@ -13,6 +13,7 @@ import Table from './layouts/Table'
 import {getCatalog, getProduct} from './store/actions/catalogAction'
 import Catalog from './layouts/Catalog'
 import CatalogView from './componetns/Catalog/CatalogView'
+import instance from './settings/defaultAxios'
 
 function App() {
   const location = useLocation()

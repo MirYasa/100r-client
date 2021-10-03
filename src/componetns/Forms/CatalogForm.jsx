@@ -45,7 +45,7 @@ const CatalogForm = ({isCreate, onClose, id, data}) => {
   useEffect(() => {
     setAllData({
       ...allData,
-      ['external_id']: 0
+      ['params']: {}
     })
     setPrices(inputData.prices)
     setParams(inputData.params)
@@ -92,6 +92,8 @@ const CatalogForm = ({isCreate, onClose, id, data}) => {
     onClose(false)
   }
 
+  console.log(allData)
+
   const addCatalog = async (url, data) => {
     try {
       const createCatalog = await instance.post('/admin_catalog', data, {
@@ -102,12 +104,12 @@ const CatalogForm = ({isCreate, onClose, id, data}) => {
       })
         .then(() => {
           getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
-          history.go(0)
         })
     } catch (e) {
       console.log(e)
     }
-    console.log(data, url)
+    history.go(0)
+    // console.log(data, url)
   }
   const createAction = (e) => {
     e.preventDefault()

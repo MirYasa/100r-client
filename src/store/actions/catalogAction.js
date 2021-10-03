@@ -3,7 +3,7 @@ import instance from '../../settings/defaultAxios'
 export const getCatalog = async (dispatch, type, url) => {
   try {
     const data = await instance.get(url)
-    dispatch({type: type, payload: data.data})
+    dispatch({type: type, payload: data.data.items})
   } catch (e) {
     console.log(e)
   }
