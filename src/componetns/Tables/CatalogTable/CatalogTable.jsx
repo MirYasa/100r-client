@@ -1,17 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {CustomTable, HeadRow} from '../StyledComponentsTable'
 import CatalogTableRow from './CatalogTableRow'
+import Titles from './Titles'
 
 const CatalogTable = ({tableData}) => {
-
-  const thNames = {
-    product_id: 'ID',
-    category: 'Категория',
-    name: 'Имя',
-    active: 'Активность',
-    manufacturer: 'Производитель'
-  }
-
   return (
     <CustomTable striped bordered hover size="lg">
       <thead>
@@ -21,10 +13,7 @@ const CatalogTable = ({tableData}) => {
         {tableData.length === 0 ? null :
           Object.keys(tableData[0]).map((item, index) => {
             return (
-              <th key={index}>{Object.entries(thNames).map(([key, value]) => {
-                if (key === item)
-                  return value
-              })}</th>
+              <Titles key={index} item={item}/>
             )
           })}
         <th>Смотреть</th>

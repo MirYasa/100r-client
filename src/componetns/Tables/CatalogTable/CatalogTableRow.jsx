@@ -20,8 +20,6 @@ const CatalogTableRow = ({rowData}) => {
         <td><input type="checkbox" checked={active} onChange={() => {
         }} onClick={() => {
           setActive(!active)
-          // console.log(rowData.product_id)
-          // getInputs(dispatch, 'GET_INPUT_DATA', `/admin_catalog/create?category=${rowData.product_id}`)
         }}/></td>
         {Object.values(rowData).map((item, index) => {
           return (
@@ -30,8 +28,6 @@ const CatalogTableRow = ({rowData}) => {
         })}
         <td><Link to={`/admin_catalog/${rowData.product_id}`}>
           <ButtonTable variant={'link'} onClick={() => {
-            // setOpen(true)
-            // getProduct(dispatch, 'GET_PRODUCTS', '/admin_catalog', rowData.product_id)
           }}>Смотреть</ButtonTable>
         </Link></td>
         <td><Button style={{width: 90}} variant={'danger'} onClick={() => {
