@@ -54,7 +54,7 @@ export const SidebarData = [
     subArr: [
       {
         title: 'Продукты',
-        path: '/',
+        path: '/admin_catalog',
         icon: <FaIcons.FaBookOpen/>
       },
       {

@@ -47,6 +47,7 @@ const BasicTableBodyRow = ({isActive, rowData, currentTable, dispatch, inputType
       </BodyRow>
       <BasicTablePopup
         show={open}
+        isPretty={isPretty}
         handleClose={setOpen}
         formData={inputTypes}
         formDataValue={d}

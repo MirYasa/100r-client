@@ -74,7 +74,7 @@ const SubMenu = ({item}) => {
             )
           }) : subnav && item.subNav && item.title === 'Каталог' ? item.subArr.map((item, index) => {
           return (
-            <DropdownLink to={`/admin_catalog${item.path}`} key={index}>
+            <DropdownLink to={`${item.path}`} key={index}>
               {item.icon}
               <SideBarLabel>{item.title}</SideBarLabel>
             </DropdownLink>

@@ -11,10 +11,17 @@ background-color: white;
 border: 1px solid #eceef0;
 margin: ${props => props.margin};
 `
-const BasicForm = ({margin, formData, isCreate, dispatch, url, formDataValue, id, onClose}) => {
+const BasicForm = ({margin, formData, isCreate, dispatch, url, formDataValue, id, onClose, isPretty}) => {
   const [allData, setAllData] = useState(formDataValue)
   const input = useRef(null)
   let mut = {}
+
+  const thNames = {
+    id: 'ID',
+    name: 'Название',
+    value: 'Значение',
+    data_type: 'Тип данных'
+  }
 
   const uploadData = (name, val) => {
     setAllData({
@@ -56,7 +63,7 @@ const BasicForm = ({margin, formData, isCreate, dispatch, url, formDataValue, id
               val={isCreate ? undefined : allData[key]}
               type={val}
               setData={uploadData}
-              inputTitle={key}
+              inputTitle={isPretty ? thNames[key] : key}
               refs={input}/>
           )
         })

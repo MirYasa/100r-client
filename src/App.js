@@ -43,7 +43,7 @@ function App() {
             <Route path={'/tables/:table'} component={Table}/>
             <Route path={'/admin_catalog'} exact component={Catalog}/>
             <Route path={'/admin_catalog/:id'} exact component={CatalogView}/>
-            <Route path={'/admin_catalog/:table'} exact component={Table}/>
+            <Route path={'/:table'} exact component={Table}/>
           </Switch>
         </Col>
       </Row>

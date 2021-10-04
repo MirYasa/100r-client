@@ -28,13 +28,13 @@ const Table = () => {
   const {content} = useSelector(state => state.content)
   const {inputData} = useSelector(state => state.inputData)
   const [open, setOpen] = useState(false)
+  const location = useLocation().pathname
 
 
   useEffect(() => {
     getContent(dispatch, 'GET_CONTENT', table)
     getInputs(dispatch, 'GET_INPUT_DATA', `${table}/create`)
   }, [table])
-
 
   return (
     <TableContainer>
@@ -47,7 +47,7 @@ const Table = () => {
         dispatch={dispatch}
         inputTypes={inputData}
         url={table}
-        isPretty={local.pathname.includes('catalog')}/>
+        isPretty={!local.pathname.includes('tables')}/>
       <BasicTablePopup
         show={open}
         handleClose={setOpen}
@@ -55,7 +55,8 @@ const Table = () => {
         isCreate={true}
         dispatch={dispatch}
         url={table}
-        modalTitle={'Создание'}/>
+        modalTitle={'Создание'}
+        isPretty={!local.pathname.includes('tables')}/>
     </TableContainer>
   )
 }
