@@ -1,15 +1,13 @@
 import React, {useEffect, useState} from 'react'
-import {createCatalog, createContent, update, updateCat} from '../../functions/APIRequest'
+import {AddCatalog} from '../../functions/APIRequest'
 import FormButtons from './FormButtons'
 import styled from 'styled-components'
 import {Form} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import CatalogInput from '../UI/Inputs/CatalogInput'
 import {names, titles} from './CatalogFormInputsName'
-import {useHistory, useLocation} from 'react-router'
-import instance from '../../settings/defaultAxios'
+import {useLocation} from 'react-router-dom'
 import {getInputs} from '../../store/actions/inputDataAction'
-import {getCatalog, getProduct} from '../../store/actions/catalogAction'
 
 const FormBack = styled(Form)`
 width: 95%;
@@ -22,22 +20,20 @@ h5{
 font-size: 18px;
 color: #a2b0bd;
 }
-padding: 5px;
 border-bottom: 1px solid #eceef0;
 margin: 10px 5px;
 `
 
-const CatalogForm = ({isCreate, onClose, id, data}) => {
+const CatalogForm = ({isCreate, onClose}) => {
   const {inputData} = useSelector(state => state.inputData)
-  const [allData, setAllData] = useState(isCreate ? inputData : data)
+  const [allData, setAllData] = useState({})
   const titlesMap = new Map(Object.entries(titles))
   const [params, setParams] = useState(inputData.params)
   const [prices, setPrices] = useState(inputData.prices)
   const dispatch = useDispatch()
   const url = useLocation().pathname
-  const history = useHistory()
 
-
+  console.log(allData)
   useEffect(() => {
     getInputs(dispatch, 'GET_INPUT_DATA', `/admin_catalog/create?category=${allData.category_id === undefined ? '' : allData.category_id}`)
   }, [allData.category_id])
@@ -45,15 +41,12 @@ const CatalogForm = ({isCreate, onClose, id, data}) => {
   useEffect(() => {
     setAllData({
       ...allData,
-      ['params']: {}
+      ['params']: {},
+      ['prices']: {},
+      active: false
     })
     setPrices(inputData.prices)
     setParams(inputData.params)
-
-    if (!isCreate)
-      setAllData(data)
-
-
   }, [inputData])
 
   const uploadData = (name, val) => {
@@ -92,41 +85,23 @@ const CatalogForm = ({isCreate, onClose, id, data}) => {
     onClose(false)
   }
 
-  console.log(allData)
 
-  const addCatalog = async (url, data) => {
-    try {
-      const createCatalog = await instance.post('/admin_catalog', data, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-        }
-      })
-        .then(() => {
-          getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
-        })
-    } catch (e) {
-      console.log(e)
-    }
-    history.go(0)
-    // console.log(data, url)
-  }
   const createAction = (e) => {
     e.preventDefault()
     close()
-    addCatalog(url, allData)
+    AddCatalog(dispatch, url, allData)
   }
-  const updateAction = (e) => {
-    delete allData.category
-    delete allData.created_at
-    delete allData.updated_at
-    delete allData.manufacturer
-    console.log(allData)
-    close()
-    updateCat(e, url, allData, id, dispatch, () => {
-      history.go(0)
-    })
-  }
+  // const updateAction = (e) => {
+  //   delete allData.category
+  //   delete allData.created_at
+  //   delete allData.updated_at
+  //   delete allData.manufacturer
+  //   console.log(allData)
+  //   close()
+  //   updateCat(e, url, allData, id, dispatch, () => {
+  //     history.go(0)
+  //   })
+  // }
 
   return (
     <FormBack>
@@ -175,7 +150,7 @@ const CatalogForm = ({isCreate, onClose, id, data}) => {
         buttons={[
           {title: 'Отмена', type: 'primary', action: close},
           {title: 'Сброс', type: 'primary', action: null},
-          {title: 'Подтвердить', type: 'success', action: isCreate ? createAction : updateAction}]}
+          {title: 'Подтвердить', type: 'success', action: createAction}]}
       />
     </FormBack>
   )

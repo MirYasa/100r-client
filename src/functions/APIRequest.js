@@ -1,5 +1,6 @@
 import {addContent, deleteContent, getContent, updateContent} from '../store/actions/contentAction'
 import {addCatalog, getCatalog, updateCatalog} from '../store/actions/catalogAction'
+import instance from '../settings/defaultAxios'
 
 export const APIRequest = (url, message, dispatch, id, type) => {
 
@@ -35,6 +36,17 @@ export const createCatalog = (e, url, data, dispatch, type) => {
   // })
 
 }
+export const AddCatalog = async (dispatch, url, data) => {
+  try {
+    const createCatalog = await instance.post('/admin_catalog', data)
+      .then(() => {
+        getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
+      })
+  } catch (e) {
+    console.log(e)
+  }
+}
+
 
 export const updateCat = (e, url, data, id, dispatch) => {
   updateCatalog(`${url}/${id}`, data)
