@@ -1,15 +1,22 @@
-import {addContent, deleteContent, getContent, updateContent} from '../store/actions/contentAction'
+import {addContent, deleteContent, getContent, getDefaultContent, updateContent} from '../store/actions/contentAction'
 import {addCatalog, getCatalog, updateCatalog} from '../store/actions/catalogAction'
 import instance from '../settings/defaultAxios'
 
-export const APIRequest = (url, message, dispatch, id, type) => {
+export const Delete = (url, message, dispatch, id, type, content) => {
 
   if (window.confirm(message))
 
     deleteContent(`${url}/${id}`)
       .then(() => {
-        getContent(dispatch, type, url)
-        getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
+        if (content === 'default'){
+          getDefaultContent(dispatch, type, url)
+        }
+        if (content === 'content'){
+          getContent(dispatch, type, url)
+        }
+        if (content === 'catalog'){
+          getCatalog(dispatch, type, url)
+        }
       })
       .catch(e => {
         console.log(e)
@@ -20,7 +27,7 @@ export const createContent = (e, url, data, dispatch, type) => {
   e.preventDefault()
   addContent(url, data)
     .then(() => {
-      getContent(dispatch, type, url)
+      getDefaultContent(dispatch, type, url)
     })
     .catch(e => {
       console.log(e)
@@ -29,12 +36,6 @@ export const createContent = (e, url, data, dispatch, type) => {
 export const createCatalog = (e, url, data, dispatch, type) => {
   e.preventDefault()
   addCatalog(`${url}`, data)
-  // .then(() => {
-  //   getCatalog(dispatch,type, url)
-  // }).catch(e => {
-  // console.log(e)
-  // })
-
 }
 export const AddCatalog = async (dispatch, url, data) => {
   try {
@@ -47,6 +48,26 @@ export const AddCatalog = async (dispatch, url, data) => {
   }
 }
 
+export const AddCategory = async (dispatch, data) => {
+  try {
+    const createCategory = await instance.post('/admin_categories', data)
+      .then(() => {
+        getCatalog(dispatch, 'GET_CATEGORIES', '/admin_categories')
+      })
+  } catch (e) {
+    console.log(e)
+  }
+}
+export const UpdateCategory = async (dispatch, id, data) => {
+  try {
+    const updateCategory = await instance.put(`/admin_categories/${id}`, data)
+      .then(() => {
+        getCatalog(dispatch, 'GET_CATEGORIES', '/admin_categories')
+      })
+  } catch (e) {
+    console.log(e)
+  }
+}
 
 export const updateCat = (e, url, data, id, dispatch) => {
   updateCatalog(`${url}/${id}`, data)
@@ -58,7 +79,7 @@ export const update = (e, url, data, dispatch, type, id) => {
   e.preventDefault()
   updateContent(`${url}/${id}`, data)
     .then(() => {
-      getContent(dispatch, type, url)
+      getDefaultContent(dispatch, type, url)
     })
     .catch(e => {
       console.log(e)

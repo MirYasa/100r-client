@@ -34,12 +34,14 @@ const CustomSelect = styled(Form.Select)`
 
 `
 
-const CustomInput = ({inputName, isRequired, type, radio, val = '', setData, refs, inputTitle}) => {
+const CustomInput = ({inputName, isRequired, type, radio, val = '', setData, refs, inputTitle, isCategory}) => {
   const [input, setInput] = useState(val)
   let Type = ''
 
   useEffect(() => {
-    setData(inputName, val)
+    if (!isCategory) {
+      setData(inputName, val)
+    }
   }, [])
 
   switch (type) {

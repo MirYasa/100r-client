@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Button} from 'react-bootstrap'
 import BasicTablePopup from './BasicTablePopup'
-import {APIRequest} from '../../../functions/APIRequest'
+import {APIRequest, Delete} from '../../../functions/APIRequest'
 import {BodyRow, ButtonTable} from '../StyledComponentsTable'
 
 const BasicTableBodyRow = ({isActive, rowData, currentTable, dispatch, inputTypes, url, isPretty}) => {
@@ -42,7 +42,7 @@ const BasicTableBodyRow = ({isActive, rowData, currentTable, dispatch, inputType
           setOpen(true)
         }}>Смотреть</ButtonTable></td>
         <td><Button style={{width: 90}} variant={'danger'} onClick={() => {
-          APIRequest(currentTable, 'Удалить запись?', dispatch, rowData.id, 'GET_CONTENT')
+          Delete(currentTable, 'Удалить запись?', dispatch, rowData.id, 'GET_CONTENT', 'default')
         }}>Удалить</Button></td>
       </BodyRow>
       <BasicTablePopup

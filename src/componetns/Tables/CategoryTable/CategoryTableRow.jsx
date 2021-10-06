@@ -2,17 +2,16 @@ import React, {useEffect, useState} from 'react'
 import {BodyRow, ButtonTable} from '../StyledComponentsTable'
 import {Button} from 'react-bootstrap'
 import {APIRequest, Delete} from '../../../functions/APIRequest'
-import CatalogTablePopup from './CatalogTablePopup'
+import CategoryTablePopup from './CategoryTablePopup'
 import {getCatalog, getProduct} from '../../../store/actions/catalogAction'
 import {useDispatch, useSelector} from 'react-redux'
 import {Link, useLocation} from 'react-router-dom'
 
-const CatalogTableRow = ({rowData}) => {
+const CategoryTableRow = ({rowData}) => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState(false)
   const local = useLocation().pathname
-  const {products} = useSelector(state => state.catalog)
 
   return (
     <React.Fragment>
@@ -21,27 +20,25 @@ const CatalogTableRow = ({rowData}) => {
         }} onClick={() => {
           setActive(!active)
         }}/></td>
-        {Object.values(rowData).map((item, index) => {
-          return (
-            <td key={index}>{item === true ? 'Да' : item === false ? 'Нет' : item}</td>
-          )
+        {Object.entries(rowData).map(([key, val]) => {
+          return <td key={key}>{key === 'parent_id' ? (val === null ? 'Нет' : val.name) : val}</td>
         })}
-        <td><Link to={`/admin_catalog/${rowData.product_id}`}>
+        <td>
           <ButtonTable variant={'link'} onClick={() => {
+            setOpen(true)
           }}>Смотреть</ButtonTable>
-        </Link></td>
+        </td>
         <td><Button style={{width: 90}} variant={'danger'} onClick={() => {
-          Delete(local, 'Удалить продукт?', dispatch, rowData.product_id, 'GET_CATALOG', 'catalog')
+          Delete(local, 'Удалить категорию?', dispatch, rowData.id, 'GET_CATEGORIES', 'catalog')
         }}>Удалить</Button></td>
       </BodyRow>
-      <CatalogTablePopup
+      <CategoryTablePopup
         modalTitle={'Просмотр и изменение'}
         show={open}
         handleClose={setOpen}
-        id={rowData.product_id}
         isCreate={false}
-        data={products}/>
+        data={rowData.id}/>
     </React.Fragment>
   )
 }
-export default CatalogTableRow
+export default CategoryTableRow

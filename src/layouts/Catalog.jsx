@@ -4,7 +4,7 @@ import CatalogTable from '../componetns/Tables/CatalogTable/CatalogTable'
 import styled from 'styled-components'
 import {Button} from 'react-bootstrap'
 import CatalogTablePopup from '../componetns/Tables/CatalogTable/CatalogTablePopup'
-import {getContent} from '../store/actions/contentAction'
+import {getContent, getDefaultContent} from '../store/actions/contentAction'
 import {useParams} from 'react-router'
 import {getInputs} from '../store/actions/inputDataAction'
 import instance from '../settings/defaultAxios'
@@ -24,8 +24,8 @@ const Catalog = () => {
   const [page, setPage] = useState(0)
 
   useEffect(() => {
-    getContent(dispatch, 'GET_CATEGORY', '/category')
-    getContent(dispatch, 'GET_MANUFACTURE', '/manufacturer')
+    getDefaultContent(dispatch, 'GET_CATEGORY', '/category')
+    getDefaultContent(dispatch, 'GET_MANUFACTURE', '/manufacturer')
     instance.get('/admin_catalog')
       .then(data => {
         setCount(data.data.count)

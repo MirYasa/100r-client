@@ -3,13 +3,13 @@ import * as IconFa from 'react-icons/fa'
 import {getCatalog} from '../../../store/actions/catalogAction'
 import {useDispatch} from 'react-redux'
 
-const Titles = ({item, currentPage}) => {
+const CategoryTitles = ({item, currentPage}) => {
   const thNames = {
-    product_id: 'ID',
+    id: 'ID',
     category: 'Категория',
     name: 'Имя',
-    active: 'Активность',
-    manufacturer: 'Производитель',
+    updated_at: 'Изменено',
+    parent_id: 'Родительская категория',
     created_at: 'Создано'
   }
   const [field, setField] = useState('')
@@ -21,14 +21,14 @@ const Titles = ({item, currentPage}) => {
       if (key === item)
         return value
     })} {asc ? <IconFa.FaSortAmountDownAlt onClick={() => {
-      getCatalog(dispatch, 'GET_CATALOG', `/admin_catalog?page=${currentPage}&order=${field}&direction=${asc ? 'asc' : 'desc'}`)
+      getCatalog(dispatch, 'GET_CATEGORIES', `/admin_categories?page=${currentPage}&order=${field}&direction=${asc ? 'asc' : 'desc'}`)
       setField(item)
       setAsc(!asc)
     }}/> : <IconFa.FaSortAmountUpAlt onClick={() => {
-      getCatalog(dispatch, 'GET_CATALOG', `/admin_catalog?page=${currentPage}&order=${field}&direction=${asc ? 'asc' : 'desc'}`)
+      getCatalog(dispatch, 'GET_CATEGORIES', `/admin_categories?page=${currentPage}&order=${field}&direction=${asc ? 'asc' : 'desc'}`)
       setField(item)
       setAsc(!asc)
     }}/>}</th>
   )
 }
-export default Titles
+export default CategoryTitles
