@@ -8,6 +8,9 @@ import CustomInput from '../UI/Inputs/CustomInput'
 import SelectMultiply from '../UI/Selects/SelectMultiply'
 import MySelect from '../UI/Selects/MySelect'
 import {AddCatalog, AddCategory, UpdateCategory} from '../../functions/APIRequest'
+import {useForm} from 'react-hook-form'
+import ValidInput from '../UI/Inputs/ValidInput'
+
 
 const FormBack = styled(Form)`
 width: 95%;
@@ -30,6 +33,7 @@ const CategoryForm = ({isCreate, onClose, categoryId}) => {
   } : {})
   const [updatedData, setUpdatedData] = useState({})
   const dispatch = useDispatch()
+  const {register, handleSubmit, watch, formState: {errors}} = useForm()
 
   // console.log(updatedData, data)
   useEffect(() => {
@@ -51,6 +55,8 @@ const CategoryForm = ({isCreate, onClose, categoryId}) => {
     },
     []
   )
+
+  console.log(watch('name'))
 
   const updateData = (name, value) => {
     setData({
@@ -74,19 +80,25 @@ const CategoryForm = ({isCreate, onClose, categoryId}) => {
     UpdateCategory(dispatch, categoryId, updatedData)
   }
   const createAction = (e) => {
-    e.preventDefault()
     close()
     console.log(data)
+    console.log(errors)
     AddCategory(dispatch, data)
   }
-
+  const _onSubmit = (e) => {
+    console.log(e)
+    console.log(errors)
+  }
 
   return (
-    <FormBack>
+    <FormBack onSubmit={handleSubmit(_onSubmit)}>
       {Object.entries(isCreate ? TypeData : (data === undefined ? {} : data)).map(([key, val]) => {
         if (key === 'name') {
-          return <CustomInput key={key} type={val} val={isCreate ? '' : val} inputTitle={names[key]} inputName={key}
-                              setData={isCreate ? updateData : updateUpdatedData} isCategory={true}/>
+          return (
+            <CustomInput key={key} type={val} val={isCreate ? '' : val} inputTitle={names[key]} inputName={key}
+                         setData={isCreate ? updateData : updateUpdatedData}
+                         isCategory={true}/>
+          )
         }
         if (key === 'parent_id') {
           return <MySelect key={key} inputTitle={names[key]} inputName={key} options={isCreate ? val : TypeData[key]}
@@ -107,6 +119,4 @@ const CategoryForm = ({isCreate, onClose, categoryId}) => {
     </FormBack>
   )
 }
-
-
 export default CategoryForm

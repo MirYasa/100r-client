@@ -1,9 +1,10 @@
-import React, {useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import CustomInput from '../UI/Inputs/CustomInput'
 import FormButtons from './FormButtons'
 import {Form} from 'react-bootstrap'
 import {createContent, update} from '../../functions/APIRequest'
+import {useForm} from 'react-hook-form'
 
 const FormBack = styled(Form)`
 width: 95%;
@@ -12,9 +13,9 @@ border: 1px solid #eceef0;
 margin: ${props => props.margin};
 `
 const BasicForm = ({margin, formData, isCreate, dispatch, url, formDataValue, id, onClose, isPretty}) => {
-  const [allData, setAllData] = useState(formDataValue)
-  const input = useRef(null)
+  const [allData, setAllData] = useState(isCreate? formData : formDataValue)
   let mut = {}
+  const {register, handleSubmit, watch, formState: {errors}} = useForm()
 
   const thNames = {
     id: 'ID',
@@ -37,22 +38,25 @@ const BasicForm = ({margin, formData, isCreate, dispatch, url, formDataValue, id
     update(e, url, allData, dispatch, 'GET_CONTENT', id)
   }
   const createAction = (e) => {
-    close()
-    createContent(e, url, allData, dispatch, 'GET_CONTENT')
+    // close()
+    console.log(allData)
+    // createContent(e, url, allData, dispatch, 'GET_CONTENT')
   }
 
   const clear = () => {
-    console.log(input.current.value)
+    // console.log(input.current.value)
     // Object.keys(formData).map(key => {
     //   mut = {...mut, [key]: null}
     // })
     // setAllData(mut)
   }
 
-  console.log(allData)
 
   return (
-    <FormBack margin={margin}>
+    <FormBack margin={margin} onSubmit={(e) => {
+      e.preventDefault()
+      // console.log(e.target)
+    }}>
       {
         Object.entries(formData).map(([key, val]) => {
           return (
@@ -64,7 +68,7 @@ const BasicForm = ({margin, formData, isCreate, dispatch, url, formDataValue, id
               type={val}
               setData={uploadData}
               inputTitle={isPretty ? thNames[key] : key}
-              refs={input}/>
+              />
           )
         })
       }

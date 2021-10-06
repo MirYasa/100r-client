@@ -11,8 +11,11 @@ display: flex;
 align-items: center;
 justify-content: center;
 `
-const CustomButton = styled(Button)`
+const CustomButton = styled.input`
 margin: 20px 10px;
+color: white;
+padding: 6px 12px;
+border-radius: 4px;
 background-color: ${props => props.variant === 'success' ? '#26b99a' : null};
 border: ${props => props.variant === 'success' ? '#26b99a 1px solid' : null};
 
@@ -20,6 +23,7 @@ border: ${props => props.variant === 'success' ? '#26b99a 1px solid' : null};
 background-color: ${props => props.variant === 'success' ? '#22aa8f' : null};
 border: ${props => props.variant === 'success' ? '#22aa8f 1px solid' : null};
 };
+
 `
 const FormButtons = ({buttons, isUpdateCatalog}) => {
   return (
@@ -32,10 +36,17 @@ const FormButtons = ({buttons, isUpdateCatalog}) => {
             }}>{item.title}</CustomButton>
           </Link>)
         }
+        if (item.title === 'Подтвердить'){
+          return (
+            <CustomButton type="submit" value={item.title} key={index} variant={item.type} onClick={(e) => {
+              item.action(e)
+            }}/>
+          )
+        }
         return (
-          <CustomButton key={index} variant={item.type} onClick={(e) => {
+          <Button style={{margin: '20px 10px'}} key={index} variant={item.type} onClick={(e) => {
             item.action(e)
-          }}>{item.title}</CustomButton>
+          }}>{item.title}</Button>
         )
       })}
     </ButtonsContainer>
