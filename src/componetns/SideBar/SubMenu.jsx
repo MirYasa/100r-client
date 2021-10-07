@@ -79,7 +79,14 @@ const SubMenu = ({item}) => {
               <SideBarLabel>{item.title}</SideBarLabel>
             </DropdownLink>
           )
-        }): null}
+        }): subnav && item.subNav && item.title === 'Заказы' ? item.subArr.map((item, index) => {
+          return (
+            <DropdownLink to={`${item.path}`} key={index}>
+              {item.icon}
+              <SideBarLabel>{item.title}</SideBarLabel>
+            </DropdownLink>
+          )
+        }) : null}
     </>
   )
 }

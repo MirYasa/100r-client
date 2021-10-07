@@ -48,12 +48,11 @@ const BasicForm = ({margin, formData, isCreate, dispatch, url, formDataValue, id
   }
   const updateAction = (e) => {
     close()
-    update(e, url, allData, dispatch, 'GET_CONTENT', id, true)
+    update(e, url, allData, dispatch, 'GET_CONTENT', id)
   }
   const createAction = (e) => {
     close()
-    console.log(allData)
-    createContent(e, url, allData, dispatch, 'GET_CONTENT', true)
+    createContent(e, url, allData, dispatch, 'GET_CONTENT', false)
   }
 
   const clear = () => {

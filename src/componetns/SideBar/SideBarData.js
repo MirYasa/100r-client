@@ -2,7 +2,7 @@ import React from 'react'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import * as RiIcons from 'react-icons/ri'
-import * as MdIcons from 'react-icons/md'
+import * as BSIcons from 'react-icons/bs'
 
 export const SidebarData = [
   {
@@ -78,5 +78,34 @@ export const SidebarData = [
         icon: <FaIcons.FaBookOpen/>
       }
     ]
-  },
+  },{
+    title: 'Заказы',
+    path: '/tables',
+    icon: <FaIcons.FaClipboardList/>,
+    iconClosed: <RiIcons.RiArrowDownSFill/>,
+    iconOpened: <RiIcons.RiArrowUpSFill/>,
+    subNav: true,
+    subArr: [
+      {
+        title: 'Клиенты',
+        path: '/clients',
+        icon: <BSIcons.BsFillPeopleFill/>
+      },
+      {
+        title: 'Источник клиентов',
+        path: '/client_sources',
+        icon: <BSIcons.BsFillPeopleFill/>
+      },
+      {
+        title: 'Источник заказов',
+        path: '/order_sources',
+        icon: <FaIcons.FaWarehouse/>
+      },
+      {
+        title: 'Статус заказов',
+        path: '/order_status',
+        icon: <FaIcons.FaWarehouse/>
+      },
+    ]
+  }
 ]

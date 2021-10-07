@@ -6,6 +6,7 @@ background-color: #3f5367;
 color: white;
 th {
 border: none;
+width: ${props => props.width === 'created_at' ? '130px' : ''};
 }`
 export const CustomTable = styled(Table)`
 input {

@@ -23,11 +23,15 @@ export const Delete = (url, message, dispatch, id, type, content) => {
       })
 
 }
-export const createContent = (e, url, data, dispatch, type) => {
+export const createContent = (e, url, data, dispatch, type, isDef) => {
   e.preventDefault()
   addContent(url, data)
     .then(() => {
-      getDefaultContent(dispatch, type, url)
+      if (isDef) {
+        getDefaultContent(dispatch, type, url)
+      } else {
+        getContent(dispatch, type, url)
+      }
     })
     .catch(e => {
       console.log(e)
@@ -75,11 +79,14 @@ export const updateCat = (e, url, data, id, dispatch) => {
       getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
     })
 }
-export const update = (e, url, data, dispatch, type, id) => {
+export const update = (e, url, data, dispatch, type, id, isDef) => {
   e.preventDefault()
   updateContent(`${url}/${id}`, data)
     .then(() => {
-      getDefaultContent(dispatch, type, url)
+      if (isDef) {
+        getDefaultContent(dispatch, type, url)
+      }
+     getContent(dispatch, type, url)
     })
     .catch(e => {
       console.log(e)

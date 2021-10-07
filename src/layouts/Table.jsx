@@ -10,7 +10,7 @@ import {getRows} from '../functions/getRows'
 import {getInputs} from '../store/actions/inputDataAction'
 
 const TableContainer = styled.div`
-width: 90%;
+width: 95%;
 margin: 50px auto 0;
 overflow-x: scroll;
 `

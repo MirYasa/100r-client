@@ -15,6 +15,7 @@ import Catalog from './layouts/Catalog'
 import CatalogView from './componetns/Catalog/CatalogView'
 import instance from './settings/defaultAxios'
 import Category from './layouts/Category'
+import Client from './layouts/Client'
 
 function App() {
   const location = useLocation()
@@ -45,8 +46,9 @@ function App() {
             <Route path={'/admin_catalog'} exact component={Catalog}/>
             <Route path={'/admin_catalog/:id'} exact component={CatalogView}/>
             <Route path={'/admin_categories'} exact component={Category}/>
+            <Route path={'/clients'} exact component={Client}/>
             <Route path={'/:table'} exact component={Table}/>
-
+            <Route path={'/:table'} exact component={Table}/>
           </Switch>
         </Col>
       </Row>

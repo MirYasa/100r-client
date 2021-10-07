@@ -12,6 +12,9 @@ const CategoryTable = ({tableData, currentPage}) => {
         }}/></th>
         {tableData.length === 0 ? null :
           Object.keys(tableData[0]).map((item, index) => {
+            if (item === 'client_source_id') {
+              return  null
+            }
             return (
               <CategoryTitles key={index} item={item} currentPage={currentPage}/>
             )

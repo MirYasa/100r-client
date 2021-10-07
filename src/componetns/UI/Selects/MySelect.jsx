@@ -17,12 +17,21 @@ text-align: right;
 
 const MySelect = ({options, inputTitle, val, inputName, setData}) => {
   const option = [{value: 0, label: 'Выбрать'}]
+  let count = 1
+  let accept = false
   options.map(item => {
     option.push({
       value: item.id,
       label: item.name
     })
+    count++
+    if (count === option.length){
+      accept = true
+    }
   })
+
+  console.log(val)
+  console.log(option)
 
   return (
     <InputContainer>
@@ -30,12 +39,11 @@ const MySelect = ({options, inputTitle, val, inputName, setData}) => {
         <InputName>{inputTitle}</InputName>
       </Col>
       <Col lg={10}>
-        <Select options={option} defaultValue={val === undefined ? option[0] : option[val]} onChange={(e) => {
-         setData(inputName, e.value)
-        }}/>
+        {accept ? <Select options={option} defaultValue={val === undefined ? option[0] : option[val]} onChange={(e) => {
+          setData(inputName, e.value)
+        }}/> : null}
       </Col>
     </InputContainer>
-
   )
 }
 export default MySelect
