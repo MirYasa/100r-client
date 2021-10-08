@@ -91,17 +91,6 @@ const CatalogForm = ({isCreate, onClose}) => {
     close()
     AddCatalog(dispatch, url, allData)
   }
-  // const updateAction = (e) => {
-  //   delete allData.category
-  //   delete allData.created_at
-  //   delete allData.updated_at
-  //   delete allData.manufacturer
-  //   console.log(allData)
-  //   close()
-  //   updateCat(e, url, allData, id, dispatch, () => {
-  //     history.go(0)
-  //   })
-  // }
 
   return (
     <FormBack>

@@ -53,8 +53,6 @@ const CatalogView = () => {
       })
   }, [data.category_id])
 
-  console.log(data)
-
   const uploadData = (name, val) => {
     setData({
       ...data,
@@ -88,7 +86,8 @@ const CatalogView = () => {
     })
   }
   const updateAction = (e) => {
-    updateCat(e, 'admin_catalog', data, id, dispatch)
+    console.log(data)
+    updateCat(e, '/admin_catalog', data, id, dispatch)
   }
   return (
     <Container>

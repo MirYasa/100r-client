@@ -44,7 +44,7 @@ const BasicTableBodyRow = ({isActive, rowData, currentTable, dispatch, inputType
           setOpen(true)
         }}>Смотреть</ButtonTable></td>
         <td><Button style={{width: 90}} variant={'danger'} onClick={() => {
-          Delete(currentTable, 'Удалить запись?', dispatch, rowData.id, 'GET_CONTENT', 'content')
+          Delete(currentTable, 'Удалить клиента?', dispatch, rowData.id, 'GET_CONTENT', 'content')
         }}>Удалить</Button></td>
       </BodyRow>
       <ClientTablePopup

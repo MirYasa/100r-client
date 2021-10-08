@@ -30,15 +30,13 @@ const MySelect = ({options, inputTitle, val, inputName, setData}) => {
     }
   })
 
-  // console.log(val)
-
   return (
     <InputContainer>
       <Col lg={2}>
         <InputName>{inputTitle}</InputName>
       </Col>
       <Col lg={10}>
-        {accept ? <Select options={option} defaultValue={val === undefined ? option[0] : option[val -1]} onChange={(e) => {
+        {accept ? <Select options={option} defaultValue={val === undefined ? option[0] : option[val]} onChange={(e) => {
           setData(inputName, e.value)
           console.log(e)
         }}/> : null}
