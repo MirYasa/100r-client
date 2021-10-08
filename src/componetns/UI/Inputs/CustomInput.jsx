@@ -34,7 +34,7 @@ const CustomSelect = styled(Form.Select)`
 
 `
 
-const CustomInput = ({inputName, isRequired, type, radio, val = '', setData, refs, inputTitle, isCategory}) => {
+const CustomInput = ({inputName, isRequired, type, radio, val = '', setData, refs, inputTitle, isCategory, step}) => {
   const [input, setInput] = useState(val)
   let Type = ''
 
@@ -98,12 +98,12 @@ const CustomInput = ({inputName, isRequired, type, radio, val = '', setData, ref
                   type={Type}
                   ref={refs}
                   defaultChecked={val}
-                  step={Type === 'float' ? '0.01' : null}
+                  step={step}
                   required={isRequired}
                   value={input === null ? undefined : input}
                   onChange={(e) => {
-                    setInput(Type === 'checkbox' ? !e.target.defaultChecked : Type === 'number' ? parseInt(e.target.value) : e.target.value)
-                    setData(inputName, Type === 'checkbox' ? !e.target.defaultChecked : Type === 'number' ? parseInt(e.target.value) : e.target.value)
+                    setInput(Type === 'checkbox' ? !e.target.defaultChecked : e.target.value)
+                    setData(inputName, Type === 'checkbox' ? !e.target.defaultChecked : e.target.value)
                   }}/>}
       </Col>
     </InputContainer>

@@ -92,6 +92,11 @@ export const SidebarData = [
         icon: <BSIcons.BsFillPeopleFill/>
       },
       {
+        title: 'Заказы',
+        path: '/admin_orders',
+        icon: <FaIcons.FaClipboardList/>
+      },
+      {
         title: 'Источник клиентов',
         path: '/client_sources',
         icon: <BSIcons.BsFillPeopleFill/>

@@ -11,13 +11,7 @@ export const getCatalog = async (dispatch, type, url) => {
 
 export const addCatalog = async (url, data) => {
   try {
-    const createCatalog = await instance.post('/catalog/', data, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-      }
-
-    })
+    const createCatalog = await instance.post('/catalog/', data)
   } catch (e) {
     console.log(e)
   }

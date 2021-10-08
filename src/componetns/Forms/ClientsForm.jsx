@@ -22,7 +22,7 @@ const BasicForm = ({margin, formData, isCreate, dispatch, url, formDataValue, id
 
   const thNames = {
     id: 'ID',
-    name: 'Название',
+    name: 'Имя',
     value: 'Значение',
     data_type: 'Тип данных',
     phone: 'Номер телефона',

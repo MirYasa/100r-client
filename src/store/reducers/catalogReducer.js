@@ -1,7 +1,8 @@
 const initialState = {
   catalog: [],
   categories: [],
-  products: {}
+  products: {},
+  orders: []
 }
 
 export const catalogReducer = (state = initialState, action) => {
@@ -12,6 +13,8 @@ export const catalogReducer = (state = initialState, action) => {
       return {...state, products: action.payload}
     case'GET_CATEGORIES':
       return {...state, categories: action.payload}
+    case'GET_ORDERS':
+      return {...state, orders: action.payload}
     default:
       return state
   }

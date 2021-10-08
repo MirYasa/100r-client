@@ -38,7 +38,7 @@ const ViewForm = ({data, inputTypes, updateData, updatePrice, updateParams, upda
         buttons={[{title: 'Отмена', type: 'primary', action: () => {}},
           {title: 'Сброс', type: 'primary', action: null},
           {title: 'Подтвердить', type: 'success', action: updateAction}]}
-      isUpdateCatalog={true}/>
+        isUpdateCatalog={true}/>
     </form>
   )
 }

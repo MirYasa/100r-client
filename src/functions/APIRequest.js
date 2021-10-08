@@ -8,13 +8,13 @@ export const Delete = (url, message, dispatch, id, type, content) => {
 
     deleteContent(`${url}/${id}`)
       .then(() => {
-        if (content === 'default'){
+        if (content === 'default') {
           getDefaultContent(dispatch, type, url)
         }
-        if (content === 'content'){
+        if (content === 'content') {
           getContent(dispatch, type, url)
         }
-        if (content === 'catalog'){
+        if (content === 'catalog') {
           getCatalog(dispatch, type, url)
         }
       })
@@ -79,14 +79,35 @@ export const updateCat = (e, url, data, id, dispatch) => {
       getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
     })
 }
+export const createOrders = (e, url, data, dispatch) => {
+  try {
+    instance.post(`${url}`, data)
+      .then(() => {
+        getCatalog(dispatch, 'GET_ORDERS', '/admin_orders')
+      })
+  } catch (e) {
+    console.log(e)
+  }
+}
+export const updateOrders = (e, url, data, id, dispatch) => {
+  try {
+    instance.put(`${url}/${id}`, data)
+      .then(() => {
+        getCatalog(dispatch, 'GET_ORDERS', '/admin_orders?page=0&order=id&direction=asc')
+      })
+  } catch (e) {
+    console.log(e)
+  }
+}
 export const update = (e, url, data, dispatch, type, id, isDef) => {
   e.preventDefault()
   updateContent(`${url}/${id}`, data)
     .then(() => {
       if (isDef) {
         getDefaultContent(dispatch, type, url)
+      } else {
+        getContent(dispatch, type, url)
       }
-     getContent(dispatch, type, url)
     })
     .catch(e => {
       console.log(e)
