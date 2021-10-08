@@ -1,23 +1,13 @@
 import React from 'react'
-import styled from 'styled-components'
 import {Link} from 'react-router-dom'
-
-const Container = styled.div`
-display: flex;
-margin: 10px 0;
-justify-content: center;
-  
-  p,a {
-  margin: 0 10px;
-  }
-`
+import {FooterContainer} from './LoginStyles'
 
 const LoginFooter = ({title, buttonText, link}) => {
-    return (
-      <Container>
-        <p>{title}</p>
-        <Link to={link}>{buttonText}</Link>
-      </Container>
-    )
+  return (
+    <FooterContainer>
+      <p>{title}</p>
+      <Link to={link}>{buttonText}</Link>
+    </FooterContainer>
+  )
 }
 export default LoginFooter

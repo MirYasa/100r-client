@@ -1,28 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import {AddCatalog} from '../../functions/APIRequest'
 import FormButtons from './FormButtons'
-import styled from 'styled-components'
-import {Form} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import CatalogInput from '../UI/Inputs/CatalogInput'
 import {names, titles} from './CatalogFormInputsName'
 import {useLocation} from 'react-router-dom'
 import {getInputs} from '../../store/actions/inputDataAction'
-
-const FormBack = styled(Form)`
-width: 95%;
-background-color: white;
-border: 1px solid #eceef0;
-margin: ${props => props.margin};
-`
-const Block = styled.div`
-h5{
-font-size: 18px;
-color: #a2b0bd;
-}
-border-bottom: 1px solid #eceef0;
-margin: 10px 5px;
-`
+import {FormBack, ParamsBlock} from './FormStyles'
 
 const CatalogForm = ({isCreate, onClose}) => {
   const {inputData} = useSelector(state => state.inputData)
@@ -94,7 +78,7 @@ const CatalogForm = ({isCreate, onClose}) => {
 
   return (
     <FormBack>
-      <Block>
+      <ParamsBlock>
         <h5>Параметры</h5>
         {Object.entries(params === undefined ? {} : params).map(([key, val]) => {
           return (
@@ -107,8 +91,8 @@ const CatalogForm = ({isCreate, onClose}) => {
               setData={uploadParams}/>
           )
         })}
-      </Block>
-      <Block>
+      </ParamsBlock>
+      <ParamsBlock>
         <h5>Цены</h5>
         {Object.entries(prices === undefined ? {} : prices).map(([key, val]) => {
           return (
@@ -121,7 +105,7 @@ const CatalogForm = ({isCreate, onClose}) => {
               setData={uploadPrices}/>
           )
         })}
-      </Block>
+      </ParamsBlock>
       {Object.entries(names).map(([key, val]) => {
         // console.log(allData[key], key)
         return (

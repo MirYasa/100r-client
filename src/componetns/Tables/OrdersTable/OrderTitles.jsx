@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import * as IconFa from 'react-icons/fa'
 import {getCatalog} from '../../../store/actions/catalogAction'
 import {useDispatch} from 'react-redux'
-import {getContent} from '../../../store/actions/contentAction'
 
 const OrderTitles = ({item, currentPage}) => {
   const thNames = {

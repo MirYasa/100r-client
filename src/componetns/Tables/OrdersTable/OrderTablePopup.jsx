@@ -1,13 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
 import {Modal} from 'react-bootstrap'
 import OrderForm from '../../Forms/OrdersForm'
-
-const Popup = styled(Modal)`
-.modal-dialog {
-max-width: 1000px;
-}
-`
+import {Popup} from '../StyledComponentsTable'
 
 const BasicTablePopup = ({show, handleClose, formData, isCreate, dispatch, url, formDataValue, modalTitle, id, isPretty}) => {
   return (

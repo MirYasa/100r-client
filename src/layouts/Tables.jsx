@@ -1,17 +1,12 @@
 import React from 'react'
 import StrippedTable from '../componetns/Tables/StrippedTable'
-import styled from 'styled-components'
 import BasicTable from '../componetns/Tables/BasicTable/BasicTable'
 import PlusBasicTable from '../componetns/Tables/PlusBasicTable'
-
-const TablesContainer = styled.div`
-width: 95%;
-margin: 50px auto 0 ;
-`
+import {Container} from './LayoutStyles'
 
 const Tables = () => {
   return (
-    <TablesContainer>
+    <Container>
       <h3>Stripped table</h3>
       <StrippedTable
         tableData={[
@@ -96,7 +91,7 @@ const Tables = () => {
           startDate: '2008/11/28',
           salary: '$162,700'
         }]}/>
-    </TablesContainer>
+    </Container>
   )
 }
 export default Tables

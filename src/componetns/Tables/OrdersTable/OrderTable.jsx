@@ -3,11 +3,8 @@ import {CustomTable, HeadRow} from '../StyledComponentsTable'
 import OrderTableRow from './OrderTableRow'
 import OrderTitles from './OrderTitles'
 
-
-
 const OrderTable = ({tableData, currentTable, dispatch, inputTypes, url, isPretty, currentPage}) => {
   const [allActive, setAllActive] = useState(false)
-  // console.log(tableData)
 
   return (
     <CustomTable striped bordered hover size="lg">

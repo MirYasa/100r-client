@@ -1,16 +1,8 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {Modal} from 'react-bootstrap'
-import styled from 'styled-components'
-import CatalogForm from '../../Forms/CatalogForm'
-import {getInputs} from '../../../store/actions/inputDataAction'
-import {useDispatch} from 'react-redux'
 import CategoryForm from '../../Forms/CategoryForm'
+import {Popup} from '../StyledComponentsTable'
 
-const Popup = styled(Modal)`
-.modal-dialog {
-max-width: 1000px;
-}
-`
 const CategoryTablePopup = ({show, handleClose, modalTitle, isCreate, data}) => {
   return (
     <Popup show={show} onHide={() => {

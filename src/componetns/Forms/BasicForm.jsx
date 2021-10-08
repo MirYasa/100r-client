@@ -1,19 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react'
-import styled from 'styled-components'
 import CustomInput from '../UI/Inputs/CustomInput'
 import FormButtons from './FormButtons'
-import {Form} from 'react-bootstrap'
 import {createContent, update} from '../../functions/APIRequest'
 import {useForm} from 'react-hook-form'
 import MySelect from '../UI/Selects/MySelect'
 import instance from '../../settings/defaultAxios'
+import {FormBack} from './FormStyles'
 
-const FormBack = styled(Form)`
-width: 95%;
-background-color: white;
-border: 1px solid #eceef0;
-margin: ${props => props.margin};
-`
 const BasicForm = ({margin, formData, isCreate, dispatch, url, formDataValue, id, onClose, isPretty}) => {
   const [allData, setAllData] = useState(isCreate ? formData : formDataValue)
   const [options, setOPtions] = useState([])

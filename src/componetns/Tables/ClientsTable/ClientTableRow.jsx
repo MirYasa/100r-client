@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Button} from 'react-bootstrap'
-// import BasicTablePopup from './BasicTablePopup'
-import {APIRequest, Delete} from '../../../functions/APIRequest'
+import {Delete} from '../../../functions/APIRequest'
 import {BodyRow, ButtonTable} from '../StyledComponentsTable'
-import BasicTablePopup from '../BasicTable/BasicTablePopup'
 import ClientTablePopup from './ClientTablePopup'
 
 const BasicTableBodyRow = ({isActive, rowData, currentTable, dispatch, inputTypes, url, isPretty}) => {
@@ -22,8 +20,6 @@ const BasicTableBodyRow = ({isActive, rowData, currentTable, dispatch, inputType
   useEffect(() => {
     setActive(isActive)
   }, [isActive])
-
-  // console.log(rowData)
 
   return (
     <React.Fragment>

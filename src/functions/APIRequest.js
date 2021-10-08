@@ -5,7 +5,6 @@ import instance from '../settings/defaultAxios'
 export const Delete = (url, message, dispatch, id, type, content) => {
 
   if (window.confirm(message))
-
     deleteContent(`${url}/${id}`)
       .then(() => {
         if (content === 'default') {
@@ -36,10 +35,6 @@ export const createContent = (e, url, data, dispatch, type, isDef) => {
     .catch(e => {
       console.log(e)
     })
-}
-export const createCatalog = (e, url, data, dispatch, type) => {
-  e.preventDefault()
-  addCatalog(`${url}`, data)
 }
 export const AddCatalog = async (dispatch, url, data) => {
   try {

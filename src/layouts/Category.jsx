@@ -1,25 +1,16 @@
 import React, {useEffect, useState} from 'react'
-import styled from 'styled-components'
-import {getCatalog, getCategory} from '../store/actions/catalogAction'
+import {getCatalog} from '../store/actions/catalogAction'
 import {useDispatch, useSelector} from 'react-redux'
 import instance from '../settings/defaultAxios'
-import {Button} from 'react-bootstrap'
-import CatalogTable from '../componetns/Tables/CatalogTable/CatalogTable'
 import PaginationList from '../componetns/PaginationList'
-import CatalogTablePopup from '../componetns/Tables/CatalogTable/CatalogTablePopup'
 import CategoryTable from '../componetns/Tables/CategoryTable/CategoryTable'
 import CategoryTablePopup from '../componetns/Tables/CategoryTable/CategoryTablePopup'
-
-const CategoryContainer = styled.div`
-width: 95%;
-margin: 50px auto 0;
-`
+import {Container, CreateButton} from './LayoutStyles'
 
 const Category = () => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const [page, setPage] = useState(0)
-  // const [data, setData] = useState([])
   const [count, setCount] = useState(0)
   const {categories} = useSelector(state => state.catalog)
 
@@ -34,9 +25,10 @@ const Category = () => {
   }, [page])
 
   return (
-    <CategoryContainer>
-      <Button style={{margin: '10px 0'}} variant={'warning'} onClick={() => { setOpen(true)
-      }}>Создать</Button>
+    <Container>
+      <CreateButton variant={'warning'} onClick={() => {
+        setOpen(true)
+      }}>Создать</CreateButton>
       <CategoryTable
         tableData={categories}
         currentPage={page}/>
@@ -51,7 +43,7 @@ const Category = () => {
         isCreate={true}
         data={categories}
       />
-    </CategoryContainer>
+    </Container>
   )
 }
 export default Category

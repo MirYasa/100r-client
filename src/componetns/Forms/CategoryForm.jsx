@@ -1,23 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import FormButtons from './FormButtons'
-import styled from 'styled-components'
-import {Form} from 'react-bootstrap'
 import {useDispatch} from 'react-redux'
 import instance from '../../settings/defaultAxios'
 import CustomInput from '../UI/Inputs/CustomInput'
 import SelectMultiply from '../UI/Selects/SelectMultiply'
 import MySelect from '../UI/Selects/MySelect'
-import {AddCatalog, AddCategory, UpdateCategory} from '../../functions/APIRequest'
+import {AddCategory, UpdateCategory} from '../../functions/APIRequest'
 import {useForm} from 'react-hook-form'
 import ValidInput from '../UI/Inputs/ValidInput'
+import {FormBack} from './FormStyles'
 
-
-const FormBack = styled(Form)`
-width: 95%;
-background-color: white;
-border: 1px solid #eceef0;
-margin: ${props => props.margin};
-`
 const names = {
   name: 'Название',
   parent_id: 'Родительская категория',

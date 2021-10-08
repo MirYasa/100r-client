@@ -1,19 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import CatalogTable from '../componetns/Tables/CatalogTable/CatalogTable'
-import styled from 'styled-components'
-import {Button} from 'react-bootstrap'
 import CatalogTablePopup from '../componetns/Tables/CatalogTable/CatalogTablePopup'
-import {getContent, getDefaultContent} from '../store/actions/contentAction'
-import {useParams} from 'react-router'
-import {getInputs} from '../store/actions/inputDataAction'
+import {getDefaultContent} from '../store/actions/contentAction'
 import instance from '../settings/defaultAxios'
 import PaginationList from '../componetns/PaginationList'
 import {getCatalog} from '../store/actions/catalogAction'
-const CatalogContainer = styled.div`
-width: 95%;
-margin: 50px auto 0;
-`
+import {Container, CreateButton} from './LayoutStyles'
 
 const Catalog = () => {
   const dispatch = useDispatch()
@@ -37,8 +30,8 @@ const Catalog = () => {
   }, [page])
 
   return (
-    <CatalogContainer>
-      <Button style={{margin: '10px 0'}} variant={'warning'} onClick={()=>{setOpen(true)}}>Создать</Button>
+    <Container>
+      <CreateButton variant={'warning'} onClick={()=>{setOpen(true)}}>Создать</CreateButton>
       <CatalogTable
         tableData={catalog}
         currentPage={page}/>
@@ -53,8 +46,7 @@ const Catalog = () => {
       isCreate={true}
       data={products}
       />
-    </CatalogContainer>
-
+    </Container>
   )
 }
 export default Catalog

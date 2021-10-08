@@ -1,47 +1,7 @@
 import React, {useState} from 'react'
-import styled from 'styled-components'
-import {NavLink} from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa'
 import {useSelector} from 'react-redux'
-
-
-const SideBarLink = styled.div`
-  display: flex;
-   color: #f5f5f5; 
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  list-style: none;
-  height: 60px;
-  text-decoration: none;
-  font-size: 18px;
-   &.active {
-   border-right: 4px solid #1abb9c;
-  }
-  &:hover {
-  color: #e1e9fc;
-    cursor: pointer;
-  }
-`
-
-const SideBarLabel = styled.span`
-  margin-left: 16px;
-`
-
-const DropdownLink = styled(NavLink)`
-  height: 60px;
-  padding-left: 3rem;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #f5f5f5; 
-  border-right: 4px solid #1abb9c;
-  font-size: 18px;
-  &:hover {
-  color: #e1e9fc;
-    cursor: pointer;
-  }
-`
+import {DropdownLink, SideBarLabel, SideBarLink} from './SideBarSryles'
 
 const SubMenu = ({item}) => {
   const [subnav, setSubnav] = useState(false)
@@ -90,6 +50,4 @@ const SubMenu = ({item}) => {
     </>
   )
 }
-
-
 export default SubMenu

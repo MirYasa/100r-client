@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {BodyRow, ButtonTable} from '../StyledComponentsTable'
 import {Button} from 'react-bootstrap'
-import {APIRequest, Delete} from '../../../functions/APIRequest'
+import {Delete} from '../../../functions/APIRequest'
 import CategoryTablePopup from './CategoryTablePopup'
-import {getCatalog, getProduct} from '../../../store/actions/catalogAction'
-import {useDispatch, useSelector} from 'react-redux'
-import {Link, useLocation} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
+import {useLocation} from 'react-router-dom'
 
 const CategoryTableRow = ({rowData}) => {
   const dispatch = useDispatch()

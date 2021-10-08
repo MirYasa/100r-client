@@ -3,7 +3,7 @@ import LoginFooter from './LoginFooter'
 import LoginTitle from './LoginTitle'
 import {LinkContainer} from 'react-router-bootstrap'
 import {Button, Form} from 'react-bootstrap'
-import {FormContainer, ButtonsRow} from './Login'
+import {FormContainer, ButtonsRow} from './LoginStyles'
 
 const CreateAccount = () => {
     return (

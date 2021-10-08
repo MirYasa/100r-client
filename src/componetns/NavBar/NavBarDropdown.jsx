@@ -1,27 +1,6 @@
 import React from 'react'
 import {LinkContainer} from 'react-router-bootstrap'
-import styled from 'styled-components'
-import {NavDropdown} from 'react-bootstrap'
-import * as Icon from 'react-icons/im'
-
-const DropDown = styled(NavDropdown)`
-padding-left: 10px;
-a {
-color: #73879c !important;
-padding: 0;
-&:hover {
-color: #73879c;
-}
-}
-`
-const DropDownItem = styled(NavDropdown.Item)`
-width: 180px;
-padding: 12px 20px !important;
-color: #282c34 !important;
-`
-const ExitIcon = styled(Icon.ImExit)`
-
-`
+import {DropDown, DropDownItem, ExitIcon} from './NavBarStyles'
 
 const NavBarDropdown = ({userName}) => {
   return (
