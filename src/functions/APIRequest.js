@@ -1,26 +1,34 @@
-import {addContent, deleteContent, getContent, getDefaultContent, updateContent} from '../store/actions/contentAction'
-import {addCatalog, getCatalog, updateCatalog} from '../store/actions/catalogAction'
-import instance from '../settings/defaultAxios'
+import {
+  addContent,
+  deleteContent,
+  getContent,
+  getDefaultContent,
+  updateContent,
+} from "../store/actions/contentAction"
+import {
+  addCatalog,
+  getCatalog,
+  updateCatalog,
+} from "../store/actions/catalogAction"
+import instance from "../settings/defaultAxios"
 
 export const Delete = (url, message, dispatch, id, type, content) => {
-
   if (window.confirm(message))
     deleteContent(`${url}/${id}`)
       .then(() => {
-        if (content === 'default') {
+        if (content === "default") {
           getDefaultContent(dispatch, type, url)
         }
-        if (content === 'content') {
+        if (content === "content") {
           getContent(dispatch, type, url)
         }
-        if (content === 'catalog') {
+        if (content === "catalog") {
           getCatalog(dispatch, type, url)
         }
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e)
       })
-
 }
 export const createContent = (e, url, data, dispatch, type, isDef) => {
   e.preventDefault()
@@ -32,15 +40,16 @@ export const createContent = (e, url, data, dispatch, type, isDef) => {
         getContent(dispatch, type, url)
       }
     })
-    .catch(e => {
+    .catch((e) => {
       console.log(e)
     })
 }
 export const AddCatalog = async (dispatch, url, data) => {
   try {
-    const createCatalog = await instance.post('/admin_catalog', data)
+    const createCatalog = await instance
+      .post("/admin_catalog", data)
       .then(() => {
-        getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
+        getCatalog(dispatch, "GET_CATALOG", "/admin_catalog")
       })
   } catch (e) {
     console.log(e)
@@ -49,9 +58,10 @@ export const AddCatalog = async (dispatch, url, data) => {
 
 export const AddCategory = async (dispatch, data) => {
   try {
-    const createCategory = await instance.post('/admin_categories', data)
+    const createCategory = await instance
+      .post("/admin_categories", data)
       .then(() => {
-        getCatalog(dispatch, 'GET_CATEGORIES', '/admin_categories')
+        getCatalog(dispatch, "GET_CATEGORIES", "/admin_categories")
       })
   } catch (e) {
     console.log(e)
@@ -59,9 +69,10 @@ export const AddCategory = async (dispatch, data) => {
 }
 export const UpdateCategory = async (dispatch, id, data) => {
   try {
-    const updateCategory = await instance.put(`/admin_categories/${id}`, data)
+    const updateCategory = await instance
+      .put(`/admin_categories/${id}`, data)
       .then(() => {
-        getCatalog(dispatch, 'GET_CATEGORIES', '/admin_categories')
+        getCatalog(dispatch, "GET_CATEGORIES", "/admin_categories")
       })
   } catch (e) {
     console.log(e)
@@ -69,27 +80,28 @@ export const UpdateCategory = async (dispatch, id, data) => {
 }
 
 export const updateCat = (e, url, data, id, dispatch) => {
-  updateCatalog(`${url}/${id}`, data)
-    .then(() => {
-      getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
-    })
+  updateCatalog(`${url}/${id}`, data).then(() => {
+    getCatalog(dispatch, "GET_CATALOG", "/admin_catalog")
+  })
 }
 export const createOrders = (e, url, data, dispatch) => {
   try {
-    instance.post(`${url}`, data)
-      .then(() => {
-        getCatalog(dispatch, 'GET_ORDERS', '/admin_orders')
-      })
+    instance.post(`${url}`, data).then(() => {
+      getCatalog(dispatch, "GET_ORDERS", "/admin_orders")
+    })
   } catch (e) {
     console.log(e)
   }
 }
 export const updateOrders = (e, url, data, id, dispatch) => {
   try {
-    instance.put(`${url}/${id}`, data)
-      .then(() => {
-        getCatalog(dispatch, 'GET_ORDERS', '/admin_orders?page=0&order=id&direction=asc')
-      })
+    instance.put(`${url}/${id}`, data).then(() => {
+      getCatalog(
+        dispatch,
+        "GET_ORDERS",
+        "/admin_orders?page=0&order=id&direction=asc"
+      )
+    })
   } catch (e) {
     console.log(e)
   }
@@ -104,7 +116,7 @@ export const update = (e, url, data, dispatch, type, id, isDef) => {
         getContent(dispatch, type, url)
       }
     })
-    .catch(e => {
+    .catch((e) => {
       console.log(e)
     })
 }

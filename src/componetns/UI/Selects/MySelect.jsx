@@ -1,31 +1,19 @@
-import React, {useState} from 'react'
-import Select from 'react-select'
-import {Col, Row} from 'react-bootstrap'
-import styled from 'styled-components'
+import React, { useState } from "react"
+import Select from "react-select"
+import { Col } from "react-bootstrap"
+import { InputName, InputContainer } from "./Styles"
 
-const InputContainer = styled(Row)`
-display: flex;
-align-items: center;
-justify-content: center;
-margin: 10px 0;
-`
-const InputName = styled.label`
-color: #97a6b5;
-width: 100%;
-text-align: right;
-`
-
-const MySelect = ({options, inputTitle, val, inputName, setData}) => {
-  const option = [{value: 0, label: 'Выбрать'}]
+const MySelect = ({ options, inputTitle, val, inputName, setData }) => {
+  const option = [{ value: 0, label: "Выбрать" }]
   let count = 1
   let accept = false
-  options.map(item => {
+  options.map((item) => {
     option.push({
       value: item.id,
-      label: item.name
+      label: item.name,
     })
     count++
-    if (count === option.length){
+    if (count === option.length) {
       accept = true
     }
   })
@@ -36,10 +24,16 @@ const MySelect = ({options, inputTitle, val, inputName, setData}) => {
         <InputName>{inputTitle}</InputName>
       </Col>
       <Col lg={10}>
-        {accept ? <Select options={option} defaultValue={val === undefined ? option[0] : option[val]} onChange={(e) => {
-          setData(inputName, e.value)
-          console.log(e)
-        }}/> : null}
+        {accept ? (
+          <Select
+            options={option}
+            defaultValue={val === undefined ? option[0] : option[val]}
+            onChange={(e) => {
+              setData(inputName, e.value)
+              console.log(e)
+            }}
+          />
+        ) : null}
       </Col>
     </InputContainer>
   )
