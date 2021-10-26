@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { Form, Row, ToggleButton, ToggleButtonGroup } from "react-bootstrap"
 
-//Catalog Input
+//Inputs
 export const InputContainer = styled(Row)`
   display: flex;
   align-items: center;
@@ -29,3 +29,10 @@ export const RadioButton = styled(ToggleButton)`
   border: #6c757d 1px solid;
 `
 export const CustomSelect = styled(Form.Select)``
+
+// Filter Input
+export const FilterInputContainer = styled.div`
+  label {
+    padding-bottom: 3px;
+  }
+`
