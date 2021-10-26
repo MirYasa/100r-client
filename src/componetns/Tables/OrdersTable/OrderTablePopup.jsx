@@ -26,11 +26,7 @@ const BasicTablePopup = ({
         <Modal.Title>{modalTitle}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Tabs
-          defaultActiveKey="profile"
-          id="uncontrolled-tab-example"
-          className="mb-3"
-        >
+        <Tabs defaultActiveKey="client" id="uncontrolled-tab-example" className="mb-3">
           <Tab eventKey="client" title="Клиент">
             <div>Клиент</div>
           </Tab>
