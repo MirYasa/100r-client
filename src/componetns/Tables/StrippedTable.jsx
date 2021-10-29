@@ -1,30 +1,41 @@
 import React from 'react'
-import {Table} from 'react-bootstrap'
+import {Button, Table} from 'react-bootstrap'
 
-const StrippedTable = ({tableData}) => {
-    return (
-      <Table striped bordered hover size="lg  ">
-        <thead>
-        <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
-        </tr>
-        </thead>
-        <tbody>
-        {tableData.map((item, index) => {
-          return(
-            <tr key={index}>
-              <td>{item.index}</td>
-              <td>{item.name}</td>
-              <td>{item.secondName}</td>
-              <td>{item.userName}</td>
-            </tr>
-          )
-        })}
-        </tbody>
-      </Table>
-    )
+const StrippedTable = ({tableData, del, setProducts, products, isAdd}) => {
+
+  return (
+    <Table striped bordered hover size="md">
+      <thead>
+      <tr>
+        <th>Артикул</th>
+        <th>Продукт</th>
+        <th>Цена</th>
+        <th>Поставщик</th>
+        <th>Редактировать</th>
+        <th>Удалить</th>
+      </tr>
+      </thead>
+      <tbody>
+      {tableData.map((item, index) => {
+        return (
+          <tr key={index}>
+            <td>{item.product_id}</td>
+            <td>{item.short_name}</td>
+            <td>Price</td>
+            <td>{item.created_at}</td>
+            <td><Button variant={'success'} onClick={() => {
+
+            }}>Редактировать</Button></td>
+            <td><Button variant={'danger'} onClick={() => {
+              del(tableData.filter(el => el.product_id !== item.product_id))
+              setProducts(products.filter(el => el !== item.product_id))
+              isAdd(false)
+            }}>Удалить</Button></td>
+          </tr>
+        )
+      })}
+      </tbody>
+    </Table>
+  )
 }
 export default StrippedTable

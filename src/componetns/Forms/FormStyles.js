@@ -1,11 +1,20 @@
 import styled from 'styled-components'
-import {Button, Form} from 'react-bootstrap'
+import {Button, Form, Tab} from 'react-bootstrap'
 
 export const FormBack = styled(Form)`
 width: 95%;
 background-color: white;
 border: 1px solid #eceef0;
 margin: ${props => props.margin};
+`
+export const TabBack = styled.div`
+width: 95%;
+background-color: white;
+border: 1px solid #eceef0;
+margin: 0 auto;
+  h5{
+  margin-left: 10px;
+  }
 `
 
 export const ParamsBlock = styled.div`

@@ -1,19 +1,11 @@
-import React, { useState } from "react"
-import { Col } from "react-bootstrap"
-import instance from "../../../settings/defaultAxios"
-import { InputContainer, InputName, CustomSelect } from "./Styles"
+import React, {useState} from 'react'
+import {Col} from 'react-bootstrap'
+import instance from '../../../settings/defaultAxios'
+import {InputContainer, InputName, CustomSelect} from './Styles'
 
-const OrderSelect = ({
-  options,
-  inputTitle,
-  val,
-  inputName,
-  setData,
-  newOptions,
-}) => {
+const OrderSelect = ({options, inputTitle, val, isAdd, newOptions, setProducts}) => {
   const option = []
   const values = []
-  const propsId = []
 
   if (val !== undefined) {
     val.forEach((item) => {
@@ -32,14 +24,13 @@ const OrderSelect = ({
 
   // console.log(values)
   const _onChange = (e) => {
-    if (e.length !== 0) {
-      e.map((item) => {
-        propsId.push(item.value)
-        setData([inputName], propsId)
-      })
+    if (e === null) {
+      return
     } else {
-      setData([inputName], e)
+      setProducts((prev) => [...prev, e.value])
+      isAdd(true)
     }
+
   }
 
   return (
@@ -49,9 +40,7 @@ const OrderSelect = ({
       </Col>
       <Col lg={10}>
         <CustomSelect
-          isMulti
           isClearable={true}
-          defaultValue={val === undefined ? null : values}
           options={option}
           onChange={_onChange}
           onInputChange={(e) => {

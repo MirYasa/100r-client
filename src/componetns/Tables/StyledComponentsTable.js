@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import {Button, Modal, Table} from 'react-bootstrap'
+import ClientHandlingTable from './OrdersTable/ClientHandlingTable'
 
 export const HeadRow = styled.tr`
 background-color: #3f5367;
@@ -30,6 +31,10 @@ padding: 0;
 `
 export const Popup = styled(Modal)`
 .modal-dialog {
-max-width: 1000px;
+max-width: 1200px;
 }
+`
+export const ClientHandlingTableContainer = styled.div`
+height: 260px;
+overflow-y: scroll; 
 `

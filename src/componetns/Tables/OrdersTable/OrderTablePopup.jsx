@@ -1,20 +1,9 @@
-import React from "react"
-import { Modal, Tabs, Tab } from "react-bootstrap"
-import OrderForm from "../../Forms/OrdersForm"
-import { Popup } from "../StyledComponentsTable"
+import React from 'react'
+import {Modal} from 'react-bootstrap'
+import {Popup} from '../StyledComponentsTable'
+import OrderForm from '../../Forms/OrderForm'
 
-const BasicTablePopup = ({
-  show,
-  handleClose,
-  formData,
-  isCreate,
-  dispatch,
-  url,
-  formDataValue,
-  modalTitle,
-  id,
-  isPretty,
-}) => {
+const OrderTablePopup = ({show, handleClose, formData, isCreate, dispatch, url, formDataValue, modalTitle, id, isPretty,}) => {
   return (
     <Popup
       show={show}
@@ -26,27 +15,17 @@ const BasicTablePopup = ({
         <Modal.Title>{modalTitle}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Tabs defaultActiveKey="client" id="uncontrolled-tab-example" className="mb-3">
-          <Tab eventKey="client" title="Клиент">
-            <div>Клиент</div>
-          </Tab>
-          <Tab eventKey="order" title="Заказ">
-            <OrderForm
-              formData={formData}
-              isCreate={isCreate}
-              dispatch={dispatch}
-              url={url}
-              id={id}
-              formDataValue={formDataValue}
-              onClose={handleClose}
-              isPretty={isPretty}
-            />
-          </Tab>
-          <Tab eventKey="tab3" title="Вкладка 3"></Tab>
-          <Tab eventKey="tab4" title="Вкладка 4"></Tab>
-        </Tabs>
+      <OrderForm
+        formData={formData}
+        isCreate={isCreate}
+        dispatch={dispatch}
+        url={url}
+        id={id}
+        formDataValue={formDataValue}
+        onClose={handleClose}
+        isPretty={isPretty}/>
       </Modal.Body>
     </Popup>
   )
 }
-export default BasicTablePopup
+export default OrderTablePopup

@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import instance from "../settings/defaultAxios"
-import { getCatalog } from "../store/actions/catalogAction"
-import PaginationList from "../componetns/PaginationList"
-import OrderTable from "../componetns/Tables/OrdersTable/OrderTable"
-import OrderTablePopup from "../componetns/Tables/OrdersTable/OrderTablePopup"
-import { Container, CreateButton, RowContainer } from "./LayoutStyles"
-import FilterPanel from "../componetns/FilterPanel"
+import React, {useEffect, useState} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import instance from '../settings/defaultAxios'
+import {getCatalog} from '../store/actions/catalogAction'
+import PaginationList from '../componetns/PaginationList'
+import OrderTable from '../componetns/Tables/OrdersTable/OrderTable'
+import OrderTablePopup from '../componetns/Tables/OrdersTable/OrderTablePopup'
+import {Container, CreateButton, RowContainer} from './LayoutStyles'
+import FilterPanel from '../componetns/FilterPanel'
 
 const Order = () => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const [page, setPage] = useState(0)
   const [count, setCount] = useState(0)
-  const { orders } = useSelector((state) => state.catalog)
+  const {orders} = useSelector((state) => state.catalog)
 
   useEffect(() => {
     instance.get(`/admin_orders`).then((data) => {
@@ -23,7 +23,7 @@ const Order = () => {
   useEffect(() => {
     getCatalog(
       dispatch,
-      "GET_ORDERS",
+      'GET_ORDERS',
       `/admin_orders?page=${page}&order=id&direction=asc`
     )
   }, [page])
@@ -32,30 +32,28 @@ const Order = () => {
     <Container>
       <RowContainer>
         <CreateButton
-          variant={"warning"}
+          variant={'warning'}
           onClick={() => {
             setOpen(true)
-          }}
-        >
-          Создать
+          }}>Создать
         </CreateButton>
-        <FilterPanel />
+        <FilterPanel/>
       </RowContainer>
       <OrderTable
         tableData={orders}
         currentPage={page}
-        currentTable={"admin_orders"}
+        currentTable={'admin_orders'}
         dispatch={dispatch}
       />
-      <PaginationList count={count} updatePage={setPage} />
+      <PaginationList count={count} updatePage={setPage}/>
       <OrderTablePopup
         show={open}
         handleClose={setOpen}
         id={1}
-        modalTitle={"Заказ"}
+        modalTitle={'Заказ'}
         isCreate={true}
         data={orders}
-        url={"/admin_orders"}
+        url={'/admin_orders'}
         dispatch={dispatch}
       />
     </Container>
