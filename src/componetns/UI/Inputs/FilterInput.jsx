@@ -1,12 +1,12 @@
 import React from "react"
 import { FilterInputContainer } from "./Styles"
 
-const FilterInput = ({ title, inputName, setValue }) => {
+const FilterInput = ({ title, inputName, setValue, type }) => {
   return (
     <FilterInputContainer>
       <label htmlFor="">{title}</label>
       <input
-        type="text"
+        type={type}
         placeholder={title}
         onInput={(e) => {
           setValue(inputName, e.target.value)

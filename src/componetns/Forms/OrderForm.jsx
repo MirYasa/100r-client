@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import {Tab, Tabs} from 'react-bootstrap'
+import {Form, Tab, Tabs} from 'react-bootstrap'
 import ClientTab from '../Tables/OrdersTable/ClientTab'
-import OrderTab from './OrderTab'
+import OrderTab from '../Tables/OrdersTable/OrderTab'
 import instance from '../../settings/defaultAxios'
 
 const OrderForm = ({formData, isCreate, dispatch, url, formDataValue, id, isPretty, onClose}) => {
@@ -23,6 +23,7 @@ const OrderForm = ({formData, isCreate, dispatch, url, formDataValue, id, isPret
     comment: 'Комментарий',
     order_source_id: 'Источник заказа',
     products: 'Продукты',
+    price: 'Цена'
   }
 
   const uploadData = (name, val) => {
@@ -68,7 +69,7 @@ const OrderForm = ({formData, isCreate, dispatch, url, formDataValue, id, isPret
     }
   }, [])
   return (
-    <form action="">
+    <Form onSubmit={(e) => {e.preventDefault()}}>
       <Tabs defaultActiveKey="client" id="uncontrolled-tab-example" className="mb-3">
         <Tab eventKey="client" title="Клиент">
           <ClientTab
@@ -99,7 +100,7 @@ const OrderForm = ({formData, isCreate, dispatch, url, formDataValue, id, isPret
           />
         </Tab>
       </Tabs>
-    </form>
+    </Form>
   )
 }
 export default OrderForm

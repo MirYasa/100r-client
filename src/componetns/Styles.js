@@ -13,15 +13,20 @@ export const FilterContainer = styled.div`
   height: 110px;
   border: 2px solid #f2f2f2;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
 
   ul {
     margin: 0 0 0 0;
-    padding: 0 25px;
     display: flex;
     align-items: center;
     width: 100%;
     height: 65px;
     justify-content: space-between;
+   
+   div {
+   padding: 0 20px;
+   }
   }
 `
 export const FilterTitle = styled.div`

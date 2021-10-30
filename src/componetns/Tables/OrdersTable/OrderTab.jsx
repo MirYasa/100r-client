@@ -1,13 +1,13 @@
 import React, {useEffect, useMemo, useState} from 'react'
-import CustomInput from '../UI/Inputs/CustomInput'
-import FormButtons from './FormButtons'
-import {createOrders, updateOrders} from '../../functions/APIRequest'
+import CustomInput from '../../UI/Inputs/CustomInput'
+import FormButtons from '../../Forms/FormButtons'
+import {createOrders, updateOrders} from '../../../functions/APIRequest'
 import {useForm} from 'react-hook-form'
-import MySelect from '../UI/Selects/MySelect'
-import instance from '../../settings/defaultAxios'
-import OrderSelect from '../UI/Selects/OrderSelect'
-import {TabBack} from './FormStyles'
-import StrippedTable from '../Tables/StrippedTable'
+import MySelect from '../../UI/Selects/MySelect'
+import instance from '../../../settings/defaultAxios'
+import OrderSelect from '../../UI/Selects/OrderSelect'
+import {TabBack} from '../../Forms/FormStyles'
+import StrippedTable from '../StrippedTable'
 
 const OrderTab = ({margin, isCreate, dispatch, url, id, onClose, names, inputs, ready, allData, uploadData, options, setOptions, selVal}) => {
   const [products, setProducts] = useState([])
@@ -30,11 +30,15 @@ const OrderTab = ({margin, isCreate, dispatch, url, id, onClose, names, inputs, 
       const current = arr.pop()
       if (add) {
         instance.get(`admin_catalog/${current}`).then((data) => {
-          tableProducts.map(item => {
-            if (item.product_id !== data.data.product_id) {
-              setTableProducts([...tableProducts, data.data])
-            }
-          })
+          if (tableProducts.length === 0) {
+            setTableProducts([...tableProducts, data.data])
+          } else {
+            tableProducts.map(item => {
+              if (item.product_id !== data.data.product_id) {
+                setTableProducts([...tableProducts, data.data])
+              }
+            })
+          }
         })
       }
     }

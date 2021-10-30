@@ -34,7 +34,7 @@ export const CustomSelect = styled(Form.Select)``
 export const FilterInputContainer = styled.div`
   label {
     padding-bottom: 3px;
-    font-size: 14px;
+    font-size: 17px;
   }
   input {
     border-radius: 5px;

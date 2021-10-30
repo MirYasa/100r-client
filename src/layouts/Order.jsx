@@ -21,11 +21,7 @@ const Order = () => {
     })
   }, [])
   useEffect(() => {
-    getCatalog(
-      dispatch,
-      'GET_ORDERS',
-      `/admin_orders?page=${page}&order=id&direction=asc`
-    )
+    getCatalog(dispatch, 'GET_ORDERS', `/admin_orders?page=${page}&order=id&direction=asc`)
   }, [page])
 
   return (
