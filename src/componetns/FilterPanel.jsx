@@ -21,7 +21,7 @@ const FilterPanel = () => {
     order_status: '',
     date: '',
   })
-  const [options, setOptions] = useState([{id: 0, name: 'Выберите'}])
+  const [options, setOptions] = useState([{id: "", name: 'Выберите'}])
   const [ready, setReady] = useState(false)
   const dispatch = useDispatch()
 
