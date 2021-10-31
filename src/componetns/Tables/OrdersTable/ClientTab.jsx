@@ -28,6 +28,8 @@ const ClientTab = ({inputs, ready, names, isCreate, uploadData, allData, setAllD
           .then(data => {
             setClientHistory(data.data)
           })
+      } else {
+        setClientHistory([])
       }
     }
   }, [currentClient])
