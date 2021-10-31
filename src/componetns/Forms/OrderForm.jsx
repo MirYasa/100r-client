@@ -79,6 +79,7 @@ const OrderForm = ({formData, isCreate, dispatch, url, formDataValue, id, isPret
             isCreate={isCreate}
             allData={allData}
             uploadData={uploadData}
+            setAllData={setAllData}
           />
         </Tab>
         <Tab eventKey="order" title="Заказ">

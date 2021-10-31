@@ -10,8 +10,10 @@ import {
   CustomSelect,
 } from './Styles'
 
-const CustomInput = ({inputName, isRequired, type, radio, val = '', setData, refs, inputTitle, isCategory, step, clientSearch}) => {
+const CustomInput = ({inputName, isRequired, type, radio, val = '', setData, refs, inputTitle, isCategory, step}) => {
+  // console.log(inputName + '  ' + val)
   const [input, setInput] = useState(val)
+  // console.log(input)
   let Type = ''
 
   useEffect(() => {
@@ -99,13 +101,6 @@ const CustomInput = ({inputName, isRequired, type, radio, val = '', setData, ref
                 inputName,
                 Type === 'checkbox' ? !e.target.defaultChecked : e.target.value
               )
-            }}
-            onInput={(e) => {
-              if (clientSearch === undefined) {
-
-              } else {
-                clientSearch(inputName, e.target.value)
-              }
             }}
           />
         )}

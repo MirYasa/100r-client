@@ -8,10 +8,10 @@ const ClientHandlingTable = ({tableData}) => {
         <Table striped bordered hover size="md">
           <thead>
           <tr>
-            <th>Id Клиента</th>
-            <th>Имя</th>
+            <th>Id заказа</th>
+            <th>Цена</th>
             <th>Источник</th>
-            <th>Заказ</th>
+            <th>Статус</th>
             <th>Дата</th>
           </tr>
           </thead>
@@ -19,10 +19,10 @@ const ClientHandlingTable = ({tableData}) => {
           {tableData.map((item, index) => {
             return (
               <tr key={index}>
-                <td>{item.client_id}</td>
-                <td>{item.short_name}</td>
-                <td>{item.client_source}</td>
-                <td>{item.order}</td>
+                <td>{item.id}</td>
+                <td>{item.price}</td>
+                <td>{item.order_source?.name}</td>
+                <td>{item.order_status?.name}</td>
                 <td>{item.created_at}</td>
               </tr>
             )

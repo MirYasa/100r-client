@@ -1,10 +1,10 @@
-import React, { useState } from "react"
-import Select from "react-select"
-import { Col } from "react-bootstrap"
-import { InputName, InputContainer } from "./Styles"
+import React from 'react'
+import Select from 'react-select'
+import {Col} from 'react-bootstrap'
+import {InputName, InputContainer} from './Styles'
 
-const MySelect = ({ options, inputTitle, val, inputName, setData }) => {
-  const option = [{ value: 0, label: "Выбрать" }]
+const MySelect = ({options, inputTitle, val, inputName, setData}) => {
+  const option = [{value: 0, label: 'Выбрать'}]
   let count = 1
   let accept = false
   options.map((item) => {
@@ -16,6 +16,7 @@ const MySelect = ({ options, inputTitle, val, inputName, setData }) => {
     if (count === option.length) {
       accept = true
     }
+    // console.log(option[3])
   })
 
   return (
