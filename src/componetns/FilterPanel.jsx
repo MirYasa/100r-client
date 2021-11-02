@@ -40,7 +40,7 @@ const FilterPanel = () => {
     })
   }
   const filterData = () => {
-    console.log(data)
+    // console.log(data)
     getCatalog(dispatch, 'GET_ORDERS',
       `/admin_orders?page=&order=id&direction=asc${data.id.trim() !== '' ? `&filters[id]=${data.id}` : ''}
       ${data.client.trim() !== '' ? `&filters[client]=${data.client}` : ''}

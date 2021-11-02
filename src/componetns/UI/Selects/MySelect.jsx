@@ -1,23 +1,28 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Select from 'react-select'
 import {Col} from 'react-bootstrap'
 import {InputName, InputContainer} from './Styles'
 
 const MySelect = ({options, inputTitle, val, inputName, setData}) => {
-  const option = [{value: 0, label: 'Выбрать'}]
+  const [option, setOption] = useState([{value: 0, label: 'Выбрать'}])
+  const [defVal, setDefVal] = useState(0)
   let count = 1
   let accept = false
-  options.map((item) => {
-    option.push({
-      value: item.id,
-      label: item.name,
+
+  useEffect(() => {
+    setDefVal(val === undefined ? 0 : val)
+  }, [val])
+
+  useEffect(() => {
+    options.map((item) => {
+      setOption(prev => [...prev, {
+        value: item.id,
+        label: item.name,
+      }])
+
+      // console.log(option[3])
     })
-    count++
-    if (count === option.length) {
-      accept = true
-    }
-    // console.log(option[3])
-  })
+  }, [options])
 
   return (
     <InputContainer>
@@ -25,16 +30,15 @@ const MySelect = ({options, inputTitle, val, inputName, setData}) => {
         <InputName>{inputTitle}</InputName>
       </Col>
       <Col lg={10}>
-        {accept ? (
-          <Select
-            options={option}
-            defaultValue={val === undefined ? option[0] : option[val]}
-            onChange={(e) => {
-              setData(inputName, e.value)
-              console.log(e)
-            }}
-          />
-        ) : null}
+        <Select
+          options={option.sort((a, b) => {
+           return a.value - b.value
+          })}
+          value={option[defVal]}
+          onChange={(e) => {
+            setData(inputName, e.value)
+          }}
+        />
       </Col>
     </InputContainer>
   )

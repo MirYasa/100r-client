@@ -9,7 +9,7 @@ import OrderSelect from '../../UI/Selects/OrderSelect'
 import {TabBack} from '../../Forms/FormStyles'
 import StrippedTable from '../StrippedTable'
 
-const OrderTab = ({margin, isCreate, dispatch, url, id, onClose, names, inputs, ready, allData, uploadData, options, setOptions, selVal}) => {
+const OrderTab = ({margin, isCreate, dispatch, url, id, onClose, names, inputs, ready, allData, uploadData, options, setOptions, selVal, switchForm}) => {
   const [products, setProducts] = useState([])
   const [tableProducts, setTableProducts] = useState([])
   const [add, setAdd] = useState(true)
@@ -124,7 +124,7 @@ const OrderTab = ({margin, isCreate, dispatch, url, id, onClose, names, inputs, 
                   isAdd={setAdd}
                 />
                 <StrippedTable tableData={tableProducts} del={setTableProducts} setProducts={setProducts}
-                               products={products} isAdd={setAdd}/>
+                               products={products} isAdd={setAdd} switchForm={switchForm}/>
               </React.Fragment>
             )
           }

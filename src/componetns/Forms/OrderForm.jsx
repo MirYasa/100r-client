@@ -4,12 +4,11 @@ import ClientTab from '../Tables/OrdersTable/ClientTab'
 import OrderTab from '../Tables/OrdersTable/OrderTab'
 import instance from '../../settings/defaultAxios'
 
-const OrderForm = ({formData, isCreate, dispatch, url, formDataValue, id, isPretty, onClose}) => {
+const OrderForm = ({isCreate, dispatch, url, id, isPretty, onClose, allData, setAllData, switchForm}) => {
   const [clientInputs, setClientInputs] = useState({})
   const [orderInputs, setOrderInputs] = useState({})
   const [selVal, setSelVal] = useState([])
   const [ready, setReady] = useState(false)
-  const [allData, setAllData] = useState(isCreate ? formData : formDataValue)
   const [options, setOptions] = useState([])
 
   const clientNames = {
@@ -19,7 +18,6 @@ const OrderForm = ({formData, isCreate, dispatch, url, formDataValue, id, isPret
     client_source_id: 'Источник клиента',
   }
   const orderNames = {
-    id: 'ID',
     comment: 'Комментарий',
     order_source_id: 'Источник заказа',
     products: 'Продукты',
@@ -68,6 +66,7 @@ const OrderForm = ({formData, isCreate, dispatch, url, formDataValue, id, isPret
       })
     }
   }, [])
+  console.log(allData)
   return (
     <Form onSubmit={(e) => {e.preventDefault()}}>
       <Tabs defaultActiveKey="client" id="uncontrolled-tab-example" className="mb-3">
@@ -80,6 +79,7 @@ const OrderForm = ({formData, isCreate, dispatch, url, formDataValue, id, isPret
             allData={allData}
             uploadData={uploadData}
             setAllData={setAllData}
+            switchForm={switchForm}
           />
         </Tab>
         <Tab eventKey="order" title="Заказ">
@@ -98,6 +98,7 @@ const OrderForm = ({formData, isCreate, dispatch, url, formDataValue, id, isPret
             options={options}
             setOptions={setOptions}
             selVal={selVal}
+            switchForm={switchForm}
           />
         </Tab>
       </Tabs>

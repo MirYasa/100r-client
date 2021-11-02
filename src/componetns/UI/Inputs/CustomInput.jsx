@@ -10,10 +10,8 @@ import {
   CustomSelect,
 } from './Styles'
 
-const CustomInput = ({inputName, isRequired, type, radio, val = '', setData, refs, inputTitle, isCategory, step}) => {
-  // console.log(inputName + '  ' + val)
+const CustomInput = ({inputName, isRequired, type, radio, val = '', refs, setData, inputTitle, isCategory, step}) => {
   const [input, setInput] = useState(val)
-  // console.log(input)
   let Type = ''
 
   useEffect(() => {
@@ -21,6 +19,9 @@ const CustomInput = ({inputName, isRequired, type, radio, val = '', setData, ref
       setData(inputName, val)
     }
   }, [])
+  useEffect(() => {
+    setInput(val)
+  }, [val])
 
   switch (type) {
     case 'string':
