@@ -8,12 +8,33 @@ import instance from '../../../settings/defaultAxios'
 import OrderSelect from '../../UI/Selects/OrderSelect'
 import {TabBack} from '../../Forms/FormStyles'
 import StrippedTable from '../StrippedTable'
+import {useDispatch} from 'react-redux'
+import CustomOrderInput from '../../UI/Inputs/CustomOrderInput'
 
-const OrderTab = ({margin, isCreate, dispatch, url, id, onClose, names, inputs, ready, allData, uploadData, options, setOptions, selVal, switchForm}) => {
+const OrderTab = ({
+                    margin,
+                    isCreate,
+                    url,
+                    id,
+                    onClose,
+                    names,
+                    inputs,
+                    ready,
+                    allData,
+                    uploadData,
+                    options,
+                    setOptions,
+                    selVal,
+                    switchForm,
+                    setProductId,
+                    tableProducts,
+                    setTableProducts
+                  }) => {
+
   const [products, setProducts] = useState([])
-  const [tableProducts, setTableProducts] = useState([])
   const [add, setAdd] = useState(true)
   const [addProd, setAddProd] = useState(false)
+  const dispatch = useDispatch()
 
   // const {
   //   register,
@@ -28,6 +49,7 @@ const OrderTab = ({margin, isCreate, dispatch, url, id, onClose, names, inputs, 
     } else {
       const arr = [...products]
       const current = arr.pop()
+
       if (add) {
         instance.get(`admin_catalog/${current}`).then((data) => {
           if (tableProducts.length === 0) {
@@ -104,10 +126,9 @@ const OrderTab = ({margin, isCreate, dispatch, url, id, onClose, names, inputs, 
                 key={key}
                 inputTitle={names[key]}
                 inputName={key}
-                val={isCreate ? undefined : allData[key]}
+                val={allData !== undefined ? allData[key] : undefined}
                 options={val}
                 setData={uploadData}
-                isOrder={true}
               />
             )
           }
@@ -124,16 +145,16 @@ const OrderTab = ({margin, isCreate, dispatch, url, id, onClose, names, inputs, 
                   isAdd={setAdd}
                 />
                 <StrippedTable tableData={tableProducts} del={setTableProducts} setProducts={setProducts}
-                               products={products} isAdd={setAdd} switchForm={switchForm}/>
+                               products={products} isAdd={setAdd} switchForm={switchForm} setProductId={setProductId}/>
               </React.Fragment>
             )
           }
           return (
-            <CustomInput
+            <CustomOrderInput
               key={key}
               inputName={key}
               isRequired={false}
-              val={isCreate ? undefined : allData[key]}
+              val={allData !== undefined ? allData[key] : undefined}
               type={val}
               step={key === 'price' ? '0.01' : ''}
               setData={uploadData}

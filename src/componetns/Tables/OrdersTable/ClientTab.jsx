@@ -1,19 +1,28 @@
 import React, {useEffect, useMemo, useState} from 'react'
 import {TabBack} from '../../Forms/FormStyles'
 import MySelect from '../../UI/Selects/MySelect'
-import CustomInput from '../../UI/Inputs/CustomInput'
 import ClientHandlingTable from './ClientHandlingTable'
 import instance from '../../../settings/defaultAxios'
-import MyClientSelect from '../../UI/Selects/MyClientSelect'
 import ClientSelect from '../../UI/Selects/ClientSelect'
+import CustomOrderInput from '../../UI/Inputs/CustomOrderInput'
 
-const ClientTab = ({inputs, ready, names, isCreate, uploadData, allData, setAllData}) => {
+const ClientTab = ({
+                     inputs,
+                     ready,
+                     names,
+                     clientHistory,
+                     uploadData,
+                     allData,
+                     setAllData,
+                     setClientHistory,
+                     currentClient,
+                     setCurrentClient
+                   }) => {
   const [clients, setClients] = useState([])
-  const [currentClient, setCurrentClient] = useState({})
-  const [clientHistory, setClientHistory] = useState([])
-  // console.log(currentClient)
+
 
   // console.log(allData)
+  // console.log(currentClient)
 
   useEffect(() => {
     if (ready) {
@@ -31,7 +40,6 @@ const ClientTab = ({inputs, ready, names, isCreate, uploadData, allData, setAllD
           })
       } else {
         setClientHistory([])
-        console.log(currentClient)
         setAllData({
           ...allData,
           client_email: '',
@@ -66,7 +74,6 @@ const ClientTab = ({inputs, ready, names, isCreate, uploadData, allData, setAllD
                 val={allData !== undefined ? allData[key] : undefined}
                 options={val}
                 setData={uploadData}
-                isOrder={true}
               />
             )
           }
@@ -84,7 +91,7 @@ const ClientTab = ({inputs, ready, names, isCreate, uploadData, allData, setAllD
             )
           }
           return (
-            <CustomInput
+            <CustomOrderInput
               key={key}
               inputName={key}
               isRequired={false}

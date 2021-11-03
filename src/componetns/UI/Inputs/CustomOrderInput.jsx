@@ -10,15 +10,17 @@ import {
   CustomSelect,
 } from './Styles'
 
-const CustomInput = ({inputName, isRequired, type, radio, val = '', refs, setData, inputTitle, isCategory, step}) => {
+const CustomOrderInput = ({inputName, isRequired, type, radio, val = '', refs, setData, inputTitle, isCategory, step}) => {
   const [input, setInput] = useState(val)
   let Type = ''
 
-  useEffect(() => {
-    if (!isCategory) {
-      setData(inputName, val)
-    }
-  }, [])
+  // console.log(inputName, input)
+
+  // useEffect(() => {
+  //   if (!isCategory) {
+  //     setData(inputName, val)
+  //   }
+  // }, [])
 
   useEffect(() => {
     setInput(val)
@@ -81,7 +83,7 @@ const CustomInput = ({inputName, isRequired, type, radio, val = '', refs, setDat
           </CustomSelect>
         ) : Type === 'textarea' ? (
           <TextArea
-            val={val}
+            val={val === null ? undefined : val}
             setData={setData}
             inputName={inputName}
             ref={refs}
@@ -98,10 +100,7 @@ const CustomInput = ({inputName, isRequired, type, radio, val = '', refs, setDat
               setInput(
                 Type === 'checkbox' ? !e.target.defaultChecked : e.target.value
               )
-              setData(
-                inputName,
-                Type === 'checkbox' ? !e.target.defaultChecked : e.target.value
-              )
+              setData(inputName, Type === 'checkbox' ? !e.target.defaultChecked : e.target.value)
             }}
           />
         )}
@@ -109,4 +108,4 @@ const CustomInput = ({inputName, isRequired, type, radio, val = '', refs, setDat
     </InputContainer>
   )
 }
-export default CustomInput
+export default CustomOrderInput

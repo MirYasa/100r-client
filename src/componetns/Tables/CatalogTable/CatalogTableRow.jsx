@@ -2,9 +2,9 @@ import React, {useState} from 'react'
 import {BodyRow, ButtonTable} from '../StyledComponentsTable'
 import {Button} from 'react-bootstrap'
 import {Delete} from '../../../functions/APIRequest'
-import CatalogTablePopup from './CatalogTablePopup'
 import {useDispatch, useSelector} from 'react-redux'
-import {Link, useLocation} from 'react-router-dom'
+import {useLocation} from 'react-router-dom'
+import CatalogView from '../../Catalog/CatalogView'
 
 const CatalogTableRow = ({rowData}) => {
   const dispatch = useDispatch()
@@ -25,15 +25,14 @@ const CatalogTableRow = ({rowData}) => {
             <td key={index}>{item === true ? 'Да' : item === false ? 'Нет' : item}</td>
           )
         })}
-        <td><Link to={`/admin_catalog/${rowData.product_id}`}>
-          <ButtonTable variant={'link'} onClick={() => {
-          }}>Смотреть</ButtonTable>
-        </Link></td>
+        <td><ButtonTable variant={'link'} onClick={() => {
+          setOpen(true)
+        }}>Смотреть</ButtonTable></td>
         <td><Button style={{width: 90}} variant={'danger'} onClick={() => {
           Delete(local, 'Удалить продукт?', dispatch, rowData.product_id, 'GET_CATALOG', 'catalog')
         }}>Удалить</Button></td>
       </BodyRow>
-      <CatalogTablePopup
+      <CatalogView
         modalTitle={'Просмотр и изменение'}
         show={open}
         handleClose={setOpen}

@@ -1,8 +1,8 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import CustomInput from '../UI/Inputs/CustomInput'
 import FormButtons from './FormButtons'
 import {createContent, update} from '../../functions/APIRequest'
-import {useForm} from 'react-hook-form'
+// import {useForm} from 'react-hook-form'
 import MySelect from '../UI/Selects/MySelect'
 import instance from '../../settings/defaultAxios'
 import {FormBack} from './FormStyles'
@@ -10,8 +10,7 @@ import {FormBack} from './FormStyles'
 const BasicForm = ({margin, formData, isCreate, dispatch, url, formDataValue, id, onClose, isPretty}) => {
   const [allData, setAllData] = useState(isCreate ? formData : formDataValue)
   const [options, setOPtions] = useState([])
-  let mut = {}
-  const {register, handleSubmit, watch, formState: {errors}} = useForm()
+  // const {register, handleSubmit, watch, formState: {errors}} = useForm()
 
   const thNames = {
     id: 'ID',

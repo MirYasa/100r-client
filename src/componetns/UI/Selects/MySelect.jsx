@@ -6,8 +6,8 @@ import {InputName, InputContainer} from './Styles'
 const MySelect = ({options, inputTitle, val, inputName, setData}) => {
   const [option, setOption] = useState([{value: 0, label: 'Выбрать'}])
   const [defVal, setDefVal] = useState(0)
-  let count = 1
-  let accept = false
+
+  // console.log( inputName, option)
 
   useEffect(() => {
     setDefVal(val === undefined ? 0 : val)
@@ -19,8 +19,6 @@ const MySelect = ({options, inputTitle, val, inputName, setData}) => {
         value: item.id,
         label: item.name,
       }])
-
-      // console.log(option[3])
     })
   }, [options])
 

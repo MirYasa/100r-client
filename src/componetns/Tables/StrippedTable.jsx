@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, Table} from 'react-bootstrap'
 
-const StrippedTable = ({tableData, del, setProducts, products, isAdd, switchForm}) => {
+const StrippedTable = ({tableData, del, setProducts, products, isAdd, switchForm, setProductId}) => {
 
   return (
     <Table striped bordered hover size="md">
@@ -24,6 +24,7 @@ const StrippedTable = ({tableData, del, setProducts, products, isAdd, switchForm
             <td>Price</td>
             <td>{item.created_at}</td>
             <td><Button variant={'success'} onClick={() => {
+              setProductId(item.product_id)
               switchForm('product')
             }}>Редактировать</Button></td>
             <td><Button variant={'danger'} onClick={() => {
