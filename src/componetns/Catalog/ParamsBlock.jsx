@@ -2,10 +2,12 @@ import React from "react"
 import CatalogInput from "../UI/Inputs/CatalogInput"
 import { Block } from "./Styles"
 const ParamsBlock = ({ data, title, updateData }) => {
+
+  console.log(data)
   return (
     <Block>
       <h5>{title}</h5>
-      {Object.entries(data).map(([key, val]) => {
+      {data !== undefined ? Object.entries(data).map(([key, val]) => {
         return (
           <CatalogInput
             key={key}
@@ -16,7 +18,7 @@ const ParamsBlock = ({ data, title, updateData }) => {
             setData={updateData}
           />
         )
-      })}
+      }) : null}
     </Block>
   )
 }

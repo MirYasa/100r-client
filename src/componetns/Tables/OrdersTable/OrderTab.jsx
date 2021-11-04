@@ -36,6 +36,9 @@ const OrderTab = ({
   const [addProd, setAddProd] = useState(false)
   const dispatch = useDispatch()
 
+  console.log(tableProducts)
+  console.log(allData.products)
+
   // const {
   //   register,
   //   handleSubmit,
@@ -79,12 +82,12 @@ const OrderTab = ({
       products.map(item => {
         instance.get(`admin_catalog/${item}`).then((data) => {
           if (tableProducts.length === 0) {
-            setTableProducts((prev) => [...prev, data.data])
+            // setTableProducts((prev) => [...prev, data.data])
           } else {
             tableProducts.map(item => {
-              if (item.product_id !== data.data.product_id) {
-                setTableProducts((prev) => [...prev, data.data])
-              }
+              // if (item.product_id !== data.data.product_id) {
+              //   setTableProducts((prev) => [...prev, data.data])
+              // }
             })
           }
         })

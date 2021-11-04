@@ -9,30 +9,59 @@ import instance from '../../settings/defaultAxios'
 import {updateCat} from '../../functions/APIRequest'
 
 const ViewForm = ({id}) => {
-  // console.log(id)
-
   const [data, setData] = useState({})
-  const [inputType, setInputType] = useState({})
+  const [inputType, setInputType] = useState(
+    {
+      params: {
+        asperiores: 'string',
+        aut: 'string',
+        perferendis: 'string',
+        repellendus: 'string'
+      },
+      prices: {
+        MasterCard: 'float',
+        JCB: 'float',
+        Visa: 'float'
+      },
+      full_description: 'textarea',
+      full_name: 'string',
+      short_description: 'textarea',
+      short_name: 'string',
+      manufacturer_id: 'int',
+      category_id: 'int',
+      external_id: 'int',
+    }
+  )
+
   const [params, setParams] = useState(data.params)
   const [prices, setPrices] = useState(data.prices)
+  const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
 
+  // console.log(inputType)
+
   useEffect(() => {
-    const product = instance.get(`/admin_catalog/${id}`).then((data) => {
-      delete data.data.category
-      delete data.data.created_at
-      delete data.data.updated_at
-      delete data.data.manufacturer
-      setData(data.data)
-      setParams(data.data.params)
-      setPrices(data.data.prices)
-    })
-  }, [])
-  useEffect(() => {
-    const input = instance.get(`/admin_catalog/create?category=${data.category_id === undefined ? '' : data.category_id}`)
-      .then((data) => {
-        setInputType(data.data)
+    instance.get(`/admin_catalog/${id}`)
+      .then((response) => {
+        delete response.data.category
+        delete response.data.created_at
+        delete response.data.updated_at
+        delete response.data.manufacturer
+        // console.log(response.data)
+        setData(response.data)
+        setParams(response.data.params)
+        setPrices(response.data.prices)
       })
+    setLoading(false)
+  }, [])
+
+  useEffect(() => {
+    if (data.category_id !== undefined) {
+      instance.get(`/admin_catalog/create?category=${data.category_id}`)
+        .then((data) => {
+          setInputType(data.data)
+        })
+    }
   }, [data.category_id])
 
   const uploadData = (name, val) => {
@@ -79,7 +108,7 @@ const ViewForm = ({id}) => {
           return (
             <ParamsBlock
               key={key}
-              data={data[key]}
+              data={loading ? inputType[key] : data[key]}
               title={key === 'prices' ? 'Цены' : 'Параметры'}
               updateData={key === 'prices' ? updatePrices : updateParams}
             />
@@ -89,7 +118,7 @@ const ViewForm = ({id}) => {
           return (
             <Select
               key={key}
-              val={data[key]}
+              val={loading ? inputType[key] : data[key]}
               inputTitle={titles[key]}
               updateData={uploadData}
               inputName={key}
@@ -101,7 +130,7 @@ const ViewForm = ({id}) => {
             setData={uploadData}
             type={val}
             key={key}
-            val={data[key]}
+            val={loading ? inputType[key] : data[key]}
             inputTitle={titles[key]}
             inputName={key}
           />

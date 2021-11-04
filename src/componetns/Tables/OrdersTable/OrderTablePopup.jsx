@@ -3,6 +3,8 @@ import {Modal} from 'react-bootstrap'
 import {Popup} from '../StyledComponentsTable'
 import OrderForm from '../../Forms/OrderForm'
 import ViewForm from '../../Catalog/ViewForm'
+import {CSSTransition, SwitchTransition} from 'react-transition-group'
+import '../../../scss/animateChangeForm.scss'
 
 const OrderTablePopup = ({show, handleClose, isCreate, url, modalTitle, id, isPretty}) => {
   const [allData, setAllData] = useState({})
@@ -12,7 +14,7 @@ const OrderTablePopup = ({show, handleClose, isCreate, url, modalTitle, id, isPr
   const [tableProducts, setTableProducts] = useState([])
   const [activeTab, setActiveTab] = useState('client')
 
-  // console.log(clientHistory)
+  // console.log(howForm)
 
   useEffect(() => {
     if (!show) {
@@ -36,36 +38,54 @@ const OrderTablePopup = ({show, handleClose, isCreate, url, modalTitle, id, isPr
         <Modal.Title>{modalTitle}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {
-          howForm === 'order' ?
-            <OrderForm
-              isCreate={isCreate}
-              url={url}
-              id={id}
-              onClose={handleClose}
-              isPretty={isPretty}
-              setAllData={setAllData}
-              allData={allData}
-              switchForm={setHowForm}
-              setProductId={setProductId}
-              clientHistory={clientHistory}
-              setClientHistory={setClientHistory}
-              activeTab={activeTab}
-              tableProducts={tableProducts}
-              setTableProducts={setTableProducts}/> :
-            howForm === 'product' ? <React.Fragment>
-                <button onClick={() => {
-                  setHowForm('order')
-                  setActiveTab('order')
-                }}>Назад
-                </button>
-                <ViewForm
-                  id={productId}/>
-              </React.Fragment> :
-              howForm === 'client_history' ? <div>History</div> : null
-        }
+        <SwitchTransition
+          mode={'out-in'}>
+          <CSSTransition
+            key={howForm === 'order'}
+            addEndListener={(node, done) => {
+              node.addEventListener('transitionend', done, false)
+            }}
+            classNames={'change'}>
+            <div>
+              {howForm === 'order' ?
+                <OrderForm
+                  isCreate={isCreate}
+                  url={url}
+                  id={id}
+                  onClose={handleClose}
+                  isPretty={isPretty}
+                  setAllData={setAllData}
+                  allData={allData}
+                  switchForm={setHowForm}
+                  setProductId={setProductId}
+                  clientHistory={clientHistory}
+                  setClientHistory={setClientHistory}
+                  activeTab={activeTab}
+                  tableProducts={tableProducts}
+                  setTableProducts={setTableProducts}/> :
+                howForm === 'product' ?
+                  <React.Fragment>
+                    <button onClick={() => {
+                      setHowForm('order')
+                      setActiveTab('order')
+                    }}>Назад
+                    </button>
+                    <ViewForm
+                      id={productId}/>
+                  </React.Fragment> :
+                  howForm === 'client_history' ? <div>History</div> : null
+              }
+            </div>
+          </CSSTransition>
+        </SwitchTransition>
       </Modal.Body>
     </Popup>
   )
 }
 export default OrderTablePopup
+
+//
+// {howForm === 'order' ?
+//    :
+//
+// }

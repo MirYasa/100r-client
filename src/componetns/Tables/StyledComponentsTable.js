@@ -30,6 +30,7 @@ padding: 0;
 &:hover{color: rgba(40,44,52,0.8)};
 `
 export const Popup = styled(Modal)`
+min-height: 500px;
 .modal-dialog {
 max-width: 1200px;
 }
