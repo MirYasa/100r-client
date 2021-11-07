@@ -19,8 +19,6 @@ function App() {
   const location = useLocation()
   const dispatch = useDispatch()
 
-  console.log(location.pathname)
-
   useEffect(() => {
     getTabs(dispatch, 'GET_TABS', '/tabs')
   }, [])

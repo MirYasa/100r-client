@@ -17,8 +17,8 @@ const OrderForm = ({
                      clientHistory,
                      setClientHistory,
                      activeTab,
-                     tableProducts,
-                     setTableProducts
+                     products,
+                     setProducts
                    }) => {
 
   const [clientInputs, setClientInputs] = useState({})
@@ -40,6 +40,8 @@ const OrderForm = ({
     products: 'Продукты',
     price: 'Цена'
   }
+
+  console.log(products)
 
   const uploadData = (name, val) => {
     setAllData({
@@ -71,25 +73,25 @@ const OrderForm = ({
       })
     if (!isCreate) {
       instance.get(`admin_orders/${id}`)
-        .then((data) => {
+        .then((response) => {
           setAllData({
-            comment: data.data.comment,
-            products: data.data.products.map((item) => item.id),
-            price: data.data.price,
-            client_name: data.data.client.name,
-            client_email: data.data.client.email,
-            client_phone: data.data.client.phone,
-            client_source_id: data.data.client.client_source.id,
-            order_source_id: data.data.order_source.id,
+            comment: response.data.comment,
+            products: response.data.products.length > products.length ? response.data.products.map((item) => item.id): products,
+            price: response.data.price,
+            client_name: response.data.client.name,
+            client_email: response.data.client.email,
+            client_phone: response.data.client.phone,
+            client_source_id: response.data.client.client_source.id,
+            order_source_id: response.data.order_source.id,
           })
-          setSelVal(new Set(data.data.products))
+          setSelVal(new Set(response.data.products))
           setReady(true)
           setCurrentClient({
             id: id,
-            email: data.data.client.email,
-            name: data.data.client.name,
-            phone: data.data.client.phone,
-            client_source_id: data.data.client.client_source.id
+            email: response.data.client.email,
+            name: response.data.client.name,
+            phone: response.data.client.phone,
+            client_source_id: response.data.client.client_source.id
           })
         })
     }
@@ -133,8 +135,9 @@ const OrderForm = ({
             selVal={selVal}
             switchForm={switchForm}
             setProductId={setProductId}
-            tableProducts={tableProducts}
-            setTableProducts={setTableProducts}
+            products={products}
+            setProducts={setProducts}
+            setAllData={setAllData}
           />
         </Tab>
       </Tabs>

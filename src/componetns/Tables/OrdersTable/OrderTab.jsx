@@ -27,17 +27,18 @@ const OrderTab = ({
                     selVal,
                     switchForm,
                     setProductId,
-                    tableProducts,
-                    setTableProducts
+                    products,
+                    setProducts,
+                    setAllData
                   }) => {
 
-  const [products, setProducts] = useState([])
+  const [tableProducts, setTableProducts] = useState([])
   const [add, setAdd] = useState(true)
   const [addProd, setAddProd] = useState(false)
   const dispatch = useDispatch()
-
+  //
   // console.log(tableProducts)
-  // console.log(allData.products)
+  // console.log(products)
 
   // const {
   //   register,
@@ -55,24 +56,24 @@ const OrderTab = ({
 
       if (add) {
         instance.get(`admin_catalog/${current}`).then((data) => {
-          if (tableProducts.length === 0) {
+          if (tableProducts.length === 0 && isCreate) {
             setTableProducts([...tableProducts, data.data])
           } else {
-            tableProducts.map(item => {
-              if (item.product_id !== data.data.product_id) {
-                setTableProducts([...tableProducts, data.data])
-              }
-            })
+          tableProducts.map(item => {
+            if (item.product_id !== data.data.product_id) {
+              setTableProducts([...tableProducts, data.data])
+            }
+          })
           }
         })
       }
     }
     uploadData('products', products)
   }, [products])
+
   useEffect(() => {
     if (!isCreate) {
       if (ready) {
-        setProducts(allData.products)
         setAddProd(true)
       }
     }
@@ -80,17 +81,10 @@ const OrderTab = ({
   useEffect(() => {
     if (ready) {
       products.map(item => {
-        instance.get(`admin_catalog/${item}`).then((data) => {
-          if (tableProducts.length === 0) {
-            // setTableProducts((prev) => [...prev, data.data])
-          } else {
-            tableProducts.map(item => {
-              // if (item.product_id !== data.data.product_id) {
-              //   setTableProducts((prev) => [...prev, data.data])
-              // }
-            })
-          }
-        })
+        if (item)
+          instance.get(`admin_catalog/${item}`).then((data) => {
+            setTableProducts((prev) => [...prev, data.data])
+          })
       })
     }
   }, [addProd])
@@ -101,6 +95,7 @@ const OrderTab = ({
   const updateAction = (e) => {
     close()
     updateOrders(e, url, allData, id, dispatch)
+    // console.log(products, 'products')
   }
   const createAction = (e) => {
     close()

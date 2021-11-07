@@ -11,21 +11,26 @@ const OrderTablePopup = ({show, handleClose, isCreate, url, modalTitle, id, isPr
   const [howForm, setHowForm] = useState('order')
   const [productId, setProductId] = useState(0)
   const [clientHistory, setClientHistory] = useState([])
-  const [tableProducts, setTableProducts] = useState([])
+  const [products, setProducts] = useState([])
   const [activeTab, setActiveTab] = useState('client')
-
-  // console.log(howForm)
 
   useEffect(() => {
     if (!show) {
       setAllData({})
+      setProducts([])
       setClientHistory([])
-      setTableProducts([])
       if (activeTab !== 'client') {
         setActiveTab('client')
       }
     }
   }, [show])
+  useEffect(() => {
+    if (allData.products !== undefined) {
+      if (products.length < allData.products.length){
+        setProducts(allData.products)
+      }
+    }
+  }, [allData])
 
   return (
     <Popup
@@ -61,8 +66,8 @@ const OrderTablePopup = ({show, handleClose, isCreate, url, modalTitle, id, isPr
                   clientHistory={clientHistory}
                   setClientHistory={setClientHistory}
                   activeTab={activeTab}
-                  tableProducts={tableProducts}
-                  setTableProducts={setTableProducts}/> :
+                  products={products}
+                  setProducts={setProducts}/> :
                 howForm === 'product' ?
                   <React.Fragment>
                     <button onClick={() => {

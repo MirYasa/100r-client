@@ -26,6 +26,7 @@ const StrippedTable = ({tableData, del, setProducts, products, isAdd, switchForm
             <td><Button variant={'success'} onClick={() => {
               setProductId(item.product_id)
               switchForm('product')
+              isAdd(false)
             }}>Редактировать</Button></td>
             <td><Button variant={'danger'} onClick={() => {
               del(tableData.filter(el => el.product_id !== item.product_id))

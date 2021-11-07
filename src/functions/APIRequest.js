@@ -95,12 +95,9 @@ export const createOrders = (e, url, data, dispatch) => {
 }
 export const updateOrders = (e, url, data, id, dispatch) => {
   try {
+    // console.log(data)
     instance.put(`${url}/${id}`, data).then(() => {
-      getCatalog(
-        dispatch,
-        "GET_ORDERS",
-        "/admin_orders?page=0&order=id&direction=asc"
-      )
+      getCatalog(dispatch, "GET_ORDERS", "/admin_orders?page=0&order=id&direction=asc")
     })
   } catch (e) {
     console.log(e)
