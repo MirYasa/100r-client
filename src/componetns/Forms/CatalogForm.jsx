@@ -68,8 +68,6 @@ const CatalogForm = ({isCreate, onClose}) => {
   const close = () => {
     onClose(false)
   }
-
-
   const createAction = (e) => {
     e.preventDefault()
     close()

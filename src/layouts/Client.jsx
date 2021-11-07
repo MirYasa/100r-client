@@ -18,8 +18,9 @@ const Client = () => {
   const [page, setPage] = useState(0)
   const [count, setCount] = useState(0)
 
+
   useEffect(() => {
-    getInputs(dispatch, 'GET_INPUT_DATA', `${table}/create`)
+    getInputs(dispatch, 'GET_INPUT_DATA', `${table.slice(7)}/create`)
   }, [])
 
   useEffect(() => {
@@ -38,7 +39,7 @@ const Client = () => {
       <ClientTable
         tableData={content}
         inputTypes={inputData}
-        currentTable={table}
+        currentTable={table.slice(7)}
         dispatch={dispatch}
         currentPage={page}
       />
@@ -51,7 +52,7 @@ const Client = () => {
         formData={inputData}
         isCreate={true}
         dispatch={dispatch}
-        url={table}
+        url={table.slice(7)}
         modalTitle={'Создание'}
         isPretty={true}/>
     </Container>

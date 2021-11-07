@@ -12,7 +12,7 @@ const CatalogView = ({show, handleClose, id}) => {
         <Modal.Title>Просмотр и измнение</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <ViewForm id={id}/>
+        <ViewForm id={id} close={handleClose}/>
       </Modal.Body>
     </Popup>
   )

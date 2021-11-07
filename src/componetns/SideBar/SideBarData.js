@@ -7,12 +7,12 @@ import * as BSIcons from 'react-icons/bs'
 export const SidebarData = [
   {
     title: 'Главная',
-    path: '/home',
+    path: '/admin/home',
     icon: <AiIcons.AiFillHome/>
   },
   {
     title: 'Формы',
-    path: '/forms',
+    path: '/admin/forms',
     icon: <AiIcons.AiOutlineForm/>,
     iconClosed: <RiIcons.RiArrowDownSFill/>,
     iconOpened: <RiIcons.RiArrowUpSFill/>,
@@ -38,7 +38,7 @@ export const SidebarData = [
   },
   {
     title: 'Таблицы',
-    path: '/tables',
+    path: '/admin/tables',
     icon: <FaIcons.FaTable/>,
     iconClosed: <RiIcons.RiArrowDownSFill/>,
     iconOpened: <RiIcons.RiArrowUpSFill/>,
@@ -46,7 +46,7 @@ export const SidebarData = [
   },
   {
     title: 'Каталог',
-    path: '/admin_catalog',
+    path: '/admin/admin_catalog',
     icon: <FaIcons.FaBook/>,
     iconClosed: <RiIcons.RiArrowDownSFill/>,
     iconOpened: <RiIcons.RiArrowUpSFill/>,
@@ -54,33 +54,33 @@ export const SidebarData = [
     subArr: [
       {
         title: 'Продукты',
-        path: '/admin_catalog',
+        path: '/admin/admin_catalog',
         icon: <FaIcons.FaBookOpen/>
       },
       {
         title: 'Категории',
-        path: '/admin_categories',
+        path: '/admin/admin_categories',
         icon: <FaIcons.FaThLarge/>
       },
       {
         title: 'Типы цен',
-        path: '/price_type',
+        path: '/admin/price_type',
         icon: <FaIcons.FaBookOpen/>
       },
       {
         title: 'Параметры',
-        path: '/property',
+        path: '/admin/property',
         icon: <FaIcons.FaBookOpen/>
       },
       {
         title: 'Производители',
-        path: '/manufacturer',
+        path: '/admin/manufacturer',
         icon: <FaIcons.FaBookOpen/>
       }
     ]
   },{
     title: 'Заказы',
-    path: '/tables',
+    path: '/admin/tables',
     icon: <FaIcons.FaClipboardList/>,
     iconClosed: <RiIcons.RiArrowDownSFill/>,
     iconOpened: <RiIcons.RiArrowUpSFill/>,
@@ -88,27 +88,27 @@ export const SidebarData = [
     subArr: [
       {
         title: 'Клиенты',
-        path: '/clients',
+        path: '/admin/clients',
         icon: <BSIcons.BsFillPeopleFill/>
       },
       {
         title: 'Заказы',
-        path: '/admin_orders',
+        path: '/admin/admin_orders',
         icon: <FaIcons.FaClipboardList/>
       },
       {
         title: 'Источник клиентов',
-        path: '/client_sources',
+        path: '/admin/client_sources',
         icon: <BSIcons.BsFillPeopleFill/>
       },
       {
         title: 'Источник заказов',
-        path: '/order_sources',
+        path: '/admin/order_sources',
         icon: <FaIcons.FaWarehouse/>
       },
       {
         title: 'Статус заказов',
-        path: '/order_status',
+        path: '/admin/order_status',
         icon: <FaIcons.FaWarehouse/>
       },
     ]

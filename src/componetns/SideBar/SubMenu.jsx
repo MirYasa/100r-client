@@ -27,7 +27,7 @@ const SubMenu = ({item}) => {
       item.subNav && item.title === 'Таблицы' ?
           tabs.tabs.map((item, index) => {
             return (
-              <DropdownLink to={`/tables/${item}`} key={index}>
+              <DropdownLink to={`/admin/tables/${item}`} key={index}>
                 <FaIcons.FaTable/>
                 <SideBarLabel>{item}</SideBarLabel>
               </DropdownLink>

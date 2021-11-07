@@ -15,6 +15,8 @@ const Table = () => {
   const {inputData} = useSelector(state => state.inputData)
   const [open, setOpen] = useState(false)
 
+
+  console.log(table)
   useEffect(() => {
     getDefaultContent(dispatch, 'GET_CONTENT', table)
     getInputs(dispatch, 'GET_INPUT_DATA', `${table}/create`)

@@ -25,7 +25,7 @@ const Catalog = () => {
   }, [])
 
   useEffect(() => {
-    getCatalog(dispatch, "GET_CATALOG", `/admin_catalog?page=${page}`)
+    getCatalog(dispatch, "GET_CATALOG", `/admin_catalog?page=${page}&order=product_id&direction=asc`)
   }, [page])
 
   return (

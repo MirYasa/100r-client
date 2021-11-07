@@ -71,7 +71,9 @@ const OrderTablePopup = ({show, handleClose, isCreate, url, modalTitle, id, isPr
                     }}>Назад
                     </button>
                     <ViewForm
-                      id={productId}/>
+                      id={productId}
+                      close={() => {
+                      }}/>
                   </React.Fragment> :
                   howForm === 'client_history' ? <div>History</div> : null
               }

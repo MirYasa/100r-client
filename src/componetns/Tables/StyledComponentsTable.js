@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import {Button, Modal, Table} from 'react-bootstrap'
-import ClientHandlingTable from './OrdersTable/ClientHandlingTable'
 
 export const HeadRow = styled.tr`
 background-color: #3f5367;
@@ -13,7 +12,6 @@ export const CustomTable = styled(Table)`
 input {
 width: 16px;
 height: 16px;
-overflow-x: scroll;
 }
 `
 export const BodyRow = styled.tr`

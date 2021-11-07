@@ -1,44 +1,21 @@
 import React, {useEffect, useState} from 'react'
-import CustomInput from '../UI/Inputs/CustomInput'
-import ParamsBlock from './ParamsBlock'
-import {titles} from '../Forms/CatalogFormInputsName'
-import Select from '../UI/Select'
+import {names, titles} from '../Forms/CatalogFormInputsName'
 import FormButtons from '../Forms/FormButtons'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import instance from '../../settings/defaultAxios'
 import {updateCat} from '../../functions/APIRequest'
+import {getInputs} from '../../store/actions/inputDataAction'
+import CatalogInput from '../UI/Inputs/CatalogInput'
+import {FormBack, ParamsBlock} from '../Forms/FormStyles'
 
-const ViewForm = ({id}) => {
+const ViewForm = ({id, close}) => {
   const [data, setData] = useState({})
-  const [inputType, setInputType] = useState(
-    {
-      params: {
-        asperiores: 'string',
-        aut: 'string',
-        perferendis: 'string',
-        repellendus: 'string'
-      },
-      prices: {
-        MasterCard: 'float',
-        JCB: 'float',
-        Visa: 'float'
-      },
-      full_description: 'textarea',
-      full_name: 'string',
-      short_description: 'textarea',
-      short_name: 'string',
-      manufacturer_id: 'int',
-      category_id: 'int',
-      external_id: 'int',
-    }
-  )
-
   const [params, setParams] = useState(data.params)
   const [prices, setPrices] = useState(data.prices)
-  const [loading, setLoading] = useState(true)
+  const [newParams, setNewParams] = useState(false)
+  const [emptyInput, setEmptyInput] = useState(false)
+  const {inputData} = useSelector(state => state.inputData)
   const dispatch = useDispatch()
-
-  // console.log(inputType)
 
   useEffect(() => {
     instance.get(`/admin_catalog/${id}`)
@@ -47,20 +24,35 @@ const ViewForm = ({id}) => {
         delete response.data.created_at
         delete response.data.updated_at
         delete response.data.manufacturer
-        // console.log(response.data)
         setData(response.data)
         setParams(response.data.params)
         setPrices(response.data.prices)
+        setNewParams(true)
       })
-    setLoading(false)
   }, [])
 
   useEffect(() => {
     if (data.category_id !== undefined) {
-      instance.get(`/admin_catalog/create?category=${data.category_id}`)
-        .then((data) => {
-          setInputType(data.data)
+      getInputs(dispatch, 'GET_INPUT_DATA', `/admin_catalog/create?category=${data.category_id}`)
+      if (newParams) {
+        let stepPrices = {}
+        let stepParams = {}
+        Object.keys(inputData.prices).map((key) => {
+          stepPrices = {
+            ...stepPrices,
+            [key]: ''
+          }
         })
+        Object.keys(inputData.params).map((key) => {
+          stepParams = {
+            ...stepParams,
+            [key]: ''
+          }
+        })
+        setPrices(stepPrices)
+        setParams(stepParams)
+        setEmptyInput(true)
+      }
     }
   }, [data.category_id])
 
@@ -97,57 +89,63 @@ const ViewForm = ({id}) => {
     })
   }
   const updateAction = (e) => {
-    console.log(data)
+    close(false)
     updateCat(e, '/admin_catalog', data, id, dispatch)
   }
 
   return (
-    <form>
-      {Object.entries(inputType).map(([key, val]) => {
-        if (key === 'prices' || key === 'params') {
+    <FormBack>
+      <ParamsBlock>
+        <h5>Параметры</h5>
+        {Object.entries(params === undefined ? {} : params).map(([key, val]) => {
           return (
-            <ParamsBlock
+            <CatalogInput
               key={key}
-              data={loading ? inputType[key] : data[key]}
-              title={key === 'prices' ? 'Цены' : 'Параметры'}
-              updateData={key === 'prices' ? updatePrices : updateParams}
-            />
-          )
-        }
-        if (key === 'category_id' || key === 'manufacturer_id') {
-          return (
-            <Select
-              key={key}
-              val={loading ? inputType[key] : data[key]}
-              inputTitle={titles[key]}
-              updateData={uploadData}
               inputName={key}
-            />
+              inputTitle={key}
+              val={emptyInput ? '' : data.params[key]}
+              type={val}
+              setData={updateParams}/>
           )
-        }
+        })}
+      </ParamsBlock>
+      <ParamsBlock>
+        <h5>Цены</h5>
+        {Object.entries(prices === undefined ? {} : prices).map(([key, val]) => {
+          return (
+            <CatalogInput
+              key={key}
+              inputName={key}
+              inputTitle={key}
+              val={emptyInput ? '' : data.prices[key]}
+              type={val}
+              setData={updatePrices}/>
+          )
+        })}
+      </ParamsBlock>
+      {Object.entries(names).map(([key, val]) => {
         return (
-          <CustomInput
-            setData={uploadData}
-            type={val}
+          <CatalogInput
             key={key}
-            val={loading ? inputType[key] : data[key]}
-            inputTitle={titles[key]}
             inputName={key}
-          />
+            val={data[key]}
+            type={val}
+            inputTitle={titles[key]}
+            setData={uploadData}/>
         )
-      })}
+      })
+      }
       <FormButtons
         buttons={[
           {
             title: 'Отмена', type: 'primary', action: () => {
+              close(false)
             }
           },
           {title: 'Сброс', type: 'primary', action: null},
-          {title: 'Подтвердить', type: 'success', action: updateAction},
-        ]}
-        isUpdateCatalog={true}
+          {title: 'Подтвердить', type: 'success', action: updateAction}]}
       />
-    </form>
+    </FormBack>
   )
 }
 export default ViewForm

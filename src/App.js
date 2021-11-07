@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {Route, Switch, useLocation} from 'react-router-dom'
+import {Redirect, Route, Switch, useLocation} from 'react-router-dom'
 import {Col, Container, Row} from 'react-bootstrap'
 import Home from './layouts/Home'
 import SideBar from './componetns/SideBar/SideBar'
@@ -10,9 +10,7 @@ import LoginPage from './layouts/LoginPage'
 import {useDispatch} from 'react-redux'
 import {getTabs} from './store/actions/tabsAction'
 import Table from './layouts/Table'
-import {getCatalog} from './store/actions/catalogAction'
 import Catalog from './layouts/Catalog'
-import CatalogView from './componetns/Catalog/CatalogView'
 import Category from './layouts/Category'
 import Client from './layouts/Client'
 import Order from './layouts/Order'
@@ -21,14 +19,13 @@ function App() {
   const location = useLocation()
   const dispatch = useDispatch()
 
+  console.log(location.pathname)
 
   useEffect(() => {
     getTabs(dispatch, 'GET_TABS', '/tabs')
-    getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
   }, [])
 
-
-  if (location.pathname === '/' || location.pathname === '/createAccount')
+  if (location.pathname === '/admin/' || location.pathname === '/admin/createAccount')
     return <LoginPage/>
 
   return (
@@ -39,16 +36,16 @@ function App() {
           <NavBar
             userName={'John Doe'}/>
           <Switch>
-            <Route path={'/home'} exact component={Home}/>
-            <Route path={'/forms'} exact component={Forms}/>
-            <Route path={'/tables'} exact component={Tables}/>
-            <Route path={'/tables/:table'} component={Table}/>
-            <Route path={'/admin_catalog'} exact component={Catalog}/>
-            <Route path={'/admin_catalog/:id'} exact component={CatalogView}/>
-            <Route path={'/admin_categories'} exact component={Category}/>
-            <Route path={'/admin_orders'} exact component={Order}/>
-            <Route path={'/clients'} exact component={Client}/>
-            <Route path={'/:table'} exact component={Table}/>
+            <Route path={'/admin/home'} exact component={Home}/>
+            <Route path={'/admin/forms'} exact component={Forms}/>
+            <Route path={'/admin/tables'} exact component={Tables}/>
+            <Route path={'/admin/tables/:table'} component={Table}/>
+            <Route path={'/admin/admin_catalog'} exact component={Catalog}/>
+            <Route path={'/admin/admin_categories'} exact component={Category}/>
+            <Route path={'/admin/admin_orders'} exact component={Order}/>
+            <Route path={'/admin/clients'} exact component={Client}/>
+            <Route path={'/admin/:table'} exact component={Table}/>
+            <Redirect to={'/admin/home'}/>
           </Switch>
         </Col>
       </Row>

@@ -36,8 +36,8 @@ const OrderTab = ({
   const [addProd, setAddProd] = useState(false)
   const dispatch = useDispatch()
 
-  console.log(tableProducts)
-  console.log(allData.products)
+  // console.log(tableProducts)
+  // console.log(allData.products)
 
   // const {
   //   register,

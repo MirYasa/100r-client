@@ -81,7 +81,7 @@ export const UpdateCategory = async (dispatch, id, data) => {
 
 export const updateCat = (e, url, data, id, dispatch) => {
   updateCatalog(`${url}/${id}`, data).then(() => {
-    getCatalog(dispatch, "GET_CATALOG", "/admin_catalog")
+    getCatalog(dispatch, "GET_CATALOG", `/admin_catalog?page=${0}&order=product_id&direction=asc`)
   })
 }
 export const createOrders = (e, url, data, dispatch) => {
