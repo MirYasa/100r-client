@@ -44,9 +44,11 @@ const OrderSelect = ({options, inputTitle, val, isAdd, newOptions, setProducts})
           options={option}
           onChange={_onChange}
           onInputChange={(e) => {
-            instance.get(`admin_orders/create?search=${e}`).then((data) => {
-              newOptions(data.data.products)
-            })
+            if (e !== '') {
+              instance.get(`admin_orders/create?search=${e}`).then((data) => {
+                newOptions(data.data.products)
+              })
+            }
           }}
         />
       </Col>

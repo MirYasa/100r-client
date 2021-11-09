@@ -41,7 +41,7 @@ const OrderForm = ({
     price: 'Цена'
   }
 
-  console.log(products)
+  // console.log(products)
 
   const uploadData = (name, val) => {
     setAllData({

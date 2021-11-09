@@ -5,10 +5,12 @@
 .change-enter-active {
   opacity: 1;
   transform: translateX(0%);
+  min-height: 600px;
 }
 .change-exit{
   opacity: 1;
   transform: translateX(0%);
+  min-height: 600px;
 }
 .change-exit-active {
   opacity: 0;

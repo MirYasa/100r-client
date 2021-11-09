@@ -1,5 +1,4 @@
 import React, {useEffect, useMemo, useState} from 'react'
-import CustomInput from '../../UI/Inputs/CustomInput'
 import FormButtons from '../../Forms/FormButtons'
 import {createOrders, updateOrders} from '../../../functions/APIRequest'
 import {useForm} from 'react-hook-form'
@@ -33,12 +32,9 @@ const OrderTab = ({
                   }) => {
 
   const [tableProducts, setTableProducts] = useState([])
-  const [add, setAdd] = useState(true)
+  const [add, setAdd] = useState(false)
   const [addProd, setAddProd] = useState(false)
   const dispatch = useDispatch()
-  //
-  // console.log(tableProducts)
-  // console.log(products)
 
   // const {
   //   register,
@@ -55,17 +51,18 @@ const OrderTab = ({
       const current = arr.pop()
 
       if (add) {
-        instance.get(`admin_catalog/${current}`).then((data) => {
-          if (tableProducts.length === 0 && isCreate) {
-            setTableProducts([...tableProducts, data.data])
-          } else {
-          tableProducts.map(item => {
-            if (item.product_id !== data.data.product_id) {
-              setTableProducts([...tableProducts, data.data])
+        instance.get(`admin_catalog/${current}`)
+          .then((response) => {
+            let repeat = false
+            tableProducts.map(item => {
+              if (item.product_id === response.data.product_id) {
+                repeat = true
+              }
+            })
+            if (!repeat) {
+              setTableProducts([...tableProducts, response.data])
             }
           })
-          }
-        })
       }
     }
     uploadData('products', products)
@@ -78,13 +75,15 @@ const OrderTab = ({
       }
     }
   }, [ready])
+
   useEffect(() => {
-    if (ready) {
+    if (ready || isCreate) {
       products.map(item => {
         if (item)
-          instance.get(`admin_catalog/${item}`).then((data) => {
-            setTableProducts((prev) => [...prev, data.data])
-          })
+          instance.get(`admin_catalog/${item}`)
+            .then((response) => {
+              setTableProducts((prev) => [...prev, response.data])
+            })
       })
     }
   }, [addProd])
@@ -95,7 +94,6 @@ const OrderTab = ({
   const updateAction = (e) => {
     close()
     updateOrders(e, url, allData, id, dispatch)
-    // console.log(products, 'products')
   }
   const createAction = (e) => {
     close()
