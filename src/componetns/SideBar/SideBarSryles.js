@@ -38,14 +38,14 @@ export const SideBarUserRow = styled(Row)`
 //SubMenu
 export const SideBarLink = styled.div`
   display: flex;
-   color: #f5f5f5; 
+  color: #f5f5f5; 
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 20px 10px;
   list-style: none;
   height: 60px;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 17px;
    &.active {
    border-right: 4px solid #1abb9c;
   }
@@ -67,7 +67,7 @@ export const DropdownLink = styled(NavLink)`
   text-decoration: none;
   color: #f5f5f5; 
   border-right: 4px solid #1abb9c;
-  font-size: 18px;
+  font-size: 16px;
   &:hover {
   color: #e1e9fc;
     cursor: pointer;

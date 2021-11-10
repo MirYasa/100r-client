@@ -23,23 +23,16 @@ const SubMenu = ({item}) => {
               : null}
         </div>
       </SideBarLink>
-      {subnav &&
-      item.subNav && item.title === 'Таблицы' ?
-          tabs.tabs.map((item, index) => {
-            return (
-              <DropdownLink to={`/admin/tables/${item}`} key={index}>
-                <FaIcons.FaTable/>
-                <SideBarLabel>{item}</SideBarLabel>
-              </DropdownLink>
-            )
-          }) : subnav && item.subNav && item.title === 'Каталог' ? item.subArr.map((item, index) => {
+      {subnav && item.subNav && item.title === 'Бухгалтерия' ?
+        tabs.tabs.map((item, index) => {
           return (
-            <DropdownLink to={`${item.path}`} key={index}>
-              {item.icon}
-              <SideBarLabel>{item.title}</SideBarLabel>
+            <DropdownLink to={`/admin/tables/${item}`} key={index}>
+              <FaIcons.FaTable/>
+              <SideBarLabel>{item}</SideBarLabel>
             </DropdownLink>
           )
-        }): subnav && item.subNav && item.title === 'Заказы' ? item.subArr.map((item, index) => {
+        })
+        : subnav ? item.subArr?.map((item, index) => {
           return (
             <DropdownLink to={`${item.path}`} key={index}>
               {item.icon}
