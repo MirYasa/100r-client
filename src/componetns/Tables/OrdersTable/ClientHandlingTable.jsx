@@ -23,7 +23,7 @@ const ClientHandlingTable = ({tableData}) => {
                 <td>{item.price}</td>
                 <td>{item.order_source?.name}</td>
                 <td>{item.order_status?.name}</td>
-                <td>{item.created_at}</td>
+                <td>{new Date(item.created_at).toLocaleString('ru-RU')}</td>
               </tr>
             )
           })}
