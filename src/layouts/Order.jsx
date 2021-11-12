@@ -13,6 +13,11 @@ const Order = () => {
   const [open, setOpen] = useState(false)
   const [page, setPage] = useState(0)
   const [count, setCount] = useState(0)
+  const [modalSettings, setModalSettings] = useState({
+    id: 1,
+    title: 'Заказ',
+    isCreate: true
+  })
   const {orders} = useSelector((state) => state.catalog)
 
   useEffect(() => {
@@ -24,13 +29,22 @@ const Order = () => {
     getCatalog(dispatch, 'GET_ORDERS', `/admin_orders?page=${page}&order=id&direction=asc`)
   }, [page])
 
+  const openModal = (id, title, isCreate) => {
+    setModalSettings({
+      id: id,
+      title: title,
+      isCreate: isCreate
+    })
+    setOpen(true)
+  }
+
   return (
     <Container>
       <RowContainer>
         <CreateButton
           variant={'warning'}
           onClick={() => {
-            setOpen(true)
+            openModal(1, 'Заказ', true)
           }}>Создать
         </CreateButton>
         <FilterPanel/>
@@ -40,17 +54,16 @@ const Order = () => {
         currentPage={page}
         currentTable={'admin_orders'}
         dispatch={dispatch}
+        open={openModal}
       />
       <PaginationList count={count} updatePage={setPage}/>
       <OrderTablePopup
         show={open}
         handleClose={setOpen}
-        id={1}
-        modalTitle={'Заказ'}
-        isCreate={true}
-        data={orders}
+        id={modalSettings.id}
+        modalTitle={modalSettings.title}
+        isCreate={modalSettings.isCreate}
         url={'/admin_orders'}
-        dispatch={dispatch}
       />
     </Container>
   )

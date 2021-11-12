@@ -3,7 +3,7 @@ import {CustomTable, HeadRow} from '../StyledComponentsTable'
 import OrderTableRow from './OrderTableRow'
 import OrderTitles from './OrderTitles'
 
-const OrderTable = ({tableData, currentTable, dispatch, inputTypes, url, isPretty, currentPage}) => {
+const OrderTable = ({tableData, currentTable, dispatch, currentPage, open}) => {
   const [allActive, setAllActive] = useState(false)
 
   return (
@@ -21,8 +21,7 @@ const OrderTable = ({tableData, currentTable, dispatch, inputTypes, url, isPrett
               item={item}
             />
           })}
-        <th>Смотреть</th>
-        <th>Удалить</th>
+        <th>Действия</th>
       </HeadRow>
       </thead>
       <tbody>
@@ -34,9 +33,7 @@ const OrderTable = ({tableData, currentTable, dispatch, inputTypes, url, isPrett
             rowData={item}
             currentTable={currentTable}
             dispatch={dispatch}
-            inputTypes={inputTypes}
-            url={url}
-            isPretty={isPretty}/>
+            open={open}/>
         )
       })}
       </tbody>

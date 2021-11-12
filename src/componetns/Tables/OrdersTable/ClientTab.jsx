@@ -20,10 +20,6 @@ const ClientTab = ({
                    }) => {
   const [clients, setClients] = useState([])
 
-
-  // console.log(allData)
-  // console.log(currentClient)
-
   useEffect(() => {
     if (ready) {
       if (currentClient.id !== undefined) {
@@ -111,5 +107,4 @@ const ClientTab = ({
     </TabBack>
   )
 }
-
 export default ClientTab

@@ -28,12 +28,41 @@ padding: 0;
 &:hover{color: rgba(40,44,52,0.8)};
 `
 export const Popup = styled(Modal)`
-min-height: 500px;
-.modal-dialog {
-max-width: 1200px;
-}
+
+  .modal-dialog {
+    min-width: 1400px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    margin: 0;
+      .modal-body {
+        min-height: 630px;
+      }
+  }
 `
 export const ClientHandlingTableContainer = styled.div`
 height: 260px;
 overflow-y: scroll; 
+`
+
+export const Backdrop = styled.div`
+position: fixed;
+top: 0;
+left: 0;
+z-index: 1050;
+width: 100vw;
+height: 100vh;
+//height: ${props => props.height + 'px'};
+background-color: rgba(0,0,0,0.4);
+`
+
+export const CustomPopup = styled.div`
+  position: fixed;
+  overflow-y: scroll;
+  right: 0;
+  top: 0;
+  z-index: 1051;
+  background: white;
+   width: 1300px;
+   height: 100vh;
 `

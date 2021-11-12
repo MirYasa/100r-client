@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import {Button} from 'react-bootstrap'
 import {Delete} from '../../../functions/APIRequest'
-import {BodyRow, ButtonTable} from '../StyledComponentsTable'
-import OrderTablePopup from './OrderTablePopup'
+import {BodyRow} from '../StyledComponentsTable'
+import {MdDelete, MdEdit} from 'react-icons/md'
 
-const BasicTableBodyRow = ({isActive, rowData, currentTable, dispatch, inputTypes, url, isPretty}) => {
+const BasicTableBodyRow = ({isActive, rowData, currentTable, dispatch, open}) => {
   const [active, setActive] = useState(isActive)
-  const [open, setOpen] = useState(false)
-  let d = {}
 
   useEffect(() => {
     setActive(isActive)
@@ -20,35 +18,21 @@ const BasicTableBodyRow = ({isActive, rowData, currentTable, dispatch, inputType
         }} onClick={() => {
           setActive(!active)
         }}/></td>
-        {Object.entries(rowData).map(([key,item], index) => {
+        {Object.entries(rowData).map(([key, item], index) => {
           if (key === 'comment') {
-            return  null
+            return null
           }
           return (
             <td key={index}>{item}</td>
           )
         })}
-        <td><ButtonTable variant={'link'} onClick={() => {
-          setOpen(true)
-        }}>Смотреть</ButtonTable></td>
-        <td><Button style={{width: 90}} variant={'danger'} onClick={() => {
-          Delete(currentTable, 'Удалить заказ?', dispatch, rowData.id, 'GET_ORDERS', 'catalog')
-        }}>Удалить</Button></td>
+        <td style={{display: 'flex', justifyContent: 'space-between'}}>
+          <Button variant={'success'} onClick={() => {open(rowData.id, 'Просмотр и изменение', false)}}><MdEdit/></Button>
+          <Button variant={'danger'} onClick={() => {
+            Delete(currentTable, 'Удалить заказ?', dispatch, rowData.id, 'GET_ORDERS', 'catalog')
+          }}><MdDelete/></Button></td>
       </BodyRow>
-      <OrderTablePopup
-        show={open}
-        isPretty={true}
-        handleClose={setOpen}
-        formData={inputTypes}
-        formDataValue={d}
-        isCreate={false}
-        url={currentTable}
-        id={rowData.id}
-        modalTitle={'Просмотр и изменение'}
-        dispatch={dispatch}
-      />
     </React.Fragment>
-
   )
 }
 export default BasicTableBodyRow
