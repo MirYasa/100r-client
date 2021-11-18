@@ -18,7 +18,8 @@ const OrderForm = ({
                      setClientHistory,
                      activeTab,
                      products,
-                     setProducts
+                     setProducts,
+                     openProduct
                    }) => {
 
   const [clientInputs, setClientInputs] = useState({})
@@ -138,6 +139,7 @@ const OrderForm = ({
             products={products}
             setProducts={setProducts}
             setAllData={setAllData}
+            openProduct={openProduct}
           />
         </Tab>
       </Tabs>

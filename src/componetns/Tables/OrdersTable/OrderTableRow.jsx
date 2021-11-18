@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Button} from 'react-bootstrap'
 import {Delete} from '../../../functions/APIRequest'
-import {BodyRow} from '../StyledComponentsTable'
+import {ActionsCell, BodyRow} from '../StyledComponentsTable'
 import {MdDelete, MdEdit} from 'react-icons/md'
 
 const BasicTableBodyRow = ({isActive, rowData, currentTable, dispatch, open}) => {
@@ -12,7 +12,6 @@ const BasicTableBodyRow = ({isActive, rowData, currentTable, dispatch, open}) =>
   }, [isActive])
 
   return (
-    <React.Fragment>
       <BodyRow active={active}>
         <td><input type="checkbox" checked={active} onChange={() => {
         }} onClick={() => {
@@ -22,17 +21,17 @@ const BasicTableBodyRow = ({isActive, rowData, currentTable, dispatch, open}) =>
           if (key === 'comment') {
             return null
           }
-          return (
-            <td key={index}>{item}</td>
-          )
+          return <td key={index}>{item}</td>
         })}
-        <td style={{display: 'flex', justifyContent: 'space-between'}}>
-          <Button variant={'success'} onClick={() => {open(rowData.id, 'Просмотр и изменение', false)}}><MdEdit/></Button>
+        <ActionsCell>
+          <Button variant={'success'} onClick={() => {
+            open(rowData.id, 'Просмотр и изменение', false)
+          }}><MdEdit/></Button>
           <Button variant={'danger'} onClick={() => {
             Delete(currentTable, 'Удалить заказ?', dispatch, rowData.id, 'GET_ORDERS', 'catalog')
-          }}><MdDelete/></Button></td>
+          }}><MdDelete/></Button>
+        </ActionsCell>
       </BodyRow>
-    </React.Fragment>
   )
 }
 export default BasicTableBodyRow

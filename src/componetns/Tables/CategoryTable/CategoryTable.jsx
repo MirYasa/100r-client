@@ -3,7 +3,7 @@ import {CustomTable, HeadRow} from '../StyledComponentsTable'
 import CategoryTableRow from './CategoryTableRow'
 import CategoryTitles from './CategoryTitles'
 
-const CategoryTable = ({tableData, currentPage}) => {
+const CategoryTable = ({tableData, currentPage, openModal}) => {
   return (
     <CustomTable striped bordered hover size="lg">
       <thead>
@@ -19,8 +19,7 @@ const CategoryTable = ({tableData, currentPage}) => {
               <CategoryTitles key={index} item={item} currentPage={currentPage}/>
             )
           })}
-        <th>Смотреть</th>
-        <th>Удалить</th>
+        <th>Действия</th>
       </HeadRow>
       </thead>
       <tbody>
@@ -29,7 +28,7 @@ const CategoryTable = ({tableData, currentPage}) => {
           <CategoryTableRow
             key={index}
             rowData={item}
-            inputTypes={{}}/>
+            openModal={openModal}/>
         )
       })}
       </tbody>

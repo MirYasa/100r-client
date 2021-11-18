@@ -1,14 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import {Modal} from 'react-bootstrap'
-import {Backdrop, CustomPopup, Popup} from '../StyledComponentsTable'
+import {Backdrop, CustomPopup} from '../StyledComponentsTable'
 import OrderForm from '../../Forms/OrderForm'
-import ViewForm from '../../Catalog/ViewForm'
-import {CSSTransition, SwitchTransition} from 'react-transition-group'
-import '../../../scss/animateChangeForm.scss'
+import {CSSTransition} from 'react-transition-group'
 import '../../../scss/modalAnimate.scss'
 
-
-const OrderTablePopup = ({show, handleClose, isCreate, url, modalTitle, id, isPretty}) => {
+const OrderTablePopup = ({show, handleClose, isCreate, url, modalTitle, id, isPretty, openProduct}) => {
   const [allData, setAllData] = useState({})
   const [howForm, setHowForm] = useState('order')
   const [productId, setProductId] = useState(0)
@@ -16,7 +13,6 @@ const OrderTablePopup = ({show, handleClose, isCreate, url, modalTitle, id, isPr
   const [products, setProducts] = useState([])
   const [activeTab, setActiveTab] = useState('client')
 
-  // console.log(allData)
 
   useEffect(() => {
     if (!show) {
@@ -39,13 +35,13 @@ const OrderTablePopup = ({show, handleClose, isCreate, url, modalTitle, id, isPr
 
   return (
     <React.Fragment>
-      {show ? <Backdrop height={window.innerHeight}  onClick={() => {handleClose(false)}}/> : null}
+      {show ? <Backdrop height={window.innerHeight}  zIndex={1051}  onClick={() => {handleClose(false)}}/> : null}
       <CSSTransition
         in={show}
         timeout={300}
         classNames={'modal'}
         unmountOnExit>
-        <CustomPopup>
+        <CustomPopup zIndex={1051} width={'1300px'}>
           <Modal.Header closeButton>
             <Modal.Title>{modalTitle}</Modal.Title>
           </Modal.Header>
@@ -64,7 +60,8 @@ const OrderTablePopup = ({show, handleClose, isCreate, url, modalTitle, id, isPr
               setClientHistory={setClientHistory}
               activeTab={activeTab}
               products={products}
-              setProducts={setProducts}/>
+              setProducts={setProducts}
+              openProduct={openProduct}/>
           </Modal.Body>
         </CustomPopup>
       </CSSTransition>
@@ -72,32 +69,3 @@ const OrderTablePopup = ({show, handleClose, isCreate, url, modalTitle, id, isPr
   )
 }
 export default OrderTablePopup
-
-// {/*<SwitchTransition*/}
-// {/*  mode={'out-in'}>*/}
-// {/*  <CSSTransition*/}
-// {/*    key={howForm === 'order'}*/}
-// {/*    addEndListener={(node, done) => {*/}
-// {/*      node.addEventListener('transitionend', done, false)*/}
-// {/*    }}*/}
-// {/*    classNames={'change'}>*/}
-// {/*    <div>*/}
-// {/*      {howForm === 'order' ?*/}
-// {/*         :*/}
-// {/*        howForm === 'product' ?*/}
-// {/*          <React.Fragment>*/}
-// {/*            <button onClick={() => {*/}
-// {/*              setHowForm('order')*/}
-// {/*              setActiveTab('order')*/}
-// {/*            }}>Назад*/}
-// {/*            </button>*/}
-// {/*            <ViewForm*/}
-// {/*              id={productId}*/}
-// {/*              close={() => {*/}
-// {/*              }}/>*/}
-// {/*          </React.Fragment> :*/}
-// {/*          howForm === 'client_history' ? <div>History</div> : null*/}
-// {/*      }*/}
-// {/*    </div>*/}
-// {/*  </CSSTransition>*/}
-// {/*</SwitchTransition>*/}

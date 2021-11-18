@@ -7,6 +7,7 @@ import OrderTable from '../componetns/Tables/OrdersTable/OrderTable'
 import OrderTablePopup from '../componetns/Tables/OrdersTable/OrderTablePopup'
 import {Container, CreateButton, RowContainer} from './LayoutStyles'
 import FilterPanel from '../componetns/FilterPanel'
+import CatalogView from '../componetns/Catalog/CatalogView'
 
 const Order = () => {
   const dispatch = useDispatch()
@@ -18,10 +19,16 @@ const Order = () => {
     title: 'Заказ',
     isCreate: true
   })
+  const [productModalSettings, setProductModalSettings] = useState({
+    id: 0,
+    title: 'Просмотр',
+    open: false
+  })
   const {orders} = useSelector((state) => state.catalog)
 
   useEffect(() => {
-    instance.get(`/admin_orders`).then((data) => {
+    instance.get(`/admin_orders`)
+      .then((data) => {
       setCount(data.data.count)
     })
   }, [])
@@ -36,6 +43,18 @@ const Order = () => {
       isCreate: isCreate
     })
     setOpen(true)
+  }
+  const openProductModal = (id, open) => {
+    setProductModalSettings({
+      id: id,
+      open: open
+    })
+  }
+
+  if (open) {
+    document.body.style.overflowY = 'hidden'
+  } else {
+    document.body.style.overflowY = 'scroll'
   }
 
   return (
@@ -64,6 +83,16 @@ const Order = () => {
         modalTitle={modalSettings.title}
         isCreate={modalSettings.isCreate}
         url={'/admin_orders'}
+        openProduct={openProductModal}
+      />
+      <CatalogView
+      show={productModalSettings.open}
+      id={productModalSettings.id}
+      handleClose={() => {setProductModalSettings({
+        open: false
+      })}}
+      isShow={true}
+      title={'Просмотр'}
       />
     </Container>
   )

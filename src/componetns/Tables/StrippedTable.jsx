@@ -2,7 +2,7 @@ import React from 'react'
 import {Button, Table} from 'react-bootstrap'
 import {MdDelete, MdRemoveRedEye} from 'react-icons/md'
 
-const StrippedTable = ({tableData, del, setProducts, products, isAdd, switchForm, setProductId}) => {
+const StrippedTable = ({tableData, del, setProducts, products, isAdd, openProduct}) => {
 
   return (
     <Table striped bordered hover size="md">
@@ -29,8 +29,7 @@ const StrippedTable = ({tableData, del, setProducts, products, isAdd, switchForm
             <td>{item.manufacturer}</td>
             <td>Quantity</td>
             <td style={{display: 'flex', justifyContent: 'space-around'}}><Button variant={'primary'} onClick={() => {
-              setProductId(item.product_id)
-              switchForm('product')
+              openProduct(item.product_id, true)
               isAdd(false)
             }}><MdRemoveRedEye/></Button>
               <Button variant={'danger'} onClick={() => {

@@ -13,35 +13,60 @@ const Table = () => {
   const local = useLocation()
   const {content} = useSelector(state => state.content)
   const {inputData} = useSelector(state => state.inputData)
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState({
+    show: false,
+    title: 'Создание',
+    isCreate: true,
+    id: 0,
+    formData: {}
+  })
 
-
-  console.log(table)
   useEffect(() => {
     getDefaultContent(dispatch, 'GET_CONTENT', table)
     getInputs(dispatch, 'GET_INPUT_DATA', `${table}/create`)
   }, [table])
 
+  const openModal = (show, title, isCreate, id, formData) => {
+    setOpen({
+      show: show,
+      title: title,
+      isCreate: isCreate,
+      id: id,
+      formData: formData
+    })
+  }
+
   return (
     <TableContainer>
       <CreateButton variant={'warning'} onClick={() => {
-        setOpen(true)
+        setOpen({
+          ...open,
+          show: true
+        })
       }}>Создать</CreateButton>
       <BasicTable
         tableData={content}
         currentTable={table}
         dispatch={dispatch}
         inputTypes={inputData}
-        url={table}
-        isPretty={!local.pathname.includes('tables')}/>
+        isPretty={!local.pathname.includes('tables')}
+        openModal={openModal}/>
       <BasicTablePopup
-        show={open}
-        handleClose={setOpen}
+        show={open.show}
+        handleClose={() => {
+          setOpen({
+            show: false,
+            title: 'Создание',
+            isCreate: true
+          })
+        }}
         formData={inputData}
-        isCreate={true}
+        isCreate={open.isCreate}
         dispatch={dispatch}
         url={table}
-        modalTitle={'Создание'}
+        modalTitle={open.title}
+        id={open.id}
+        formDataValue={open.formData}
         isPretty={!local.pathname.includes('tables')}/>
     </TableContainer>
   )

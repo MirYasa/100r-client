@@ -2,8 +2,8 @@ import instance from '../../settings/defaultAxios'
 
 export const getCatalog = async (dispatch, type, url) => {
   try {
-    const data = await instance.get(url)
-    dispatch({type: type, payload: data.data.items})
+    const products = await instance.get(url)
+    dispatch({type: type, payload: products.data.items})
   } catch (e) {
     console.log(e)
   }
@@ -11,7 +11,7 @@ export const getCatalog = async (dispatch, type, url) => {
 
 export const addCatalog = async (url, data) => {
   try {
-    const createCatalog = await instance.post('/catalog/', data)
+    await instance.post('/catalog/', data)
   } catch (e) {
     console.log(e)
   }
@@ -19,8 +19,7 @@ export const addCatalog = async (url, data) => {
 
 export const updateCatalog = async (url, data) => {
   try {
-    const updateCatalog = await instance.put(url, data)
-
+   await instance.put(url, data)
   } catch (e) {
     console.log(e)
   }
@@ -30,8 +29,8 @@ export const updateCatalog = async (url, data) => {
 
 export const getProduct = async (dispatch, type, url, id) => {
   try {
-    const data = await instance.get(`${url}/${id}`)
-    dispatch({type: type, payload: data.data})
+    const product = await instance.get(`${url}/${id}`)
+    dispatch({type: type, payload: product.data})
   } catch (e) {
     console.log(e)
   }

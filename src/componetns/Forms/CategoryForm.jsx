@@ -7,7 +7,6 @@ import SelectMultiply from '../UI/Selects/SelectMultiply'
 import MySelect from '../UI/Selects/MySelect'
 import {AddCategory, UpdateCategory} from '../../functions/APIRequest'
 import {useForm} from 'react-hook-form'
-import ValidInput from '../UI/Inputs/ValidInput'
 import {FormBack} from './FormStyles'
 
 const names = {
@@ -47,8 +46,6 @@ const CategoryForm = ({isCreate, onClose, categoryId}) => {
     },
     []
   )
-
-  console.log(watch('name'))
 
   const updateData = (name, value) => {
     setData({

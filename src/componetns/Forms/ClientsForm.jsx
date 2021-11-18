@@ -54,12 +54,11 @@ const BasicForm = ({margin, formData, isCreate, dispatch, url, formDataValue, id
     // })
     // setAllData(mut)
   }
-
+  // console.log(allData)
 
   return (
     <FormBack margin={margin} onSubmit={(e) => {
       e.preventDefault()
-      // console.log(e.target)
     }}>
       {
         Object.entries(formData).map(([key, val]) => {

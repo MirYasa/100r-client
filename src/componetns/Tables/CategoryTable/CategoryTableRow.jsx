@@ -1,43 +1,35 @@
 import React, {useState} from 'react'
-import {BodyRow, ButtonTable} from '../StyledComponentsTable'
+import {ActionsCell, BodyRow} from '../StyledComponentsTable'
 import {Button} from 'react-bootstrap'
 import {Delete} from '../../../functions/APIRequest'
-import CategoryTablePopup from './CategoryTablePopup'
 import {useDispatch} from 'react-redux'
 import {useLocation} from 'react-router-dom'
+import {MdDelete, MdEdit} from 'react-icons/md'
 
-const CategoryTableRow = ({rowData}) => {
+const CategoryTableRow = ({rowData, openModal}) => {
   const dispatch = useDispatch()
-  const [open, setOpen] = useState(false)
   const [active, setActive] = useState(false)
   const local = useLocation().pathname
 
   return (
-    <React.Fragment>
-      <BodyRow active={active}>
-        <td><input type="checkbox" checked={active} onChange={() => {
-        }} onClick={() => {
+    <BodyRow active={active}>
+      <td>
+        <input type="checkbox" checked={active} onChange={() => {
           setActive(!active)
-        }}/></td>
-        {Object.entries(rowData).map(([key, val]) => {
-          return <td key={key}>{key === 'parent_id' ? (val === null ? 'Нет' : val.name) : val}</td>
-        })}
-        <td>
-          <ButtonTable variant={'link'} onClick={() => {
-            setOpen(true)
-          }}>Смотреть</ButtonTable>
-        </td>
-        <td><Button style={{width: 90}} variant={'danger'} onClick={() => {
+        }}/>
+      </td>
+      {Object.entries(rowData).map(([key, val]) => {
+        return <td key={key}>{key === 'parent_id' ? (val === null ? 'Нет' : val.name) : val}</td>
+      })}
+      <ActionsCell>
+        <Button variant={'success'} onClick={() => {
+          openModal(true, 'Обновление категории', rowData.id, false)
+        }}><MdEdit/></Button>
+        <Button variant={'danger'} onClick={() => {
           Delete(local, 'Удалить категорию?', dispatch, rowData.id, 'GET_CATEGORIES', 'catalog')
-        }}>Удалить</Button></td>
-      </BodyRow>
-      <CategoryTablePopup
-        modalTitle={'Просмотр и изменение'}
-        show={open}
-        handleClose={setOpen}
-        isCreate={false}
-        data={rowData.id}/>
-    </React.Fragment>
+        }}><MdDelete/></Button>
+      </ActionsCell>
+    </BodyRow>
   )
 }
 export default CategoryTableRow

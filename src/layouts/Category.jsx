@@ -9,10 +9,16 @@ import {Container, CreateButton} from './LayoutStyles'
 
 const Category = () => {
   const dispatch = useDispatch()
-  const [open, setOpen] = useState(false)
   const [page, setPage] = useState(0)
   const [count, setCount] = useState(0)
   const {categories} = useSelector(state => state.catalog)
+  const [open, setOpen] = useState({
+    show: false,
+    title: 'Создать',
+    data: categories,
+    isCreate: true,
+
+  })
 
   useEffect(() => {
     instance.get(`/admin_categories`)
@@ -24,24 +30,42 @@ const Category = () => {
     getCatalog(dispatch, 'GET_CATEGORIES', `/admin_categories?page=${page}`)
   }, [page])
 
+  const openModal = (show, title, data, isCreate) => {
+    setOpen({
+      show: show,
+      title: title,
+      data: data,
+      isCreate: isCreate
+    })
+  }
+
+  if (open.show) {
+    document.body.style.overflowY = 'hidden'
+  } else {
+    document.body.style.overflowY = 'scroll'
+  }
+
   return (
     <Container>
       <CreateButton variant={'warning'} onClick={() => {
-        setOpen(true)
+        setOpen({
+          ...open,
+          show: true
+        })
       }}>Создать</CreateButton>
       <CategoryTable
         tableData={categories}
-        currentPage={page}/>
+        currentPage={page}
+        openModal={openModal}/>
       <PaginationList
         count={count}
         updatePage={setPage}/>
       <CategoryTablePopup
-        show={open}
-        handleClose={setOpen}
-        id={1}
-        modalTitle={'Создать'}
-        isCreate={true}
-        data={categories}
+        show={open.show}
+        handleClose={() => {setOpen({show: false})}}
+        modalTitle={open.title}
+        isCreate={open.isCreate}
+        data={open.data}
       />
     </Container>
   )

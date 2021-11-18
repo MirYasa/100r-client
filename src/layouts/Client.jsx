@@ -10,19 +10,23 @@ import ClientTablePopup from '../componetns/Tables/ClientsTable/ClientTablePopup
 import {Container, CreateButton} from './LayoutStyles'
 
 const Client = () => {
-  const [open, setOpen] = useState(false)
   const dispatch = useDispatch()
   const table = useLocation().pathname
   const {content} = useSelector(state => state.content)
   const {inputData} = useSelector(state => state.inputData)
   const [page, setPage] = useState(0)
   const [count, setCount] = useState(0)
-
+  const [open, setOpen] = useState({
+    show: false,
+    title: 'Создание',
+    isCreate: true,
+    id: 0,
+    formData: {}
+  })
 
   useEffect(() => {
     getInputs(dispatch, 'GET_INPUT_DATA', `${table.slice(7)}/create`)
   }, [])
-
   useEffect(() => {
     instance.get(`/clients`)
       .then(data => {
@@ -31,10 +35,29 @@ const Client = () => {
     getContent(dispatch, 'GET_CONTENT', `clients?page=${page}`)
   }, [page])
 
+  const openModal = (show, title, isCreate, id, formData) => {
+    setOpen({
+      show: show,
+      title: title,
+      isCreate: isCreate,
+      id: id,
+      formData: formData
+    })
+  }
+
+  if (open.show) {
+    document.body.style.overflowY = 'hidden'
+  } else {
+    document.body.style.overflowY = 'scroll'
+  }
+
   return (
     <Container>
       <CreateButton variant={'warning'} onClick={() => {
-        setOpen(true)
+        setOpen({
+          ...open,
+          show: true
+        })
       }}>Создать</CreateButton>
       <ClientTable
         tableData={content}
@@ -42,19 +65,29 @@ const Client = () => {
         currentTable={table.slice(7)}
         dispatch={dispatch}
         currentPage={page}
+        openModal={openModal}
       />
       <PaginationList
         count={count}
         updatePage={setPage}/>
       <ClientTablePopup
-        show={open}
-        handleClose={setOpen}
+        show={open.show}
+        handleClose={() => {setOpen({
+          show: false,
+          title: 'Создание',
+          isCreate: true,
+          id: 0,
+          formData: {}
+        })}}
         formData={inputData}
-        isCreate={true}
+        isCreate={open.isCreate}
         dispatch={dispatch}
         url={table.slice(7)}
-        modalTitle={'Создание'}
-        isPretty={true}/>
+        modalTitle={open.title}
+        isPretty={true}
+        id={open.id}
+        formDataValue={open.formData}
+      />
     </Container>
   )
 }

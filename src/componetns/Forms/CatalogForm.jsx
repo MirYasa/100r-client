@@ -17,7 +17,6 @@ const CatalogForm = ({isCreate, onClose}) => {
   const dispatch = useDispatch()
   const url = useLocation().pathname
 
-  console.log(allData)
   useEffect(() => {
     getInputs(dispatch, 'GET_INPUT_DATA', `/admin_catalog/create?category=${allData.category_id === undefined ? '' : allData.category_id}`)
   }, [allData.category_id])
@@ -25,12 +24,26 @@ const CatalogForm = ({isCreate, onClose}) => {
   useEffect(() => {
     setAllData({
       ...allData,
-      ['params']: {},
-      ['prices']: {},
       active: false
     })
-    setPrices(inputData.prices)
-    setParams(inputData.params)
+    let stepPrices = {}
+    let stepParams = {}
+    if (inputData.prices && inputData.params) {
+      Object.keys(inputData.prices).map((key) => {
+        stepPrices = {
+          ...stepPrices,
+          [key]: ''
+        }
+      })
+      Object.keys(inputData.params).map((key) => {
+        stepParams = {
+          ...stepParams,
+          [key]: ''
+        }
+      })
+    }
+    setPrices(stepPrices)
+    setParams(stepParams)
   }, [inputData])
 
   const uploadData = (name, val) => {
@@ -105,7 +118,6 @@ const CatalogForm = ({isCreate, onClose}) => {
         })}
       </ParamsBlock>
       {Object.entries(names).map(([key, val]) => {
-        // console.log(allData[key], key)
         return (
           <CatalogInput
             key={key}

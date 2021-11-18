@@ -28,7 +28,8 @@ const OrderTab = ({
                     setProductId,
                     products,
                     setProducts,
-                    setAllData
+                    setAllData,
+                    openProduct
                   }) => {
 
   const [tableProducts, setTableProducts] = useState([])
@@ -141,7 +142,8 @@ const OrderTab = ({
                   isAdd={setAdd}
                 />
                 <StrippedTable tableData={tableProducts} del={setTableProducts} setProducts={setProducts}
-                               products={products} isAdd={setAdd} switchForm={switchForm} setProductId={setProductId}/>
+                               products={products} isAdd={setAdd} switchForm={switchForm} setProductId={setProductId}
+                               openProduct={openProduct}/>
               </React.Fragment>
             )
           }

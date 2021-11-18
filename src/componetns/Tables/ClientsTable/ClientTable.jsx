@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import {CustomTable, HeadRow} from '../StyledComponentsTable'
-import OrderTableRow from './ClientTableRow'
+import ClientTableRow from './ClientTableRow'
 import ClientTitles from './ClientTitles'
 
-const ClientTable = ({tableData, currentTable, dispatch, inputTypes, url, isPretty, currentPage}) => {
+const ClientTable = ({tableData, currentTable, dispatch, inputTypes, url, isPretty, currentPage, openModal}) => {
   const [allActive, setAllActive] = useState(false)
 
   return (
@@ -21,14 +21,13 @@ const ClientTable = ({tableData, currentTable, dispatch, inputTypes, url, isPret
               item={item}
             />
           })}
-        <th>Смотреть</th>
-        <th>Удалить</th>
+        <th>Действия</th>
       </HeadRow>
       </thead>
       <tbody>
       {tableData.map((item, index) => {
         return (
-          <OrderTableRow
+          <ClientTableRow
             key={index}
             isActive={allActive}
             rowData={item}
@@ -36,7 +35,8 @@ const ClientTable = ({tableData, currentTable, dispatch, inputTypes, url, isPret
             dispatch={dispatch}
             inputTypes={inputTypes}
             url={url}
-            isPretty={isPretty}/>
+            isPretty={isPretty}
+            openModal={openModal}/>
         )
       })}
       </tbody>

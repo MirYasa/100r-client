@@ -8,7 +8,7 @@ import {getInputs} from '../../store/actions/inputDataAction'
 import CatalogInput from '../UI/Inputs/CatalogInput'
 import {FormBack, ParamsBlock} from '../Forms/FormStyles'
 
-const ViewForm = ({id, close}) => {
+const ViewForm = ({id, close, isShow}) => {
   const [data, setData] = useState({})
   const [params, setParams] = useState(data.params)
   const [prices, setPrices] = useState(data.prices)
@@ -135,16 +135,18 @@ const ViewForm = ({id, close}) => {
         )
       })
       }
-      <FormButtons
-        buttons={[
-          {
-            title: 'Отмена', type: 'primary', action: () => {
-              close(false)
-            }
-          },
-          {title: 'Сброс', type: 'primary', action: null},
-          {title: 'Подтвердить', type: 'success', action: updateAction}]}
-      />
+      {
+        isShow ? null : <FormButtons
+          buttons={[
+            {
+              title: 'Отмена', type: 'primary', action: () => {
+                close(false)
+              }
+            },
+            {title: 'Сброс', type: 'primary', action: null},
+            {title: 'Подтвердить', type: 'success', action: updateAction}]}
+        />
+      }
     </FormBack>
   )
 }

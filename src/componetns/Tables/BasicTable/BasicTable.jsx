@@ -8,7 +8,7 @@ const thNames = {
   value: 'Значение'
 }
 
-const BasicTable = ({tableData, currentTable, dispatch, inputTypes, url, isPretty}) => {
+const BasicTable = ({tableData, currentTable, dispatch, inputTypes, isPretty, openModal}) => {
   const [allActive, setAllActive] = useState(false)
   const namesMap = new Map(Object.entries(thNames))
 
@@ -45,8 +45,8 @@ const BasicTable = ({tableData, currentTable, dispatch, inputTypes, url, isPrett
             currentTable={currentTable}
             dispatch={dispatch}
             inputTypes={inputTypes}
-            url={url}
-            isPretty={isPretty}/>
+            isPretty={isPretty}
+            openModal={openModal}/>
         )
       })}
       </tbody>
