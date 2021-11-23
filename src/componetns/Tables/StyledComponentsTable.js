@@ -28,6 +28,7 @@ export const ActionsCell = styled.td`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-width: 110px;
 `
 export const ButtonTable = styled(Button)`
 text-decoration: none;
