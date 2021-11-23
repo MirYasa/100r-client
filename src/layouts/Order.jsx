@@ -8,6 +8,7 @@ import OrderTablePopup from '../componetns/Tables/OrdersTable/OrderTablePopup'
 import {Container, CreateButton, RowContainer} from './LayoutStyles'
 import FilterPanel from '../componetns/FilterPanel'
 import CatalogView from '../componetns/Catalog/CatalogView'
+import {getOrderSatus} from '../store/actions/orderAction'
 
 const Order = () => {
   const dispatch = useDispatch()
@@ -25,12 +26,17 @@ const Order = () => {
     open: false
   })
   const {orders} = useSelector((state) => state.catalog)
+  const {status} = useSelector(state => state.order)
+
+  const [filterReady, setFilterReady] = useState(false)
 
   useEffect(() => {
     instance.get(`/admin_orders`)
       .then((data) => {
-      setCount(data.data.count)
-    })
+        setCount(data.data.count)
+      })
+    getOrderSatus(dispatch)
+      .then(setFilterReady(true))
   }, [])
   useEffect(() => {
     getCatalog(dispatch, 'GET_ORDERS', `/admin_orders?page=${page}&order=id&direction=asc`)
@@ -66,7 +72,10 @@ const Order = () => {
             openModal(1, 'Заказ', true)
           }}>Создать
         </CreateButton>
-        <FilterPanel/>
+        <FilterPanel
+          options={[{id: '', name: 'Выберите'}, ...status]}
+          ready={filterReady}
+          dispatch={dispatch}/>
       </RowContainer>
       <OrderTable
         tableData={orders}
@@ -86,13 +95,15 @@ const Order = () => {
         openProduct={openProductModal}
       />
       <CatalogView
-      show={productModalSettings.open}
-      id={productModalSettings.id}
-      handleClose={() => {setProductModalSettings({
-        open: false
-      })}}
-      isShow={true}
-      title={'Просмотр'}
+        show={productModalSettings.open}
+        id={productModalSettings.id}
+        handleClose={() => {
+          setProductModalSettings({
+            open: false
+          })
+        }}
+        isShow={true}
+        title={'Просмотр'}
       />
     </Container>
   )

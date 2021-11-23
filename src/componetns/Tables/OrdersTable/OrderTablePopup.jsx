@@ -7,8 +7,6 @@ import '../../../scss/modalAnimate.scss'
 
 const OrderTablePopup = ({show, handleClose, isCreate, url, modalTitle, id, isPretty, openProduct}) => {
   const [allData, setAllData] = useState({})
-  const [howForm, setHowForm] = useState('order')
-  const [productId, setProductId] = useState(0)
   const [clientHistory, setClientHistory] = useState([])
   const [products, setProducts] = useState([])
   const [activeTab, setActiveTab] = useState('client')
@@ -24,7 +22,6 @@ const OrderTablePopup = ({show, handleClose, isCreate, url, modalTitle, id, isPr
       }
     }
   }, [show])
-
   useEffect(() => {
     if (allData.products !== undefined) {
       if (products.length < allData.products.length){
@@ -54,8 +51,6 @@ const OrderTablePopup = ({show, handleClose, isCreate, url, modalTitle, id, isPr
               isPretty={isPretty}
               setAllData={setAllData}
               allData={allData}
-              switchForm={setHowForm}
-              setProductId={setProductId}
               clientHistory={clientHistory}
               setClientHistory={setClientHistory}
               activeTab={activeTab}

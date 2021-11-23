@@ -1,9 +1,8 @@
 import React from 'react'
 import {Button} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
-import {BackButton, ButtonsContainer, CustomButton} from './FormStyles'
+import {ButtonsContainer} from './FormStyles'
 
-const FormButtons = ({buttons, isUpdateCatalog}) => {
+const FormButtons = ({buttons}) => {
   return (
     <ButtonsContainer>
       {buttons.map((item, index) => {

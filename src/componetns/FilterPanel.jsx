@@ -1,10 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {FilterContainer} from './Styles'
 import FilterInput from '../componetns/UI/Inputs/FilterInput'
 import {Button} from 'react-bootstrap'
 import {getCatalog} from '../store/actions/catalogAction'
-import {useDispatch} from 'react-redux'
-import instance from '../settings/defaultAxios'
 import {FilterInputContainer} from './UI/Inputs/Styles'
 
 const inputs = [
@@ -14,24 +12,13 @@ const inputs = [
   {title: 'Дата добавления', input: 'date'},
 ]
 
-const FilterPanel = () => {
+const FilterPanel = ({ready, options, dispatch}) => {
   const [data, setData] = useState({
     id: '',
     client: '',
     order_status: '',
     date: '',
   })
-  const [options, setOptions] = useState([{id: "", name: 'Выберите'}])
-  const [ready, setReady] = useState(false)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    instance.get('/order_status')
-      .then(data => {
-        setOptions(prev => [...prev, ...data.data])
-        setReady(true)
-      })
-  }, [])
 
   const uploadData = (name, val) => {
     setData({
@@ -50,7 +37,6 @@ const FilterPanel = () => {
 
   return (
     <FilterContainer>
-      {/*<FilterTitle>Фильтр</FilterTitle>*/}
       <ul>
         {ready ? inputs.map((item, index) => {
           if (item.input === 'order_status') {

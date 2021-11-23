@@ -1,10 +1,10 @@
 import React, {useEffect, useMemo, useState} from 'react'
-import {TabBack} from '../../Forms/FormStyles'
-import MySelect from '../../UI/Selects/MySelect'
-import ClientHandlingTable from './ClientHandlingTable'
-import instance from '../../../settings/defaultAxios'
-import ClientSelect from '../../UI/Selects/ClientSelect'
-import CustomOrderInput from '../../UI/Inputs/CustomOrderInput'
+import {TabBack} from '../../../Forms/FormStyles'
+import MySelect from '../../../UI/Selects/MySelect'
+import ClientHandlingTable from '../ClientHandlingTable'
+import instance from '../../../../settings/defaultAxios'
+import ClientSelect from '../../../UI/Selects/ClientSelect'
+import CustomOrderInput from '../../../UI/Inputs/CustomOrderInput'
 
 const ClientTab = ({
                      inputs,

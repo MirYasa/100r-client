@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import {Form, Tab, Tabs} from 'react-bootstrap'
-import ClientTab from '../Tables/OrdersTable/ClientTab'
-import OrderTab from '../Tables/OrdersTable/OrderTab'
+import ClientTab from '../Tables/OrdersTable/Tabs/ClientTab'
+import OrderTab from '../Tables/OrdersTable/Tabs/OrderTab'
 import instance from '../../settings/defaultAxios'
+import {filter} from '../../functions/dataFunctions'
+import StatusTab from '../Tables/OrdersTable/Tabs/StatusTab'
 
 const OrderForm = ({
                      isCreate,
@@ -12,8 +14,6 @@ const OrderForm = ({
                      onClose,
                      allData,
                      setAllData,
-                     switchForm,
-                     setProductId,
                      clientHistory,
                      setClientHistory,
                      activeTab,
@@ -28,7 +28,6 @@ const OrderForm = ({
   const [ready, setReady] = useState(false)
   const [options, setOptions] = useState([])
   const [currentClient, setCurrentClient] = useState({})
-
   const clientNames = {
     client_name: 'Клиент',
     client_phone: 'Номер телефона',
@@ -42,25 +41,12 @@ const OrderForm = ({
     price: 'Цена'
   }
 
-  // console.log(products)
-
   const uploadData = (name, val) => {
     setAllData({
       ...allData,
       [name]: val,
     })
   }
-
-  const filter = (startObject, allowedObject) => {
-    return Object.keys(startObject)
-      .filter(key => Object.keys(allowedObject).includes(key))
-      .reduce((obj, key) => {
-        obj[key] = startObject[key]
-        return obj
-      }, {})
-  }
-
-  // console.log()
 
   useEffect(() => {
     instance.get('admin_orders/create?search=')
@@ -77,7 +63,7 @@ const OrderForm = ({
         .then((response) => {
           setAllData({
             comment: response.data.comment,
-            products: response.data.products.length > products.length ? response.data.products.map((item) => item.id): products,
+            products: response.data.products.length > products.length ? response.data.products.map((item) => item.id) : products,
             price: response.data.price,
             client_name: response.data.client.name,
             client_email: response.data.client.email,
@@ -108,11 +94,9 @@ const OrderForm = ({
             inputs={clientInputs}
             names={clientNames}
             ready={ready}
-            isCreate={isCreate}
             allData={allData}
             uploadData={uploadData}
             setAllData={setAllData}
-            switchForm={switchForm}
             clientHistory={clientHistory}
             setClientHistory={setClientHistory}
             currentClient={currentClient}
@@ -122,9 +106,6 @@ const OrderForm = ({
         <Tab eventKey="order" title="Заказ">
           <OrderTab
             isCreate={isCreate}
-            url={url}
-            id={id}
-            onClose={onClose}
             isPretty={isPretty}
             names={orderNames}
             inputs={orderInputs}
@@ -134,12 +115,18 @@ const OrderForm = ({
             options={options}
             setOptions={setOptions}
             selVal={selVal}
-            switchForm={switchForm}
-            setProductId={setProductId}
             products={products}
             setProducts={setProducts}
-            setAllData={setAllData}
             openProduct={openProduct}
+          />
+        </Tab>
+        <Tab eventKey='status' title="Статус">
+          <StatusTab
+            url={url}
+            id={id}
+            onClose={onClose}
+            isCreate={isCreate}
+            allData={allData}
           />
         </Tab>
       </Tabs>
