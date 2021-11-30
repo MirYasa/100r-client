@@ -5,12 +5,13 @@ import OrderForm from '../../Forms/OrderForm'
 import {CSSTransition} from 'react-transition-group'
 import '../../../scss/modalAnimate.scss'
 
-const OrderTablePopup = ({show, handleClose, isCreate, url, modalTitle, id, isPretty, openProduct}) => {
+const OrderTablePopup = ({show, handleClose, isCreate, url, modalTitle, id, isPretty, openProduct, openOrderView}) => {
   const [allData, setAllData] = useState({})
   const [clientHistory, setClientHistory] = useState([])
   const [products, setProducts] = useState([])
   const [activeTab, setActiveTab] = useState('client')
 
+  // useEffect(() => {console.log(products)}, [products])
 
   useEffect(() => {
     if (!show) {
@@ -56,7 +57,8 @@ const OrderTablePopup = ({show, handleClose, isCreate, url, modalTitle, id, isPr
               activeTab={activeTab}
               products={products}
               setProducts={setProducts}
-              openProduct={openProduct}/>
+              openProduct={openProduct}
+              openOrderView={openOrderView}/>
           </Modal.Body>
         </CustomPopup>
       </CSSTransition>

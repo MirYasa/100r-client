@@ -1,48 +1,50 @@
-import React from 'react'
-import {Button, Table} from 'react-bootstrap'
-import {MdDelete, MdRemoveRedEye} from 'react-icons/md'
-import {ActionsCell} from './StyledComponentsTable'
+import React, {useEffect, useState} from 'react'
+import {Table} from 'react-bootstrap'
+import ProductTableInOrder from "./OrdersTable/ProductTableInOrder";
 
 const StrippedTable = ({tableData, del, setProducts, products, isAdd, openProduct}) => {
+    const testData = []
+    const [renderData, setRenderData] = useState([])
 
-  return (
-    <Table striped bordered hover size="md" style={{marginTop: 25}}>
-      <thead>
-      <tr>
-        <th>Артикул</th>
-        <th>Продукт</th>
-        <th>Цена</th>
-        <th>Цена поставщика</th>
-        <th>Поставщик</th>
-        <th>Количество</th>
-        <th>Действия</th>
-      </tr>
-      </thead>
-      <tbody>
-      {tableData.map((item, index) => {
-        // console.log(item)
-        return (
-          <tr key={index}>
-            <td>{item.product_id}</td>
-            <td>{item.short_name}</td>
-            <td><input type="number"/></td>
-            <td><input type="number"/></td>
-            <td>{item.manufacturer}</td>
-            <td><input style={{width: '90px'}} type="number"/></td>
-            <ActionsCell><Button variant={'primary'} onClick={() => {
-              openProduct(item.product_id, true)
-              isAdd(false)
-            }}><MdRemoveRedEye/></Button>
-              <Button variant={'danger'} onClick={() => {
-                del(tableData.filter(el => el.product_id !== item.product_id))
-                setProducts(products.filter(el => el !== item.product_id))
-                isAdd(false)
-              }}><MdDelete/></Button></ActionsCell>
-          </tr>
-        )
-      })}
-      </tbody>
-    </Table>
-  )
+    useEffect(() => {
+        if (tableData.length !== 0) {
+            products.map(item => {
+               return testData.push(tableData.find(i => i.product_id === item.id))
+            })
+        }
+    }, [products, tableData])
+
+    useEffect(() => {
+        if (!testData.includes(undefined) && testData.length !== 0){
+            setRenderData(testData)
+        }
+    }, [testData])
+
+
+    return (
+        <Table striped bordered hover size="md" style={{marginTop: 25}}>
+            <thead>
+            <tr>
+                <th>Артикул</th>
+                <th>Продукт</th>
+                <th>Цена</th>
+                <th>Цена поставщика</th>
+                <th>Поставщик</th>
+                <th>Количество</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            {renderData ? renderData.map((item, index) => {
+                return (
+                    <ProductTableInOrder item={item} products={products} key={index} index={index} del={del}
+                                         setProducts={setProducts} isAdd={isAdd} openProduct={openProduct}
+                                         tableData={testData}/>
+                )
+            }) : null
+            }
+            </tbody>
+        </Table>
+    )
 }
 export default StrippedTable

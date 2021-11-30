@@ -16,7 +16,8 @@ const ClientTab = ({
                      setAllData,
                      setClientHistory,
                      currentClient,
-                     setCurrentClient
+                     setCurrentClient,
+                     openOrderView
                    }) => {
   const [clients, setClients] = useState([])
 
@@ -103,7 +104,8 @@ const ClientTab = ({
       {ready ? <>
         <h5>История обращений</h5>
         <ClientHandlingTable
-          tableData={clientHistory}/></> : null}
+          tableData={clientHistory}
+          openOrderView={openOrderView}/></> : null}
     </TabBack>
   )
 }

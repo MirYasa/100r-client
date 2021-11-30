@@ -5,7 +5,7 @@ import {TabBack} from '../../../Forms/FormStyles'
 import {createOrders, updateOrders} from '../../../../functions/APIRequest'
 import {useDispatch, useSelector} from 'react-redux'
 
-const StatusTab = ({url, id, onClose, allData, margin, isCreate}) => {
+const StatusTab = ({url, id, onClose, allData, margin, isCreate, uploadData}) => {
   const dispatch = useDispatch()
   const {status} = useSelector(state => state.order)
 
@@ -17,8 +17,9 @@ const StatusTab = ({url, id, onClose, allData, margin, isCreate}) => {
     updateOrders(e, url, allData, id, dispatch)
   }
   const createAction = (e) => {
-    close()
+    // close()
     createOrders(e, url, allData, dispatch)
+    // console.log(allData)
   }
   const clear = () => {
     // console.log(input.current.value)
@@ -39,8 +40,8 @@ const StatusTab = ({url, id, onClose, allData, margin, isCreate}) => {
         options={status}
         inputTitle={'Статус заказа'}
         inputName={'order_status'}
-        setData={() => {}}
-        // val={isCreate}
+        setData={uploadData}
+        val={status[0]}
       />
       <FormButtons
         buttons={[

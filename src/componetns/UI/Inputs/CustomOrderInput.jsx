@@ -10,17 +10,9 @@ import {
   CustomSelect,
 } from './Styles'
 
-const CustomOrderInput = ({inputName, isRequired, type, radio, val = '', refs, setData, inputTitle, isCategory, step}) => {
+const CustomOrderInput = ({inputName, isRequired, type, radio, val = '', refs, setData, inputTitle, isOnlyView, step}) => {
   const [input, setInput] = useState(val)
   let Type = ''
-
-  // console.log(inputName, input)
-
-  // useEffect(() => {
-  //   if (!isCategory) {
-  //     setData(inputName, val)
-  //   }
-  // }, [])
 
   useEffect(() => {
     setInput(val)
@@ -93,6 +85,7 @@ const CustomOrderInput = ({inputName, isRequired, type, radio, val = '', refs, s
             type={Type}
             ref={refs}
             defaultChecked={val}
+            disabled={isOnlyView}
             step={step}
             required={isRequired}
             value={input === null ? undefined : input}

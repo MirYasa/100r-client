@@ -19,7 +19,8 @@ const OrderForm = ({
                      activeTab,
                      products,
                      setProducts,
-                     openProduct
+                     openProduct,
+                     openOrderView
                    }) => {
 
   const [clientInputs, setClientInputs] = useState({})
@@ -63,7 +64,10 @@ const OrderForm = ({
         .then((response) => {
           setAllData({
             comment: response.data.comment,
-            products: response.data.products.length > products.length ? response.data.products.map((item) => item.id) : products,
+            products: response.data.products.length > products.length ? response.data.products.map((item) => ({
+                id: item.id,
+                quantity: item.quntity,
+                fact_price: item.fact_price})) : products,
             price: response.data.price,
             client_name: response.data.client.name,
             client_email: response.data.client.email,
@@ -84,6 +88,8 @@ const OrderForm = ({
     }
   }, [])
 
+    console.log(allData)
+
   return (
     <Form onSubmit={(e) => {
       e.preventDefault()
@@ -101,6 +107,7 @@ const OrderForm = ({
             setClientHistory={setClientHistory}
             currentClient={currentClient}
             setCurrentClient={setCurrentClient}
+            openOrderView={openOrderView}
           />
         </Tab>
         <Tab eventKey="order" title="Заказ">
@@ -118,6 +125,7 @@ const OrderForm = ({
             products={products}
             setProducts={setProducts}
             openProduct={openProduct}
+            setAllData={setAllData}
           />
         </Tab>
         <Tab eventKey='status' title="Статус">
@@ -127,6 +135,7 @@ const OrderForm = ({
             onClose={onClose}
             isCreate={isCreate}
             allData={allData}
+            uploadData={uploadData}
           />
         </Tab>
       </Tabs>

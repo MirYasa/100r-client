@@ -9,6 +9,7 @@ import {Container, CreateButton, RowContainer} from './LayoutStyles'
 import FilterPanel from '../componetns/FilterPanel'
 import CatalogView from '../componetns/Catalog/CatalogView'
 import {getOrderSatus} from '../store/actions/orderAction'
+import OrderViewModal from '../componetns/Tables/OrdersTable/OrderViewModal'
 
 const Order = () => {
   const dispatch = useDispatch()
@@ -24,6 +25,10 @@ const Order = () => {
     id: 0,
     title: 'Просмотр',
     open: false
+  })
+  const [orderViewModal, setOrderViewModal] = useState({
+    show: false,
+    id: 0
   })
   const {orders} = useSelector((state) => state.catalog)
   const {status} = useSelector(state => state.order)
@@ -54,6 +59,12 @@ const Order = () => {
     setProductModalSettings({
       id: id,
       open: open
+    })
+  }
+  const openOrderViewModal = (id) => {
+    setOrderViewModal({
+      show: true,
+      id: id
     })
   }
 
@@ -93,6 +104,7 @@ const Order = () => {
         isCreate={modalSettings.isCreate}
         url={'/admin_orders'}
         openProduct={openProductModal}
+        openOrderView={openOrderViewModal}
       />
       <CatalogView
         show={productModalSettings.open}
@@ -104,6 +116,16 @@ const Order = () => {
         }}
         isShow={true}
         title={'Просмотр'}
+      />
+      <OrderViewModal
+        show={orderViewModal.show}
+        handleClose={() => {
+          setOrderViewModal({
+            ...orderViewModal,
+            show: false
+          })
+        }}
+        id={orderViewModal.id}
       />
     </Container>
   )

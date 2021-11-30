@@ -2,7 +2,7 @@ import React from 'react'
 import {ClientHandlingTableContainer} from '../StyledComponentsTable'
 import {Table} from 'react-bootstrap'
 
-const ClientHandlingTable = ({tableData}) => {
+const ClientHandlingTable = ({tableData, openOrderView}) => {
     return (
       <ClientHandlingTableContainer >
         <Table striped bordered hover size="md">
@@ -18,7 +18,7 @@ const ClientHandlingTable = ({tableData}) => {
           <tbody>
           {tableData.map((item, index) => {
             return (
-              <tr key={index}>
+              <tr key={index} onClick={() => {openOrderView(item.id)}}>
                 <td>{item.id}</td>
                 <td>{item.price}</td>
                 <td>{item.order_source?.name}</td>
