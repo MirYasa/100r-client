@@ -73,10 +73,9 @@ export const updateCat = (e, url, data, id, dispatch) => {
 }
 export const createOrders = (e, url, data, dispatch) => {
   try {
-      console.log(data)
-    // instance.post(`${url}`, data).then(() => {
-    //   getCatalog(dispatch, 'GET_ORDERS', '/admin_orders')
-    // })
+    instance.post(`${url}`, data).then(() => {
+      getCatalog(dispatch, 'GET_ORDERS', '/admin_orders')
+    })
   } catch (e) {
     console.log(e)
   }

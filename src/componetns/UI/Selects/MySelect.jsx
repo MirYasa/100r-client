@@ -7,8 +7,6 @@ const MySelect = ({options, inputTitle, val, inputName, setData}) => {
   const [option, setOption] = useState([{value: 0, label: 'Выбрать'}])
   const [defVal, setDefVal] = useState(0)
 
-  // console.log( inputName, option)
-
   useEffect(() => {
     setDefVal(val === undefined ? 0 : val)
   }, [val])

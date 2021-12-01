@@ -15,9 +15,10 @@ const StatusTab = ({url, id, onClose, allData, margin, isCreate, uploadData}) =>
   const updateAction = (e) => {
     close()
     updateOrders(e, url, allData, id, dispatch)
+    // console.log(allData)
   }
   const createAction = (e) => {
-    // close()
+    close()
     createOrders(e, url, allData, dispatch)
     // console.log(allData)
   }
@@ -39,9 +40,9 @@ const StatusTab = ({url, id, onClose, allData, margin, isCreate, uploadData}) =>
       <MySelect
         options={status}
         inputTitle={'Статус заказа'}
-        inputName={'order_status'}
+        inputName={'order_status_id'}
         setData={uploadData}
-        val={status[0]}
+        val={isCreate ? status[0] : allData.order_status_id}
       />
       <FormButtons
         buttons={[
