@@ -6,7 +6,7 @@ import React, {useEffect, useState} from "react";
 
 export default function ProductTableInOrder({item, products, index, openProduct, isAdd, del, setProducts, tableData}) {
     const [factPrice, setFactPrice] = useState(0)
-    const [quantity, setQuantity] = useState(0)
+    const [quantity, setQuantity] = useState(1)
 
     if (products[index] !== undefined)
     return (

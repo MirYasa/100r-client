@@ -10,7 +10,7 @@ import {
   CustomSelect,
 } from './Styles'
 
-const CustomInput = ({inputName, isRequired, type, radio, val = '', refs, setData, inputTitle, isCategory, step}) => {
+const CustomInput = ({inputName, isRequired, type, radio, val = '', refs, setData, inputTitle, isCategory, step, isView}) => {
   const [input, setInput] = useState(val)
   let Type = ''
 
@@ -92,6 +92,7 @@ const CustomInput = ({inputName, isRequired, type, radio, val = '', refs, setDat
             ref={refs}
             defaultChecked={val}
             step={step}
+            disabled={isView}
             required={isRequired}
             value={input === null ? undefined : input}
             onChange={(e) => {

@@ -88,8 +88,6 @@ const OrderForm = ({
     }
   }, [])
 
-    console.log(allData)
-
   return (
     <Form onSubmit={(e) => {
       e.preventDefault()
