@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react'
-import {names, titles} from '../Forms/CatalogFormInputsName'
-import FormButtons from '../Forms/FormButtons'
+import {names, titles} from './CatalogFormInputsName'
+import FormButtons from '../FormButtons'
 import {useDispatch, useSelector} from 'react-redux'
 import instance from '../../settings/defaultAxios'
 import {updateCat} from '../../functions/APIRequest'
 import {getInputs} from '../../store/actions/inputDataAction'
 import CatalogInput from '../UI/Inputs/CatalogInput'
-import {FormBack, ParamsBlock} from '../Forms/FormStyles'
+import {FormBack, ParamsBlock} from '../FormStyles'
 
 const ViewForm = ({id, close, isShow}) => {
   const [data, setData] = useState({})

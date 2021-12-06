@@ -3,8 +3,8 @@ import {getCatalog} from '../store/actions/catalogAction'
 import {useDispatch, useSelector} from 'react-redux'
 import instance from '../settings/defaultAxios'
 import PaginationList from '../componetns/PaginationList'
-import CategoryTable from '../componetns/Tables/CategoryTable/CategoryTable'
-import CategoryTablePopup from '../componetns/Tables/CategoryTable/CategoryTablePopup'
+import CategoryTable from '../componetns/Category/CategoryTable'
+import CategoryTablePopup from '../componetns/Category/CategoryTablePopup'
 import {Container, CreateButton} from './LayoutStyles'
 
 const Category = () => {

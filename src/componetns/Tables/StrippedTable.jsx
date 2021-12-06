@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {Table} from 'react-bootstrap'
-import ProductTableInOrder from "./OrdersTable/ProductTableInOrder";
+import ProductTableInOrder from "../Order/Table/ProductTableInOrder";
 
 const StrippedTable = ({tableData, del, setProducts, products, isAdd, openProduct}) => {
     const testData = []

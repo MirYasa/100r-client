@@ -3,13 +3,13 @@ import {useDispatch, useSelector} from 'react-redux'
 import instance from '../settings/defaultAxios'
 import {getCatalog} from '../store/actions/catalogAction'
 import PaginationList from '../componetns/PaginationList'
-import OrderTable from '../componetns/Tables/OrdersTable/OrderTable'
-import OrderTablePopup from '../componetns/Tables/OrdersTable/OrderTablePopup'
+import OrderTable from '../componetns/Order/Table/OrderTable'
+import OrderTablePopup from '../componetns/Order/OrderTablePopup'
 import {Container, CreateButton, RowContainer} from './LayoutStyles'
 import FilterPanel from '../componetns/FilterPanel'
 import CatalogView from '../componetns/Catalog/CatalogView'
 import {getOrderSatus} from '../store/actions/orderAction'
-import OrderViewModal from '../componetns/Tables/OrdersTable/OrderViewModal'
+import OrderViewModal from '../componetns/Order/OrderViewModal'
 
 const Order = () => {
   const dispatch = useDispatch()

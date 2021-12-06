@@ -1,6 +1,6 @@
 import React from 'react'
 import StrippedTable from '../componetns/Tables/StrippedTable'
-import BasicTable from '../componetns/Tables/BasicTable/BasicTable'
+import BasicTable from '../componetns/BasicTable/BasicTable'
 import PlusBasicTable from '../componetns/Tables/PlusBasicTable'
 import {Container} from './LayoutStyles'
 

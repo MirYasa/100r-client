@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react'
-import ClientTable from '../componetns/Tables/ClientsTable/ClientTable'
+import ClientTable from '../componetns/Client/ClientTable'
 import {getContent} from '../store/actions/contentAction'
 import {useDispatch, useSelector} from 'react-redux'
 import {useLocation} from 'react-router-dom'
 import {getInputs} from '../store/actions/inputDataAction'
 import instance from '../settings/defaultAxios'
 import PaginationList from '../componetns/PaginationList'
-import ClientTablePopup from '../componetns/Tables/ClientsTable/ClientTablePopup'
+import ClientTablePopup from '../componetns/Client/ClientTablePopup'
 import {Container, CreateButton} from './LayoutStyles'
 
 const Client = () => {

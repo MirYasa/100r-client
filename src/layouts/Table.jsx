@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import BasicTable from '../componetns/Tables/BasicTable/BasicTable'
+import BasicTable from '../componetns/BasicTable/BasicTable'
 import {useLocation, useParams} from 'react-router-dom'
 import {getDefaultContent} from '../store/actions/contentAction'
 import {useDispatch, useSelector} from 'react-redux'
-import BasicTablePopup from '../componetns/Tables/BasicTable/BasicTablePopup'
+import BasicTablePopup from '../componetns/BasicTable/BasicTablePopup'
 import {getInputs} from '../store/actions/inputDataAction'
 import {CreateButton, TableContainer} from './LayoutStyles'
 
