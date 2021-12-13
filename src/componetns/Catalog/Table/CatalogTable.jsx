@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import {CustomTable, HeadRow} from '../Tables/StyledComponentsTable'
+import {CustomTable, HeadRow} from '../../Tables/StyledComponentsTable'
 import CatalogTableRow from './CatalogTableRow'
-import Titles from './Titles'
+import Titles from '../Titles'
 
 const CatalogTable = ({tableData, currentPage, openModal}) => {
   return (

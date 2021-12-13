@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import CatalogTable from '../componetns/Catalog/CatalogTable'
+import CatalogTable from '../componetns/Catalog/Table/CatalogTable'
 import CatalogTablePopup from '../componetns/Catalog/CatalogTablePopup'
 import {getDefaultContent} from '../store/actions/contentAction'
 import instance from '../settings/defaultAxios'

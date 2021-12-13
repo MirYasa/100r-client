@@ -7,6 +7,9 @@ import {updateCat} from '../../functions/APIRequest'
 import {getInputs} from '../../store/actions/inputDataAction'
 import CatalogInput from '../UI/Inputs/CatalogInput'
 import {FormBack, ParamsBlock} from '../FormStyles'
+import ParamTab from "./Tabs/ParamTab";
+import ProductTab from "./Tabs/ProductTab";
+import {Tab, Tabs} from "react-bootstrap";
 
 const ViewForm = ({id, close, isShow}) => {
   const [data, setData] = useState({})
@@ -95,46 +98,26 @@ const ViewForm = ({id, close, isShow}) => {
 
   return (
     <FormBack>
-      <ParamsBlock>
-        <h5>Параметры</h5>
-        {Object.entries(params === undefined ? {} : params).map(([key, val]) => {
-          return (
-            <CatalogInput
-              key={key}
-              inputName={key}
-              inputTitle={key}
-              val={emptyInput ? '' : data.params[key]}
-              type={val}
-              setData={updateParams}/>
-          )
-        })}
-      </ParamsBlock>
-      <ParamsBlock>
-        <h5>Цены</h5>
-        {Object.entries(prices === undefined ? {} : prices).map(([key, val]) => {
-          return (
-            <CatalogInput
-              key={key}
-              inputName={key}
-              inputTitle={key}
-              val={emptyInput ? '' : data.prices[key]}
-              type={val}
-              setData={updatePrices}/>
-          )
-        })}
-      </ParamsBlock>
-      {Object.entries(names).map(([key, val]) => {
-        return (
-          <CatalogInput
-            key={key}
-            inputName={key}
-            val={data[key]}
-            type={val}
-            inputTitle={titles[key]}
-            setData={uploadData}/>
-        )
-      })
-      }
+      <Tabs defaultActiveKey={'product'}>
+        <Tab eventKey={'product'} title={'Продукт'}>
+          <ProductTab
+              emptyInput={emptyInput}
+              isCreate={false}
+              uploadPrices={updatePrices}
+              allData={data}
+              prices={prices}
+              uploadData={uploadData}
+          />
+        </Tab>
+        <Tab eventKey={'param'} title={'Параметры'}>
+          <ParamTab
+              isCreate={false}
+              uploadParams={updateParams}
+              params={params}
+              data={data}
+              emptyInput={emptyInput}/>
+        </Tab>
+      </Tabs>
       {
         isShow ? null : <FormButtons
           buttons={[
