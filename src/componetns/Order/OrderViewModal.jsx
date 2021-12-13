@@ -16,7 +16,7 @@ const OrderViewModal = ({show, handleClose, id}) => {
         classNames={'modal'}
         unmountOnExit>
         <CustomPopup zIndex={1052} width={'1200px'}>
-          <Modal.Header closeButton>
+          <Modal.Header>
             <Modal.Title>Просмотр заказа</Modal.Title>
           </Modal.Header>
           <Modal.Body>

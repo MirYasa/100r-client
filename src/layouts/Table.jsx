@@ -35,6 +35,11 @@ const Table = () => {
       formData: formData
     })
   }
+  if (open.show) {
+    document.body.style.overflowY = 'hidden'
+  } else {
+    document.body.style.overflowY = 'scroll'
+  }
 
   return (
     <TableContainer>

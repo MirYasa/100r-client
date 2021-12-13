@@ -9,12 +9,14 @@ import {FormBack, ParamsBlock} from '../FormStyles'
 import ParamTab from "./Tabs/ParamTab";
 import ProductTab from "./Tabs/ProductTab";
 import {Tab, Tabs} from "react-bootstrap";
+import {logDOM} from "@testing-library/react";
 
 const CatalogForm = ({isCreate, onClose}) => {
     const {inputData} = useSelector(state => state.inputData)
     const [allData, setAllData] = useState({})
     const titlesMap = new Map(Object.entries(titles))
     const [params, setParams] = useState(inputData.params)
+    const [paramsFields, setFields] = useState({})
     const [prices, setPrices] = useState(inputData.prices)
     const dispatch = useDispatch()
     const url = useLocation().pathname
@@ -37,15 +39,25 @@ const CatalogForm = ({isCreate, onClose}) => {
                     [key]: ''
                 }
             })
-            Object.keys(inputData.params).map((key) => {
-                stepParams = {
-                    ...stepParams,
-                    [key]: ''
-                }
-            })
+
+           inputData.params.map(item => {
+               if (stepParams[item.group_name]){
+                   stepParams = {
+                       ...stepParams,
+                       [item.group_name]: [...stepParams[item.group_name] , item]
+                   }
+               }
+               else {
+                   stepParams = {
+                       ...stepParams,
+                       [item.group_name]: [item]
+                   }
+               }
+           })
         }
+        // console.log(stepParams)
         setPrices(stepPrices)
-        setParams(stepParams)
+        setFields(stepParams)
     }, [inputData])
 
     const uploadData = (name, val) => {
@@ -84,6 +96,7 @@ const CatalogForm = ({isCreate, onClose}) => {
         onClose(false)
     }
     const createAction = (e) => {
+        // console.log(allData)
         e.preventDefault()
         close()
         AddCatalog(dispatch, url, allData)
@@ -106,7 +119,7 @@ const CatalogForm = ({isCreate, onClose}) => {
                     <ParamTab
                         allData={allData}
                         isCreate={isCreate}
-                        params={params}
+                        params={paramsFields}
                         uploadParams={uploadParams}/>
                 </Tab>
             </Tabs>

@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import {names, titles} from './CatalogFormInputsName'
 import FormButtons from '../FormButtons'
 import {useDispatch, useSelector} from 'react-redux'
 import instance from '../../settings/defaultAxios'
 import {updateCat} from '../../functions/APIRequest'
 import {getInputs} from '../../store/actions/inputDataAction'
-import CatalogInput from '../UI/Inputs/CatalogInput'
 import {FormBack, ParamsBlock} from '../FormStyles'
 import ParamTab from "./Tabs/ParamTab";
 import ProductTab from "./Tabs/ProductTab";
@@ -23,6 +21,7 @@ const ViewForm = ({id, close, isShow}) => {
   useEffect(() => {
     instance.get(`/admin_catalog/${id}`)
       .then((response) => {
+        console.log(response.data)
         delete response.data.category
         delete response.data.created_at
         delete response.data.updated_at

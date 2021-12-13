@@ -19,7 +19,12 @@ const BasicForm = ({margin, formData, isCreate, dispatch, url, formDataValue, id
     data_type: 'Тип данных',
     phone: 'Номер телефона',
     email: 'Email',
-    client_source_id: 'Источник'
+    client_source_id: 'Источник',
+    property_group: 'Группа характеристик',
+    hint: 'Подсказка',
+    units: 'Ед. измерения',
+    is_main: 'Главная',
+    group_name: 'Название группы'
   }
 
   useEffect(() => {
@@ -44,7 +49,7 @@ const BasicForm = ({margin, formData, isCreate, dispatch, url, formDataValue, id
   }
   const createAction = (e) => {
     close()
-    console.log(allData)
+    // console.log(allData)
     createContent(e, url, allData, dispatch, 'GET_CONTENT', true)
   }
 
@@ -64,14 +69,24 @@ const BasicForm = ({margin, formData, isCreate, dispatch, url, formDataValue, id
     }}>
       {
         Object.entries(formData).map(([key, val]) => {
-          if (key === 'client_source_id') {
+          if (key === 'client_source_id' || key === 'property_group') {
             return (<MySelect
               key={key}
               inputTitle={thNames[key]}
               inputName={key}
               val={isCreate ? undefined : formDataValue[key]}
-              options={options}
+              options={key === 'property_group' ? Object.entries(val).map(([propKey, propVal]) => ({value: propKey, label: propVal})) : options}
               setData={uploadData}/>)
+          }
+          if (key === 'data_type') {
+            return (<MySelect
+            options={val.map(item => ({value: item, label: item}))}
+            key={key}
+            inputName={key}
+            inputTitle={thNames[key]}
+            setData={uploadData}
+            val={isCreate ? undefined : formDataValue[key]}
+            />)
           }
           return (
             <CustomInput

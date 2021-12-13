@@ -19,6 +19,7 @@ const CategoryTableRow = ({rowData, openModal}) => {
         }}/>
       </td>
       {Object.entries(rowData).map(([key, val]) => {
+          if (key=== 'img') return null
         return <td key={key}>{key === 'parent_id' ? (val === null ? 'Нет' : val.name) : val}</td>
       })}
       <ActionsCell>
