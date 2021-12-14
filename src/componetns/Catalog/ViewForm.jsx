@@ -12,6 +12,7 @@ import {Tab, Tabs} from "react-bootstrap";
 const ViewForm = ({id, close, isShow}) => {
   const [data, setData] = useState({})
   const [params, setParams] = useState(data.params)
+  const [paramFields, setFields] = useState({})
   const [prices, setPrices] = useState(data.prices)
   const [newParams, setNewParams] = useState(false)
   const [emptyInput, setEmptyInput] = useState(false)
@@ -21,7 +22,6 @@ const ViewForm = ({id, close, isShow}) => {
   useEffect(() => {
     instance.get(`/admin_catalog/${id}`)
       .then((response) => {
-        console.log(response.data)
         delete response.data.category
         delete response.data.created_at
         delete response.data.updated_at
@@ -34,25 +34,39 @@ const ViewForm = ({id, close, isShow}) => {
   }, [])
 
   useEffect(() => {
+    let stepParams = {}
+    if (inputData.params){
+      inputData.params.map(item => {
+        if (stepParams[item.group_name]){
+          stepParams = {
+            ...stepParams,
+            [item.group_name]: [...stepParams[item.group_name] , item]
+          }
+        }
+        else {
+          stepParams = {
+            ...stepParams,
+            [item.group_name]: [item]
+          }
+        }
+      })
+    }
+    setFields(stepParams)
+  }, [inputData.params])
+
+
+  useEffect(() => {
     if (data.category_id !== undefined) {
       getInputs(dispatch, 'GET_INPUT_DATA', `/admin_catalog/create?category=${data.category_id}`)
       if (newParams) {
         let stepPrices = {}
-        let stepParams = {}
         Object.keys(inputData.prices).map((key) => {
           stepPrices = {
             ...stepPrices,
             [key]: ''
           }
         })
-        Object.keys(inputData.params).map((key) => {
-          stepParams = {
-            ...stepParams,
-            [key]: ''
-          }
-        })
         setPrices(stepPrices)
-        setParams(stepParams)
         setEmptyInput(true)
       }
     }
@@ -112,9 +126,8 @@ const ViewForm = ({id, close, isShow}) => {
           <ParamTab
               isCreate={false}
               uploadParams={updateParams}
-              params={params}
-              data={data}
-              emptyInput={emptyInput}/>
+              params={paramFields}
+              data={params}/>
         </Tab>
       </Tabs>
       {

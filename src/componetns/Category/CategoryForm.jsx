@@ -66,7 +66,7 @@ const CategoryForm = ({isCreate, onClose, categoryId}) => {
   const updateAction = (e) => {
     e.preventDefault()
     close()
-    console.log(updatedData)
+    // console.log(updatedData)
     UpdateCategory(dispatch, categoryId, updatedData)
   }
   const createAction = (e) => {
