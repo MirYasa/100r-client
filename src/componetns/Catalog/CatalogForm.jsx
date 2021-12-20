@@ -2,25 +2,30 @@ import React, {useEffect, useState} from 'react'
 import {AddCatalog} from '../../functions/APIRequest'
 import FormButtons from '../FormButtons'
 import {useDispatch, useSelector} from 'react-redux'
-import {names, titles} from './CatalogFormInputsName'
+import {titles} from './CatalogFormInputsName'
 import {useLocation} from 'react-router-dom'
 import {getInputs} from '../../store/actions/inputDataAction'
-import {FormBack, ParamsBlock} from '../FormStyles'
+import {FormBack} from '../FormStyles'
 import ParamTab from "./Tabs/ParamTab";
 import ProductTab from "./Tabs/ProductTab";
 import {Tab, Tabs} from "react-bootstrap";
-import {logDOM} from "@testing-library/react";
+import PhotoTab from "./Tabs/PhotoTab";
+import instance from "../../settings/defaultAxios";
+import {getCatalog} from "../../store/actions/catalogAction";
+import defaultAxios from "../../settings/defaultAxios";
+
 
 const CatalogForm = ({isCreate, onClose}) => {
     const {inputData} = useSelector(state => state.inputData)
+    // const {product_id} = useSelector(state => state.catalog)
     const [allData, setAllData] = useState({})
     const titlesMap = new Map(Object.entries(titles))
     const [params, setParams] = useState(inputData.params)
     const [paramsFields, setFields] = useState({})
     const [prices, setPrices] = useState(inputData.prices)
+    const [prodId, setProdId] = useState(0)
     const dispatch = useDispatch()
-    const url = useLocation().pathname
-
+    const [kek, set] = useState([])
     useEffect(() => {
         getInputs(dispatch, 'GET_INPUT_DATA', `/admin_catalog/create?category=${allData.category_id === undefined ? '' : allData.category_id}`)
     }, [allData.category_id])
@@ -95,11 +100,34 @@ const CatalogForm = ({isCreate, onClose}) => {
     const close = () => {
         onClose(false)
     }
-    const createAction = (e) => {
-        // console.log(allData)
+
+    const createAction = async (e) => {
+        console.log(allData)
         e.preventDefault()
         close()
-        AddCatalog(dispatch, url, allData)
+        try {
+            await instance.post('/admin_catalog', allData)
+                .then((res) => {
+                    getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
+                    return res
+                })
+                .then(res => {
+                    if (kek.length === 0) return
+
+                    for (let i = 0; i < kek.length; i++) {
+                        const imageData = new FormData()
+
+                        imageData.append('src', kek[i])
+                        imageData.append('product_id', res.data.id)
+                        imageData.append('is_main', 'false')
+                        setTimeout(() => {
+                            defaultAxios.post('product_files', imageData)
+                        }, 50)
+                    }
+                })
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     return (
@@ -121,6 +149,9 @@ const CatalogForm = ({isCreate, onClose}) => {
                         isCreate={isCreate}
                         params={paramsFields}
                         uploadParams={uploadParams}/>
+                </Tab>
+                <Tab eventKey='photo' title={'Изображения'}>
+                    <PhotoTab setKek={set}/>
                 </Tab>
             </Tabs>
             <FormButtons

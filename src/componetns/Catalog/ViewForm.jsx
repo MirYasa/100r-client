@@ -8,6 +8,8 @@ import {FormBack, ParamsBlock} from '../FormStyles'
 import ParamTab from "./Tabs/ParamTab";
 import ProductTab from "./Tabs/ProductTab";
 import {Tab, Tabs} from "react-bootstrap";
+import PhotoTab from "./Tabs/PhotoTab";
+import defaultAxios from "../../settings/defaultAxios";
 
 const ViewForm = ({id, close, isShow}) => {
   const [data, setData] = useState({})
@@ -16,8 +18,11 @@ const ViewForm = ({id, close, isShow}) => {
   const [prices, setPrices] = useState(data.prices)
   const [newParams, setNewParams] = useState(false)
   const [emptyInput, setEmptyInput] = useState(false)
+  const [isMain, setMain] = useState(0)
   const {inputData} = useSelector(state => state.inputData)
+  const [dataImage, setDataImage] = useState([])
   const dispatch = useDispatch()
+  const [kek, set] = useState([])
 
   useEffect(() => {
     instance.get(`/admin_catalog/${id}`)
@@ -31,6 +36,10 @@ const ViewForm = ({id, close, isShow}) => {
         setPrices(response.data.prices)
         setNewParams(true)
       })
+    defaultAxios.get(`/product_files/${id}`)
+        .then(response => {
+          setDataImage(response.data.sort((a,b) => b.is_main - a.is_main))
+        })
   }, [])
 
   useEffect(() => {
@@ -107,6 +116,24 @@ const ViewForm = ({id, close, isShow}) => {
   const updateAction = (e) => {
     close(false)
     updateCat(e, '/admin_catalog', data, id, dispatch)
+
+    dataImage.map(item => {
+      setTimeout(() => {
+        instance.put(`/product_files/${item.id}`, item)
+      }, 50)
+    })
+
+    if (kek.length === 0) return
+    for (let i = 0; i < kek.length; i++) {
+      const imageData = new FormData()
+
+      imageData.append('src', kek[i])
+      imageData.append('product_id', id)
+      imageData.append('is_main', 'false')
+      setTimeout(() => {
+        defaultAxios.post('product_files', imageData)
+      }, 50)
+    }
   }
 
   return (
@@ -128,6 +155,9 @@ const ViewForm = ({id, close, isShow}) => {
               uploadParams={updateParams}
               params={paramFields}
               data={params}/>
+        </Tab>
+        <Tab eventKey='photo' title={'Изображения'}>
+          <PhotoTab setKek={set} isUpdate={true} data={dataImage} setData={setDataImage}/>
         </Tab>
       </Tabs>
       {

@@ -7,48 +7,50 @@ export default function ParamTab({params, isCreate, uploadParams, data}) {
     return (
         <>
             {
-                isCreate ? <ParamsBlock>
-                    <h5>Параметры</h5>
-                    {Object.entries(params === undefined ? {} : params).map(([key, val]) => {
-                        if (typeof val === "object")
+                isCreate ?
+                    <ParamsBlock>
+                        <h5>Параметры</h5>
+                        {Object.entries(params === undefined ? {} : params).map(([key, val]) => {
+                            if (typeof val === "object")
+                                return (
+                                    <React.Fragment key={key}>
+                                        <span>{key}</span>
+                                        {Object.entries(val).map(([item, value]) => {
+                                            return (
+                                                <CatalogInput
+                                                    key={value.name + item}
+                                                    inputName={value.name}
+                                                    inputTitle={value.name}
+                                                    val={undefined}
+                                                    type={value.type}
+                                                    setData={uploadParams}/>
+                                            )
+                                        })}
+                                    </React.Fragment>
+                                )
+
+                        })}
+                    </ParamsBlock> :
+                    <ParamsBlock>
+                        <h5>Параметры</h5>
+                        {Object.entries(params === undefined ? {} : params).map(([key, val]) => {
                             return (
                                 <React.Fragment key={key}>
                                     <span>{key}</span>
-                                    {Object.entries(val).map(([item, value]) => {
-                                        return (
+                                    {
+                                        val.map((item, index) =>
                                             <CatalogInput
-                                                key={value.name + item}
-                                                inputName={value.name}
-                                                inputTitle={value.name}
-                                                val={undefined}
-                                                type={value.type}
-                                                setData={uploadParams}/>
-                                        )
-                                    })}
+                                                key={item.name + index}
+                                                inputName={item.name}
+                                                inputTitle={item.name}
+                                                val={data ? data[item.name] : ''}
+                                                type={item.type}
+                                                setData={uploadParams}/>)
+                                    }
                                 </React.Fragment>
                             )
-
-                    })}
-                </ParamsBlock> : <ParamsBlock>
-                    <h5>Параметры</h5>
-                    {Object.entries(params === undefined ? {} : params).map(([key, val]) => {
-                        return (
-                            <React.Fragment key={key}>
-                                <span>{key}</span>
-                                {
-                                    val.map((item, index) =>
-                                        <CatalogInput
-                                            key={item.name + index}
-                                            inputName={item.name}
-                                            inputTitle={item.name}
-                                            val={data ? data[item.name] : ''}
-                                            type={item.type}
-                                            setData={uploadParams}/>)
-                                }
-                            </React.Fragment>
-                        )
-                    })}
-                </ParamsBlock>
+                        })}
+                    </ParamsBlock>
             }
         </>
     )
