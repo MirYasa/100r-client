@@ -40,7 +40,7 @@ const OrderViewForm = ({id}) => {
                 console.log(e)
             })
     }, [])
-    console.log(data)
+    // console.log(data)
 
     if (data.id !== undefined) {
         return (

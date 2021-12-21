@@ -12,7 +12,8 @@ import {FormBack} from '../FormStyles'
 const names = {
   name: 'Название',
   parent_id: 'Родительская категория',
-  props: 'Параметры'
+  props: 'Параметры',
+  external_name: 'Имя на "Onliner"'
 }
 
 const CategoryForm = ({isCreate, onClose, categoryId}) => {
@@ -29,16 +30,16 @@ const CategoryForm = ({isCreate, onClose, categoryId}) => {
   // console.log(updatedData, data)
   useEffect(() => {
       instance.get('admin_categories/create')
-        .then(data => {
-          setTypeData(data.data)
+        .then(response => {
+          setTypeData(response.data)
           if (!isCreate) {
             instance.get(`admin_categories/${categoryId}`)
-              .then(data => {
-                setData(data.data)
+              .then(response => {
+                setData(response.data)
                 setUpdatedData({
-                  name: data.data.name,
-                  parent_id: data.data.parent_id !== null ? data.data.parent_id.id : data.data.parent_id,
-                  props: data.data.props.length === 0 ? data.data.props : data.data.props.map(item => (item.id))
+                  name: response.data.name,
+                  parent_id: response.data.parent_id !== null ? response.data.parent_id.id : response.data.parent_id,
+                  props: response.data.props.length === 0 ? response.data.props : response.data.props.map(item => (item.id))
                 })
               })
           }
@@ -65,7 +66,7 @@ const CategoryForm = ({isCreate, onClose, categoryId}) => {
   const updateAction = (e) => {
     e.preventDefault()
     close()
-    console.log(updatedData)
+    // console.log(updatedData)
     UpdateCategory(dispatch, categoryId, updatedData)
   }
   const createAction = (e) => {
@@ -82,7 +83,7 @@ const CategoryForm = ({isCreate, onClose, categoryId}) => {
   return (
     <FormBack onSubmit={handleSubmit(_onSubmit)}>
       {Object.entries(isCreate ? TypeData : (data === undefined ? {} : data)).map(([key, val]) => {
-        if (key === 'name') {
+        if (key === 'name' || key === 'external_name') {
           return (
             <CustomInput key={key} type={val} val={isCreate ? '' : val} inputTitle={names[key]} inputName={key}
                          setData={isCreate ? updateData : updateUpdatedData}

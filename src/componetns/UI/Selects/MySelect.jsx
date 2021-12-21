@@ -12,6 +12,9 @@ const MySelect = ({options, inputTitle, val, inputName, setData}) => {
   }, [val])
 
   useEffect(() => {
+    if (inputName === 'property_group' || inputName === 'data_type') {
+      return setOption([{value: 0, label: 'Выбрать'}, ...options])
+    }
     options.map((item) => {
       setOption(prev => [...prev, {
         value: item.id,
@@ -33,6 +36,7 @@ const MySelect = ({options, inputTitle, val, inputName, setData}) => {
           value={option[defVal]}
           onChange={(e) => {
             setData(inputName, e.value)
+            setDefVal(e.value)
           }}
         />
       </Col>

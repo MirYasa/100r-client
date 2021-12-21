@@ -12,7 +12,7 @@ const CategoryTable = ({tableData, currentPage, openModal}) => {
         }}/></th>
         {tableData.length === 0 ? null :
           Object.keys(tableData[0]).map((item, index) => {
-            if (item === 'client_source_id') {
+            if (item === 'client_source_id' || item === 'img') {
               return  null
             }
             return (

@@ -14,7 +14,7 @@ const CategoryTablePopup = ({show, handleClose, modalTitle, isCreate, data}) => 
         classNames={'modal'}
         unmountOnExit>
         <CustomPopup zIndex={1051} width={'1300px'}>
-          <Modal.Header closeButton>
+          <Modal.Header>
             <Modal.Title>{modalTitle}</Modal.Title>
           </Modal.Header>
           <Modal.Body>

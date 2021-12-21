@@ -56,6 +56,11 @@ export const SidebarData = [
         icon: <FaIcons.FaThLarge/>
       },
       {
+        title: 'Группа параметров',
+        path: '/admin/property_groups',
+        icon: <FaIcons.FaBookOpen/>
+      },
+      {
         title: 'Типы цен',
         path: '/admin/price_type',
         icon: <FaIcons.FaBookOpen/>
@@ -153,12 +158,18 @@ export const SidebarData = [
   },
   {
     title: 'Агрегатор прайсов',
-    path: '/admin/tables',
+    path: '/admin/',
     icon: <MdPriceChange/>,
     iconClosed: <RiIcons.RiArrowDownSFill/>,
     iconOpened: <RiIcons.RiArrowUpSFill/>,
     subNav: true,
-    subArr: []
+    subArr: [
+      {
+        title: 'Парсинг продуктов',
+        path: '/admin/price_parse',
+        icon: <AiIcons.AiTwotoneShop/>
+      },
+    ]
   },
   {
     title: 'Роли',

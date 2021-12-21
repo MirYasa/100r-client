@@ -10,7 +10,8 @@ const CategoryTitles = ({item, currentPage}) => {
     name: 'Имя',
     updated_at: 'Изменено',
     parent_id: 'Родительская категория',
-    created_at: 'Создано'
+    created_at: 'Создано',
+    external_name: 'Имя на "Onliner"'
   }
   const [field, setField] = useState('')
   const [asc, setAsc] = useState(true)

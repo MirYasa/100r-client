@@ -32,6 +32,7 @@ const CustomInput = ({inputName, isRequired, type, radio, val = '', refs, setDat
       Type = 'number'
       break
     case 'bool':
+    case 'boolean':
       Type = 'checkbox'
       break
     case 'textarea':

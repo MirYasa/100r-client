@@ -35,3 +35,10 @@ export const getProduct = async (dispatch, type, url, id) => {
     console.log(e)
   }
 }
+export const getProductId = async (dispatch, id) => {
+  try {
+    await dispatch({type: 'GET_PRODUCT_ID', payload: id})
+  } catch (e) {
+    console.log(e)
+  }
+}

@@ -14,6 +14,7 @@ import Catalog from './layouts/Catalog'
 import Category from './layouts/Category'
 import Client from './layouts/Client'
 import Order from './layouts/Order'
+import PriceParser from "./layouts/PriceParser";
 
 function App() {
   const location = useLocation()
@@ -36,6 +37,7 @@ function App() {
           <Switch>
             <Route path={'/admin/home'} exact component={Home}/>
             <Route path={'/admin/forms'} exact component={Forms}/>
+            <Route path={'/admin/price_parse'} exact component={PriceParser}/>
             <Route path={'/admin/tables'} exact component={Tables}/>
             <Route path={'/admin/tables/:table'} component={Table}/>
             <Route path={'/admin/admin_catalog'} exact component={Catalog}/>

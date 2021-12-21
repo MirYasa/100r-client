@@ -1,24 +1,28 @@
 import React, {useEffect, useState} from 'react'
-import {names, titles} from './CatalogFormInputsName'
 import FormButtons from '../FormButtons'
 import {useDispatch, useSelector} from 'react-redux'
 import instance from '../../settings/defaultAxios'
 import {updateCat} from '../../functions/APIRequest'
 import {getInputs} from '../../store/actions/inputDataAction'
-import CatalogInput from '../UI/Inputs/CatalogInput'
 import {FormBack, ParamsBlock} from '../FormStyles'
 import ParamTab from "./Tabs/ParamTab";
 import ProductTab from "./Tabs/ProductTab";
 import {Tab, Tabs} from "react-bootstrap";
+import PhotoTab from "./Tabs/PhotoTab";
+import defaultAxios from "../../settings/defaultAxios";
 
 const ViewForm = ({id, close, isShow}) => {
   const [data, setData] = useState({})
   const [params, setParams] = useState(data.params)
+  const [paramFields, setFields] = useState({})
   const [prices, setPrices] = useState(data.prices)
   const [newParams, setNewParams] = useState(false)
   const [emptyInput, setEmptyInput] = useState(false)
+  const [isMain, setMain] = useState(0)
   const {inputData} = useSelector(state => state.inputData)
+  const [dataImage, setDataImage] = useState([])
   const dispatch = useDispatch()
+  const [kek, set] = useState([])
 
   useEffect(() => {
     instance.get(`/admin_catalog/${id}`)
@@ -32,28 +36,46 @@ const ViewForm = ({id, close, isShow}) => {
         setPrices(response.data.prices)
         setNewParams(true)
       })
+    defaultAxios.get(`/product_files/${id}`)
+        .then(response => {
+          setDataImage(response.data.sort((a,b) => b.is_main - a.is_main))
+        })
   }, [])
+
+  useEffect(() => {
+    let stepParams = {}
+    if (inputData.params){
+      inputData.params.map(item => {
+        if (stepParams[item.group_name]){
+          stepParams = {
+            ...stepParams,
+            [item.group_name]: [...stepParams[item.group_name] , item]
+          }
+        }
+        else {
+          stepParams = {
+            ...stepParams,
+            [item.group_name]: [item]
+          }
+        }
+      })
+    }
+    setFields(stepParams)
+  }, [inputData.params])
+
 
   useEffect(() => {
     if (data.category_id !== undefined) {
       getInputs(dispatch, 'GET_INPUT_DATA', `/admin_catalog/create?category=${data.category_id}`)
       if (newParams) {
         let stepPrices = {}
-        let stepParams = {}
         Object.keys(inputData.prices).map((key) => {
           stepPrices = {
             ...stepPrices,
             [key]: ''
           }
         })
-        Object.keys(inputData.params).map((key) => {
-          stepParams = {
-            ...stepParams,
-            [key]: ''
-          }
-        })
         setPrices(stepPrices)
-        setParams(stepParams)
         setEmptyInput(true)
       }
     }
@@ -94,6 +116,24 @@ const ViewForm = ({id, close, isShow}) => {
   const updateAction = (e) => {
     close(false)
     updateCat(e, '/admin_catalog', data, id, dispatch)
+
+    dataImage.map(item => {
+      setTimeout(() => {
+        instance.put(`/product_files/${item.id}`, item)
+      }, 50)
+    })
+
+    if (kek.length === 0) return
+    for (let i = 0; i < kek.length; i++) {
+      const imageData = new FormData()
+
+      imageData.append('src', kek[i])
+      imageData.append('product_id', id)
+      imageData.append('is_main', 'false')
+      setTimeout(() => {
+        defaultAxios.post('product_files', imageData)
+      }, 50)
+    }
   }
 
   return (
@@ -113,9 +153,11 @@ const ViewForm = ({id, close, isShow}) => {
           <ParamTab
               isCreate={false}
               uploadParams={updateParams}
-              params={params}
-              data={data}
-              emptyInput={emptyInput}/>
+              params={paramFields}
+              data={params}/>
+        </Tab>
+        <Tab eventKey='photo' title={'Изображения'}>
+          <PhotoTab setKek={set} isUpdate={true} data={dataImage} setData={setDataImage}/>
         </Tab>
       </Tabs>
       {

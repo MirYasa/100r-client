@@ -15,7 +15,7 @@ const CatalogView = ({show, handleClose, id, isShow, title}) => {
         classNames={'modal'}
         unmountOnExit>
         <CustomPopup zIndex={1052} width={'1280px'}>
-          <Modal.Header closeButton>
+          <Modal.Header>
             <Modal.Title>{title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
