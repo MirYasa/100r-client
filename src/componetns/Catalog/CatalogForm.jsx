@@ -17,15 +17,13 @@ import defaultAxios from "../../settings/defaultAxios";
 
 const CatalogForm = ({isCreate, onClose}) => {
     const {inputData} = useSelector(state => state.inputData)
-    // const {product_id} = useSelector(state => state.catalog)
     const [allData, setAllData] = useState({})
     const titlesMap = new Map(Object.entries(titles))
     const [params, setParams] = useState(inputData.params)
     const [paramsFields, setFields] = useState({})
     const [prices, setPrices] = useState(inputData.prices)
-    const [prodId, setProdId] = useState(0)
     const dispatch = useDispatch()
-    const [kek, set] = useState([])
+    const [imagesData, set] = useState([])
     useEffect(() => {
         getInputs(dispatch, 'GET_INPUT_DATA', `/admin_catalog/create?category=${allData.category_id === undefined ? '' : allData.category_id}`)
     }, [allData.category_id])
@@ -101,33 +99,11 @@ const CatalogForm = ({isCreate, onClose}) => {
         onClose(false)
     }
 
-    const createAction = async (e) => {
+    const createAction = (e) => {
         console.log(allData)
         e.preventDefault()
         close()
-        try {
-            await instance.post('/admin_catalog', allData)
-                .then((res) => {
-                    getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
-                    return res
-                })
-                .then(res => {
-                    if (kek.length === 0) return
-
-                    for (let i = 0; i < kek.length; i++) {
-                        const imageData = new FormData()
-
-                        imageData.append('src', kek[i])
-                        imageData.append('product_id', res.data.id)
-                        imageData.append('is_main', 'false')
-                        setTimeout(() => {
-                            defaultAxios.post('product_files', imageData)
-                        }, 50)
-                    }
-                })
-        } catch (e) {
-            console.log(e)
-        }
+        AddCatalog(dispatch, allData, imagesData)
     }
 
     return (

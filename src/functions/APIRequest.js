@@ -1,6 +1,7 @@
 import {addContent, deleteContent, getContent, getDefaultContent, updateContent,} from '../store/actions/contentAction'
 import {getCatalog, updateCatalog} from '../store/actions/catalogAction'
 import instance from '../settings/defaultAxios'
+import defaultAxios from "../settings/defaultAxios";
 
 export const Delete = (url, message, dispatch, id, type, content) => {
     if (window.confirm(message))
@@ -34,22 +35,31 @@ export const createContent = (e, url, data, dispatch, type, isDef) => {
             console.log(e)
         })
 }
-// export const AddCatalog = async (dispatch, url, data) => {
-//     try {
-//         await instance.post('/admin_catalog', data)
-//             .then((res) => {
-//                 getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
-//                 return res
-//
-//             })
-//             .then(res => {
-//                 console.log(res)
-//                 // res.data.id
-//             })
-//     } catch (e) {
-//         console.log(e)
-//     }
-// }
+export const AddCatalog = async (dispatch, allData, imagesData) => {
+    try {
+        await instance.post('/admin_catalog', allData)
+            .then((res) => {
+                getCatalog(dispatch, 'GET_CATALOG', '/admin_catalog')
+                return res
+            })
+            .then(res => {
+                if (imagesData.length === 0) return
+
+                for (let i = 0; i < imagesData.length; i++) {
+                    const imageData = new FormData()
+
+                    imageData.append('src', imagesData[i])
+                    imageData.append('product_id', res.data.id)
+                    imageData.append('is_main', 'false')
+                    setTimeout(() => {
+                        defaultAxios.post('product_files', imageData)
+                    }, 50)
+                }
+            })
+    } catch (e) {
+        console.log(e)
+    }
+}
 
 export const AddCategory = async (dispatch, data) => {
     try {
@@ -109,4 +119,24 @@ export const update = (e, url, data, dispatch, type, id, isDef) => {
         .catch((e) => {
             console.log(e)
         })
+}
+export const updateImages = (localImages, imagesData, id) => {
+
+    localImages.map(item => {
+        setTimeout(() => {
+            instance.put(`/product_files/${item.id}`, item)
+        }, 50)
+    })
+
+    if (imagesData.length === 0) return
+    for (let i = 0; i < imagesData.length; i++) {
+        const imageData = new FormData()
+
+        imageData.append('src', imagesData[i])
+        imageData.append('product_id', id)
+        imageData.append('is_main', 'false')
+        setTimeout(() => {
+            defaultAxios.post('product_files', imageData)
+        }, 50)
+    }
 }
