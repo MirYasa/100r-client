@@ -30,7 +30,9 @@ const CatalogInput = ({
   }, [val])
 
   useEffect(() => {
-    setData(inputName, val)
+    if (val.trim() !== '') {
+      setData(inputName, val)
+    }
     if (inputTitle === "Категория") {
       setSelectVal([{ id: null, name: "Выберите" }, ...categories])
     } else if (inputTitle === "Производитель") {
