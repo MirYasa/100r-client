@@ -140,3 +140,21 @@ export const updateImages = (localImages, imagesData, id) => {
         }, 50)
     }
 }
+
+export const parsePrices = async () => {
+    try {
+        await instance.get('/onliner_price')
+    } catch (e) {
+        console.log(e)
+    }
+
+}
+
+export const parseParams = async () => {
+    try {
+        await instance.get('/onliner_props')
+    } catch (e) {
+        console.log(e)
+    }
+
+}
