@@ -16,7 +16,7 @@ const CatalogInput = ({
   isRequired,
   type,
   radio,
-  val = "",
+  val = inputName === 'active' ? false : '',
   setData,
   isCreate,
   inputTitle,
@@ -30,11 +30,7 @@ const CatalogInput = ({
   }, [val])
 
   useEffect(() => {
-    if(val) {
-      if (val.trim() !== '') {
-        setData(inputName, val)
-      }
-    }
+    setData(inputName, val)
     if (inputTitle === "Категория") {
       setSelectVal([{ id: null, name: "Выберите" }, ...categories])
     } else if (inputTitle === "Производитель") {
@@ -84,13 +80,13 @@ const CatalogInput = ({
         ) : (
           <InputBody
             type={type}
-            defaultChecked={val}
+            checked={val}
             required={isRequired}
             value={input === null ? undefined : input}
             onChange={(e) => {
               setInput(
                 type === "checkbox"
-                  ? !e.target.defaultChecked
+                  ? !val
                   : type === "number"
                   ? parseInt(e.target.value)
                   : e.target.value
@@ -98,7 +94,7 @@ const CatalogInput = ({
               setData(
                 inputName,
                 type === "checkbox"
-                  ? !e.target.defaultChecked
+                  ? !val
                   : type === "number"
                   ? parseInt(e.target.value)
                   : e.target.value

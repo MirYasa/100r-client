@@ -25,6 +25,7 @@ export default function ProductTab({prices, allData, isCreate, uploadPrices, tit
                         </ParamsBlock>
                         {
                             Object.entries(names).map(([key, val]) => {
+                                if (key === 'external_id') return null
                                 return (
                                     <CatalogInput
                                         key={key}
@@ -53,6 +54,7 @@ export default function ProductTab({prices, allData, isCreate, uploadPrices, tit
                             })}
                         </ParamsBlock>
                         {Object.entries(names).map(([key, val]) => {
+                            if (key === 'external_id') return null
                             return (
                                 <CatalogInput
                                     key={key}

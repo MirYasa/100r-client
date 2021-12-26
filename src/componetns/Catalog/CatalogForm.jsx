@@ -43,20 +43,19 @@ const CatalogForm = ({isCreate, onClose}) => {
                 }
             })
 
-           inputData.params.map(item => {
-               if (stepParams[item.group_name]){
-                   stepParams = {
-                       ...stepParams,
-                       [item.group_name]: [...stepParams[item.group_name] , item]
-                   }
-               }
-               else {
-                   stepParams = {
-                       ...stepParams,
-                       [item.group_name]: [item]
-                   }
-               }
-           })
+            inputData.params.map(item => {
+                if (stepParams[item.group_name]) {
+                    stepParams = {
+                        ...stepParams,
+                        [item.group_name]: [...stepParams[item.group_name], item]
+                    }
+                } else {
+                    stepParams = {
+                        ...stepParams,
+                        [item.group_name]: [item]
+                    }
+                }
+            })
         }
         // console.log(stepParams)
         setPrices(stepPrices)
@@ -100,10 +99,21 @@ const CatalogForm = ({isCreate, onClose}) => {
     }
 
     const createAction = (e) => {
-        console.log(allData)
         e.preventDefault()
         close()
-        AddCatalog(dispatch, allData, imagesData)
+        if (allData.hasOwnProperty('params')) {
+            let modifiedParams = {}
+            const modifiedData = Object.entries(allData.params).filter(([key, item]) => item.trim() !== '')
+            modifiedData.map(item => {
+                return modifiedParams = {
+                    ...modifiedParams,
+                    [item[0]]: item[1]
+                }
+            })
+            AddCatalog(dispatch, {...allData, params: modifiedParams.length !== 0 ? modifiedParams : {}}, imagesData)
+        } else {
+            AddCatalog(dispatch, {...allData, params: {}}, imagesData)
+        }
     }
 
     return (
